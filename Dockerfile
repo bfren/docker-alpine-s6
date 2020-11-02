@@ -30,5 +30,3 @@ RUN apk add --no-cache --virtual .install curl && \
     apk del --no-cache .install
 
 COPY ./overlay .
-
-ENTRYPOINT ["/init"]
