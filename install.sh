@@ -15,7 +15,7 @@ case "$TARGETPLATFORM" in
     "linux/arm/v7")
         INSTALLER="s6-overlay-armhf-installer"
         ;;
-    "linux/arm64"
+    "linux/arm64")
         INSTALLER="s6-overlay-aarch64-installer"
         ;;
     *)
