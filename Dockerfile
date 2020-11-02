@@ -31,4 +31,6 @@ RUN \
     rm /etc/install && \
     apk del --no-cache .install
 
+COPY ./overlay .
+
 ENTRYPOINT ["/init"]
