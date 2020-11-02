@@ -22,7 +22,7 @@ esac
 
 if [ -z "$INSTALLER" ] ; then
     echo "Unsupported target platform: $TARGETPLATFORM"
-    exit
+    exit 1
 fi
 
 
@@ -35,4 +35,4 @@ cd /tmp
 URL="https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER"
 curl -L -o "$INSTALLER" "$URL" && chmod +x "$INSTALLER"
 
-"$INSTALLER" / && rm "$INSTALLER"
+"./$INSTALLER" / && rm "$INSTALLER"
