@@ -10,8 +10,7 @@ case "$TARGETPLATFORM" in
         INSTALLER="s6-overlay-amd64-installer"
         ;;
     "linux/arm/v6")
-        INSTALLER="s6-overlay-arm-installer"
-        ;;
+        ;;&
     "linux/arm/v7")
         INSTALLER="s6-overlay-armhf-installer"
         ;;
@@ -31,7 +30,7 @@ fi
 #   Download and run installer
 #
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER"
-echo "$URL"
-curl -L -o "/tmp/$INSTALLER" "$URL"
-chmod +x "/tmp/$INSTALLER" && "/tmp/$INSTALLER" /
+INSTALLER_URL="https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER"
+curl -L -o "/tmp/$INSTALLER" "$INSTALLER_URL"
+
+chmod +x "/tmp/$INSTALLER" && "/tmp/$INSTALLER"
