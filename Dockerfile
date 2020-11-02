@@ -13,7 +13,6 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-ARG TARGETPLATFORM
 ENV S6_VERSION=2.1.0.2
 
 RUN apk update && \
