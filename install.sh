@@ -31,5 +31,5 @@ fi
 #   Download and run installer
 #
 
-curl "https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER" /tmp/
+curl "https://github.com/just-containers/s6-overlay/releases/download/v2.1.0.2/$INSTALLER" /tmp/
 chmod +x "/tmp/$INSTALLER" && "/tmp/$INSTALLER" /
