@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo "Registering cron daemon..."
-rc-service crond start && rc-update add crond

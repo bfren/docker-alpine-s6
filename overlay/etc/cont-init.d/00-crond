@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [[ ! "$CRON_ENABLED" == "1" ]] ; then
-  /bin/s6-svc -d /etc/services.d/00-crond
-  exit 0
-fi

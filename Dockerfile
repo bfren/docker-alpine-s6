@@ -1,8 +1,10 @@
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
+
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
+RUN \
+    echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
 
 FROM alpine:3.12
 COPY --from=build /log /log
@@ -15,12 +17,18 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 ENV S6_VERSION=2.1.0.2
 
-RUN apk update && \
+RUN \
+    apk update && \
     apk upgrade && \
-    apk add curl bash tzdata && \
+    apk add bash tzdata && \
     rm -rf /var/cache/apk/*
 
-COPY ./install.sh /etc/install.sh
-RUN bash -c 'chmod +x /etc/install.sh' && /etc/install.sh
+COPY ./install /etc/install
+RUN \
+    apk add --no-cache --virtual .install curl && \
+    bash -c 'chmod +x /etc/install' && \
+    /etc/install && \
+    rm /etc/install && \
+    apk del --no-cache .install
 
 ENTRYPOINT ["/init"]
