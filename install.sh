@@ -33,5 +33,5 @@ fi
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER"
 echo "$URL"
-curl -L "$URL" -O "/tmp/$INSTALLER"
+curl -L -o "/tmp/$INSTALLER" "$URL"
 chmod +x "/tmp/$INSTALLER" && "/tmp/$INSTALLER" /
