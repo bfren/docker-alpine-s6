@@ -16,13 +16,12 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 ARG TARGETPLATFORM
 ENV S6_VERSION=2.1.0.2
 
-COPY ./install.sh /root/install.sh
-WORKDIR /root
+COPY ./install.sh /etc/install.sh
 
 RUN apk update && \
     apk upgrade && \
     apk add curl bash tzdata && \
     rm -rf /var/cache/apk/*
 
-RUN /bin/bash -c 'chmod +x install.sh' && \
-    install.sh
+RUN /bin/bash -c 'chmod +x /etc/install.sh' && \
+    /etc/install.sh
