@@ -6,7 +6,7 @@ ARG BUILDPLATFORM
 RUN \
     echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
 
-FROM alpine:3.12
+FROM alpine:3.12.1
 COPY --from=build /log /log
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
