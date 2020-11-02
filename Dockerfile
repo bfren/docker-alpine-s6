@@ -20,7 +20,7 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 
 ARG TARGETPLATFORM
-ENV S6_VERSION=2.1.0.2
+ARG S6_VERSION=2.1.0.2
 
 COPY ./install /etc/install
 RUN apk add --no-cache --virtual .install curl && \
