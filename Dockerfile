@@ -23,4 +23,4 @@ RUN apk update && \
 COPY ./install.sh /etc/install.sh
 RUN bash -c 'chmod +x /etc/install.sh' && /etc/install.sh
 
-CMD ["bash"]
+ENTRYPOINT ["/init"]
