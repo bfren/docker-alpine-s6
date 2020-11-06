@@ -6,11 +6,11 @@
 
 I've been using [webhippie](https://github.com/dockhippie/alpine)'s Alpine image for a while, but I wanted to control the Alpine and S6 versions.
 
-Cron is enabled by default - include jobs in `/etc/periodic/*` or override `/etc/crontabs/root`.
+Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
 ## Authors
 
-* [Ben Green](https://github.com/bencgdreen)
+* [Ben Green](https://github.com/bencgreen)
 * [Thomas Boerger](https://github.com/tboerger)
 
 ## License
