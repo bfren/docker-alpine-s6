@@ -9,7 +9,7 @@ FROM alpine:3.12.1
 COPY --from=build /log /log
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
-    org.label-schema.name="Alpine" \
+    org.label-schema.name="Alpine + S6" \
     org.label-schema.version="latest" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
@@ -22,11 +22,11 @@ RUN apk update && \
 ARG TARGETPLATFORM
 ARG S6_VERSION=2.1.0.2
 
-COPY ./install /etc/install
+COPY ./install /tmp/install
 RUN apk add --no-cache --virtual .install curl && \
-    bash -c 'chmod +x /etc/install' && \
-    /etc/install && \
-    rm /etc/install && \
+    chmod +x /tmp/install && \
+    /tmp/install && \
+    rm /tmp/install && \
     apk del --no-cache .install
 
 COPY ./overlay .
