@@ -8,6 +8,13 @@ I've been using [webhippie](https://github.com/dockhippie/alpine)'s Alpine image
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
+## Packages
+
+The image comes pre-installed with the following packages:
+
+* bash
+* tzdata
+
 ## Authors
 
 * [Ben Green](https://github.com/bencgreen)
