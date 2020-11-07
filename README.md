@@ -12,8 +12,8 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/
 
 The image comes pre-installed with the following packages:
 
-* bash
-* tzdata
+* `bash`
+* `tzdata`
 
 ## Authors
 
