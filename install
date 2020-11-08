@@ -29,18 +29,18 @@ fi
 
 cd /tmp
 
-URL="htps://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
+URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
 echo " - downloading ${URL}..."
-curl -L -o "${INSTALLER}" "${URL}" && chmod +x "${INSTALLER}"
+curl -L -o ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
 echo " - done."
 
-echo "Installing S6..."
-"./${INSTALLER}" / && rm "${INSTALLER}"
+echo " - installing S6..."
+./${INSTALLER} / && rm ${INSTALLER}
 
 if [ -d /etc/s6 ] ; then
-    echo "done."
+    echo " - done."
     exit 0
 else
-    echo "error."
+    echo " - error."
     exit 1
 fi
