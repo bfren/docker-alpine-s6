@@ -36,6 +36,11 @@ echo " - done."
 
 echo "Installing S6..."
 "./${INSTALLER}" / && rm "${INSTALLER}"
-echo "done."
 
-exit 0
+if [ -d /etc/s6 ] ; then
+    echo "done."
+    exit 0
+else
+    echo "error."
+    exit 1
+fi
