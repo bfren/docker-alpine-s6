@@ -14,21 +14,21 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-RUN apk update && \
-    apk upgrade && \
-    apk add bash tzdata && \
-    rm -rf /var/cache/apk/*
+RUN apk update \
+    && apk upgrade \
+    && apk add bash tzdata \
+    && rm -rf /var/cache/apk/*
 
 ARG TARGETPLATFORM
 ARG S6_VERSION=2.1.0.2
 
 COPY ./install /tmp/install
-RUN apk add --no-cache --virtual .install curl && \
-    chmod +x /tmp/install && \
-    /tmp/install && \
-    rm /tmp/install && \
-    apk del --no-cache .install
+RUN apk add --no-cache --virtual .install curl \
+    && chmod +x /tmp/install \
+    && /tmp/install \
+    && rm /tmp/install \
+    && apk del --no-cache .install
 
-COPY ./overlay .
+COPY ./overlay /
 
 ENTRYPOINT [ "/init" ]

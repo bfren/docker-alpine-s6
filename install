@@ -1,11 +1,10 @@
 #!/bin/bash
 
+#======================================================================================================================
+# Get correct installer for target platform
+#======================================================================================================================
 
-#
-#   Get correct installer for target platform
-#
-
-case "$TARGETPLATFORM" in
+case "${TARGETPLATFORM}" in
     "linux/amd64")
         INSTALLER="s6-overlay-amd64-installer"
         ;;
@@ -18,23 +17,25 @@ case "$TARGETPLATFORM" in
     *)
 esac
 
-if [ -z "$INSTALLER" ] ; then
-    echo "Unsupported target platform: $TARGETPLATFORM"
+if [ -z "${INSTALLER}" ] ; then
+    echo "Unsupported target platform: ${TARGETPLATFORM}"
     exit 1
 fi
 
 
-#
-#   Download and run installer
-#
+#======================================================================================================================
+# Download and run installer
+#======================================================================================================================
 
 cd /tmp
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v$S6_VERSION/$INSTALLER"
-echo "Downloading $URL" && curl -L -o "$INSTALLER" "$URL" && chmod +x "$INSTALLER"
+URL="htps://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
+echo " - downloading ${URL}..."
+curl -L -o ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
+echo " - done."
 
 echo "Installing S6..."
-"./$INSTALLER" / && rm "$INSTALLER"
-echo "done"
+"./${INSTALLER}" / && rm ${INSTALLER}
+echo "done."
 
 exit 0
