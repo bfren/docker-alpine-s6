@@ -14,11 +14,8 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-RUN apk update \
-    && apk upgrade \
-    && apk add \
-        bash \
-        tzdata \
+RUN apk -U upgrade \
+    && apk add tzdata \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETPLATFORM
