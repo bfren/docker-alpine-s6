@@ -16,7 +16,9 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 RUN apk update \
     && apk upgrade \
-    && apk add bash tzdata \
+    && apk add \
+        bash \
+        tzdata \
     && rm -rf /var/cache/apk/*
 
 ARG TARGETPLATFORM
@@ -26,7 +28,7 @@ COPY ./install /tmp/install
 RUN apk add --no-cache --virtual .install curl \
     && chmod +x /tmp/install \
     && /tmp/install \
-    && rm /tmp/install \
+    && rm -rf /tmp/* \
     && apk del --no-cache .install
 
 COPY ./overlay /
