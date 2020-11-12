@@ -10,10 +10,7 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/
 
 ## Packages
 
-The image comes pre-installed with the following packages:
-
-* `bash`
-* `tzdata`
+The image comes as base Alpine plus the `tzdata` package pre-installed.
 
 ## Authors
 
