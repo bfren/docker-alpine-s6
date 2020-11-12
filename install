@@ -35,7 +35,7 @@ curl -sL -o ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
 echo " - done."
 
 echo " - installing S6..."
-./${INSTALLER} / && rm ${INSTALLER}
+./${INSTALLER} /
 
 if [ -d /etc/s6 ] ; then
     echo " - done."
