@@ -31,7 +31,7 @@ cd /tmp
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
 echo " - downloading ${URL}..."
-curl -sL -o ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
+wget -O ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
 echo " - done."
 
 echo " - installing S6 v${S6_VERSION}..."

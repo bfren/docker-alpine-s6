@@ -10,12 +10,20 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/
 
 ## Packages
 
-The image comes as base Alpine plus the `tzdata` package pre-installed.
+The image is the [base Alpine image](https://github.com/alpinelinux/docker-alpine) plus the `tzdata` package.
+
+## apk Repositories
+
+Edge repositories are added using tags, so only stable packages are installed /upgraded by default, but the latest ones can be used like so: `apk add curl@edgemain`.
+
+```bash
+@edgemain # Edge main packages
+@edgecomm # Edge community packages
+```
 
 ## Authors
 
 * [Ben Green](https://github.com/bencgreen)
-* [Thomas Boerger](https://github.com/tboerger)
 
 ## License
 
