@@ -1,2 +1,2 @@
 #!/bin/sh
-e_colour '\033[1;32m' "done"
+_c '\033[1;32m' "done"
