@@ -1,0 +1,5 @@
+#!/bin/sh
+e_colour () {
+    NC='\033[0m'
+    echo -e " - ${1}${2}${NC}"
+}

@@ -16,20 +16,21 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-ENV ENV="/etc/profile"
-ENV WITH_BASH=0
+ENV \
+    # adds functions to default bash profile
+    #ENV="/etc/profile" \
+    # set to 1 to install bash package
+    WITH_BASH=0
 
 RUN apk -U upgrade \
     && apk add tzdata \
     && rm -rf /var/cache/apk/*
 
-ARG S6_VERSION=2.1.0.2
+COPY ./overlay /
 
-COPY ./install /tmp/install
-RUN chmod +x /tmp/install \
+ARG S6_VERSION=2.1.0.2
+RUN chmod +x /tmp/install /usr/local/bin/_* \
     && /tmp/install \
     && rm -rf /tmp/*
-
-COPY ./overlay /
 
 ENTRYPOINT [ "/init" ]
