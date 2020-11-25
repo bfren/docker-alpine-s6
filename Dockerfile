@@ -17,6 +17,7 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.schema-version="1.0"
 
 ENV ENV="/etc/profile"
+ENV WITH_BASH=0
 
 RUN apk -U upgrade \
     && apk add tzdata \
