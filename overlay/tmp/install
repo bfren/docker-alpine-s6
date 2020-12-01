@@ -7,7 +7,7 @@ source /etc/profile.d/functions.sh
 #======================================================================================================================
 
 if [ -z "${TARGETPLATFORM}" ] ; then
-    e_exit " - target platform not set."
+    _x " - target platform not set."
 fi
 
 
@@ -29,7 +29,7 @@ case "${TARGETPLATFORM}" in
 esac
 
 if [ -z "${INSTALLER}" ] ; then
-    e_exit " - unsupported target platform: ${TARGETPLATFORM}"
+    _x " - unsupported target platform: ${TARGETPLATFORM}"
 fi
 
 
@@ -40,16 +40,16 @@ fi
 cd /tmp
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
-e " - downloading ${URL}"
+_e " - downloading ${URL}"
 wget -O ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
-e_done
+_d
 
-e " - installing S6 v${S6_VERSION}"
+_e " - installing S6 v${S6_VERSION}"
 ./${INSTALLER} /
 
 if [ -d /etc/s6 ] ; then
-    e_done
+    _d
     exit 0
 else
-    e_exit "S6 not installed"
+    _x "S6 not installed"
 fi
