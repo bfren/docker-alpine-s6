@@ -1,3 +1,4 @@
 #!/bin/sh
+DATE=$(date '+%Y-%m-%d %H:%M')
 NC='\033[0m'
-echo -e " - ${1}${2}${NC}"
+echo -e "[bcg] ${DATE} - ${1}${2}${NC}"
