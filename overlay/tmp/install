@@ -28,7 +28,7 @@ case "${TARGETPLATFORM}" in
 esac
 
 if [ -z "${INSTALLER}" ] ; then
-    _error "unsupported target platform: ${TARGETPLATFORM}"
+    _error "unsupported target platform: ${TARGETPLATFORM}."
     exit 1
 fi
 
@@ -40,7 +40,7 @@ fi
 cd /tmp
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
-_echo " - downloading ${URL}..."
+_echo "downloading ${URL}..."
 wget -O ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
 _done
 
