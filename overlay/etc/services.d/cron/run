@@ -1,4 +1,3 @@
 #!/bin/sh
-
 _echo " - starting cron service"
 /usr/sbin/crond -f

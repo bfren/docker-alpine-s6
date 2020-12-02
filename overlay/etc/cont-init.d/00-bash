@@ -1,5 +1,2 @@
 #!/usr/bin/with-contenv sh
-
-[[ "${WITH_BASH}" = "1" ]] \
-    && apk add -U bash \
-    && ln /etc/profile.d/functions.sh /root/.bashrc
+[[ "${WITH_BASH}" == "1" ]] && apk add -U bash

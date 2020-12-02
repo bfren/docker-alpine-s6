@@ -25,7 +25,6 @@ Edge repositories are added using tags, so only stable packages are installed /u
 ```bash
 @edgemain # Edge main packages
 @edgecomm # Edge community packages
-@bcg      # Mirror of packages used by bcg ecosystem - retaining older versions
 ```
 
 ## Authors
