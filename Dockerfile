@@ -27,7 +27,7 @@ RUN apk -U upgrade \
 COPY ./overlay /
 
 ARG S6_VERSION=2.1.0.2
-RUN chmod +x /tmp/install /usr/bin/_* \
+RUN chmod +x /tmp/install /usr/local/bin/_* \
     && /tmp/install \
     && rm -rf /tmp/*
 
