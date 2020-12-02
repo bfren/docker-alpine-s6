@@ -12,6 +12,12 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/
 
 The image is the [base Alpine image](https://github.com/alpinelinux/docker-alpine) plus the `tzdata` package.
 
+## Environment Variables
+
+```bash
+WITH_BASH=0 # set to 1 if you would like the bash shell to be installed automatically
+```
+
 ## apk Repositories
 
 Edge repositories are added using tags, so only stable packages are installed /upgraded by default, but the latest ones can be used like so: `apk add curl@edgemain`.
@@ -19,6 +25,7 @@ Edge repositories are added using tags, so only stable packages are installed /u
 ```bash
 @edgemain # Edge main packages
 @edgecomm # Edge community packages
+@bcg      # Mirror of packages used by bcg ecosystem - retaining older versions
 ```
 
 ## Authors
