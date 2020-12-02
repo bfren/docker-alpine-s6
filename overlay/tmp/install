@@ -5,7 +5,8 @@
 #======================================================================================================================
 
 if [ -z "${TARGETPLATFORM}" ] ; then
-    _x " - target platform not set."
+    _error "target platform not set."
+    exit 1
 fi
 
 
@@ -27,7 +28,8 @@ case "${TARGETPLATFORM}" in
 esac
 
 if [ -z "${INSTALLER}" ] ; then
-    _x " - unsupported target platform: ${TARGETPLATFORM}"
+    _error "unsupported target platform: ${TARGETPLATFORM}"
+    exit 1
 fi
 
 
@@ -38,16 +40,17 @@ fi
 cd /tmp
 
 URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
-_e " - downloading ${URL}"
+_echo " - downloading ${URL}..."
 wget -O ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
-_d
+_done
 
-_e " - installing S6 v${S6_VERSION}"
+_echo "installing S6 v${S6_VERSION}..."
 ./${INSTALLER} /
 
 if [ -d /etc/s6 ] ; then
-    _d
+    _done
     exit 0
 else
-    _x "S6 not installed"
+    _error "S6 not installed."
+    exit 1
 fi
