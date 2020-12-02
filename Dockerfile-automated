@@ -9,8 +9,6 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.schema-version="1.0"
 
 ENV \
-    # adds functions to default bash profile
-    #ENV="/etc/profile" \
     # set to 1 to install bash package
     WITH_BASH=0
 
