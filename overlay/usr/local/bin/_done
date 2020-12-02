@@ -1,2 +1,2 @@
 #!/bin/sh
-_c "\e[92m" "done"
+_ok "done"
