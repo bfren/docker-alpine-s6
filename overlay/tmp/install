@@ -51,6 +51,6 @@ if [ -d /etc/s6 ] ; then
     _done
     exit 0
 else
-    _error "Error: S6 not installed."
+    _error "S6 not installed."
     exit 1
 fi
