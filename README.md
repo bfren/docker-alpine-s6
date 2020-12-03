@@ -8,14 +8,10 @@ I've been using [webhippie](https://github.com/dockhippie/alpine)'s Alpine image
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
-## Packages
-
-The image is the [base Alpine image](https://github.com/alpinelinux/docker-alpine) plus the `tzdata` package.
-
 ## Environment Variables
 
 ```bash
-WITH_BASH=0 # set to 1 if you would like the bash shell to be installed automatically
+WITH_BASH=0 # set to 1 if to install the Bourne Again shell
 ```
 
 ## apk Repositories

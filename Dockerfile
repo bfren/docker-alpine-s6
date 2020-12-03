@@ -17,11 +17,15 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.schema-version="1.0"
 
 ENV \
-    # set to 1 to install bash package
-    WITH_BASH=0
+    # set to 1 to install bash
+    WITH_BASH=0 \
+    # change to a valid timezone
+    TZ=Europe/London
 
 RUN apk -U upgrade \
-    && apk add tzdata \
+    && apk add --virtual .tz tzdata \
+    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && apk del .tz \
     && rm -rf /var/cache/apk/*
 
 COPY ./overlay /
