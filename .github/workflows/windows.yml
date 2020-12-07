@@ -22,8 +22,9 @@ jobs:
         working-directory: .
         run: |
           docker login -u $env:USERNAME -p $env:PASSWORD
-          docker build alpine-s6
-          docker image push bcgdesign/alpine-s6:latest bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
+          docker build
+          docker image push bcgdesign/alpine-s6:latest
+          docker image push bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
           docker logout
         env:
           USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
