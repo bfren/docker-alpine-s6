@@ -22,7 +22,7 @@ jobs:
         working-directory: .
         run: |
           docker login -u $env:USERNAME -p $env:PASSWORD
-          docker build
+          docker build - < Dockerfile
           docker image push bcgdesign/alpine-s6:latest
           docker image push bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
           docker logout
