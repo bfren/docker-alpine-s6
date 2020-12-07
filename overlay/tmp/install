@@ -15,7 +15,7 @@ fi
 #======================================================================================================================
 
 case "${TARGETPLATFORM}" in
-    "linux/amd64")
+    "linux/amd64" | "windows/amd64")
         INSTALLER="s6-overlay-amd64-installer"
         ;;
     "linux/arm/v7")
