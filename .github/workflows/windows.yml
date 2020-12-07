@@ -9,14 +9,16 @@ jobs:
     runs-on: windows-2019
     steps:
       -
+        name: Checkout code
+        uses: actions/checkout@v2
+      -
         name: Read version
         uses: bencgreen/read-file-action@v1
         with:
           path: ./VERSION
         id: version
       -
-        name: Checkout, build, and push
-        uses: actions/checkout@v2
+        name: Build and push to Docker Hub
         working-directory: .
         run: |
           docker login -u $env:USERNAME -p $env:PASSWORD
@@ -26,6 +28,3 @@ jobs:
         env:
           USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
