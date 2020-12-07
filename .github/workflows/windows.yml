@@ -1,4 +1,4 @@
-name: build
+name: build-windows
 
 on:
   push:
@@ -9,36 +9,23 @@ jobs:
     runs-on: windows-2019
     steps:
       -
-        name: Checkout code
-        uses: actions/checkout@v2
-      -
         name: Read version
         uses: bencgreen/read-file-action@v1
         with:
           path: ./VERSION
         id: version
       -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          platforms: windows/amd64
-          tags: |
-            bcgdesign/alpine-s6:latest
-            bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
+        name: Checkout, build, and push
+        uses: actions/checkout@v2
+        working-directory: .
+        run: |
+          docker login -u $env:USERNAME -p $env:PASSWORD
+          docker build alpine-s6
+          docker image push bcgdesign/alpine-s6:latest bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
+          docker logout
+        env:
+          USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
