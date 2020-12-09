@@ -18,7 +18,9 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 ENV \
     # set to 1 to install bash
-    WITH_BASH=0 \
+    WITH_BASH=0
+
+ARG \
     # change to a valid timezone
     TZ=Europe/London
 
