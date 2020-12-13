@@ -16,10 +16,6 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-ENV \
-    # set to 1 to install bash
-    WITH_BASH=0
-
 ARG \
     # change to a valid timezone
     TZ=Europe/London

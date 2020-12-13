@@ -1,12 +1,13 @@
 #!/bin/sh
 
+set -euo pipefail
+
 #======================================================================================================================
 # Check for target platform
 #======================================================================================================================
 
 if [ -z "${TARGETPLATFORM}" ] ; then
     _error "Target platform not set."
-    exit 1
 fi
 
 
@@ -29,7 +30,6 @@ esac
 
 if [ -z "${INSTALLER}" ] ; then
     _error "Unsupported target platform: ${TARGETPLATFORM}."
-    exit 1
 fi
 
 
@@ -49,8 +49,6 @@ _echo "Installing S6 v${S6_VERSION}..."
 
 if [ -d /etc/s6 ] ; then
     _done
-    exit 0
 else
     _error "S6 not installed."
-    exit 1
 fi
