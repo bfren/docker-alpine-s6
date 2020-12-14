@@ -1,0 +1,4 @@
+#!/bin/sh
+set -euo pipefail
+[[ -z "${1}" ]] && _error "_rmrf: Cannot remove ''."
+rm -rf ${1}

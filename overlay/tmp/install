@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+
 #======================================================================================================================
 # Check for target platform
 #======================================================================================================================
@@ -16,36 +17,36 @@ fi
 #======================================================================================================================
 
 case "${TARGETPLATFORM}" in
-    "linux/amd64" | "windows/amd64")
-        INSTALLER="s6-overlay-amd64-installer"
+    "linux/amd64")
+        ARCH="amd64"
         ;;
     "linux/arm/v7")
-        INSTALLER="s6-overlay-armhf-installer"
+        ARCH="armhf"
         ;;
     "linux/arm64")
-        INSTALLER="s6-overlay-aarch64-installer"
+        ARCH="aarch64"
         ;;
     *)
 esac
 
-if [ -z "${INSTALLER}" ] ; then
+if [ -z "${ARCH}" ] ; then
     _error "Unsupported target platform: ${TARGETPLATFORM}."
 fi
 
 
 #======================================================================================================================
-# Download and run installer
+# Download and run S6 installer
 #======================================================================================================================
 
 cd /tmp
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${INSTALLER}"
+URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
 _echo "Downloading ${URL}..."
-wget -O ${INSTALLER} ${URL} && chmod +x ${INSTALLER}
+wget -O installer ${URL} && chmod +x installer
 _done
 
 _echo "Installing S6 v${S6_VERSION}..."
-./${INSTALLER} /
+./installer /
 
 if [ -d /etc/s6 ] ; then
     _done
