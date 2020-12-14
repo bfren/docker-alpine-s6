@@ -8,15 +8,9 @@ I've been using [webhippie](https://github.com/dockhippie/alpine)'s Alpine image
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
-## Environment Variables
-
-```bash
-WITH_BASH=0 # set to 1 if to install the Bourne Again shell
-```
-
 ## apk Repositories
 
-Edge repositories are added using tags, so only stable packages are installed /upgraded by default, but the latest ones can be used like so: `apk add curl@edgemain`.
+Edge repositories are added using tags, so only stable packages are installed/upgraded by default, but edge ones can be used like so: `apk add curl@edgemain`.
 
 ```bash
 @edgemain # Edge main packages
