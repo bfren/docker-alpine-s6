@@ -7,9 +7,7 @@ set -euo pipefail
 # Check for target platform
 #======================================================================================================================
 
-if [ -z "${TARGETPLATFORM}" ] ; then
-    _error "Target platform not set."
-fi
+[[ -z "${TARGETPLATFORM}" ]] && _error "Target platform not set."
 
 
 #======================================================================================================================
@@ -29,9 +27,7 @@ case "${TARGETPLATFORM}" in
     *)
 esac
 
-if [ -z "${ARCH}" ] ; then
-    _error "Unsupported target platform: ${TARGETPLATFORM}."
-fi
+[[ -z "${ARCH}" ]] && _error "Unsupported target platform: ${TARGETPLATFORM}."
 
 
 #======================================================================================================================
@@ -48,8 +44,4 @@ _done
 _echo "Installing S6 v${S6_VERSION}..."
 ./installer /
 
-if [ -d /etc/s6 ] ; then
-    _done
-else
-    _error "S6 not installed."
-fi
+[[ -d /etc/s6 ]] && _done || _error "S6 not installed."
