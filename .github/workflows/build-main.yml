@@ -4,6 +4,7 @@ on:
   push:
     branches: main
     paths-ignore:
+      - '.github/workflows/build-dev.yml'
       - '*.code-workspace'
       - 'README.md'
 
