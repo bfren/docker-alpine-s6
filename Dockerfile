@@ -28,7 +28,7 @@ RUN apk -U upgrade \
 
 COPY ./overlay /
 
-ARG S6_VERSION=2.2.0.0
+ARG S6_VERSION=2.2.0.1
 RUN chmod +x /tmp/install /usr/local/bin/_* \
     && /tmp/install \
     && rm -rf /tmp/* \
