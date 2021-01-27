@@ -16,6 +16,18 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v2
       -
+        name: Read Alpine minor
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./ALPINE_MINOR
+        id: alpine_minor
+      -
+        name: Read Alpine revision
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./ALPINE_REVISION
+        id: alpine_revision
+      -
         name: Read version
         uses: bencgreen/read-file-action@v1
         with:
@@ -43,6 +55,8 @@ jobs:
           tags: |
             bcgdesign/alpine-s6:latest
             bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
+            bcgdesign/alpine-s6:alpine-${{ steps.alpine_minor.outputs.content }}
+            bcgdesign/alpine-s6:alpine-${{ steps.alpine_revision.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
