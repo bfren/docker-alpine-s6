@@ -1,0 +1,7 @@
+/usr/local/bin/_c false root:root 0500 0500
+/usr/local/bin/_done false root:root 0500 0500
+/usr/local/bin/_echo false root:root 0500 0500
+/usr/local/bin/_error false root:root 0500 0500
+/usr/local/bin/_ok false root:root 0500 0500
+/usr/local/bin/_rmrf false root:root 0500 0500
+/usr/local/bin/_terminate false root:root 0500 0500
