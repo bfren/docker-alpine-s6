@@ -16,19 +16,19 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v2
       -
-        name: Read Alpine minor
+        name: Read Alpine version - minor
         uses: bencgreen/read-file-action@v1
         with:
           path: ./ALPINE_MINOR
         id: alpine_minor
       -
-        name: Read Alpine revision
+        name: Read Alpine version - revision
         uses: bencgreen/read-file-action@v1
         with:
           path: ./ALPINE_REVISION
         id: alpine_revision
       -
-        name: Read version
+        name: Read image version
         uses: bencgreen/read-file-action@v1
         with:
           path: ./VERSION
