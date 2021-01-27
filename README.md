@@ -4,7 +4,7 @@
 
 [Usage Guide](https://github.com/bencgreen/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
 
-[Alpine](https://alpinelinux.org/)'s base image (version 3.12.3) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.1).
+[Alpine](https://alpinelinux.org/)'s base image (version 3.13.0) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.1).
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
