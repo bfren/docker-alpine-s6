@@ -19,14 +19,15 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ## Helper Functions
 
-Function | Arguments                 | Description
--------- | ------------------------- | -----------
-`_c`     | 1: ANSI colour<br>2: Text | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`
-`_echo`  | 1: Text                   | Echoes `$1` to `stdout` in black with prefix
-`_done`  | *None*                    | Echoes 'done.' to `stdout` in green with prefix
-`_ok`    | *None*                    | Echoes 'ok.' to `stdout` in green with prefix
-`_error` | 1: Text                   | Echoes `$1` to `stdout` in red with prefix
-`_rmrf`  | 1: Path                   | Runs `rm -rf $1` safely: doing nothing if `$1` is empty
+Function     | Arguments                 | Description
+------------ | ------------------------- | -----------
+`_c`         | 1: ANSI colour<br>2: Text | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`
+`_echo`      | 1: Text                   | Echoes `$1` to `stdout` in black with prefix
+`_done`      | *None*                    | Echoes 'done.' to `stdout` in green with prefix
+`_ok`        | *None*                    | Echoes 'ok.' to `stdout` in green with prefix
+`_error`     | 1: Text                   | Echoes `$1` to `stdout` in red with prefix
+`_rmrf`      | 1: Path                   | Runs `rm -rf $1` safely: doing nothing if `$1` is empty
+`_terminate` | *None*                    | Terminates all running services - used in `finish` file of a service in `services.d`
 
 ## Authors
 
