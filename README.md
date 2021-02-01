@@ -8,6 +8,12 @@
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` or overlay `/etc/crontabs/root`.
 
+## Contents
+
+* [apk Repositories](#apk-repositories)
+* [Helper Functions](#helper-functions)
+* [Authors / Licence / Copyright](#authors)
+
 ## apk Repositories
 
 Edge repositories are added using tags, so only stable packages are installed/upgraded by default, but edge ones can be used like so: `apk add curl@edgemain`.
