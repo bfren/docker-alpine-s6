@@ -40,7 +40,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/alpine-s6:dev
+            bcgdesign/alpine-s6:dev-alpine-3.12
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
