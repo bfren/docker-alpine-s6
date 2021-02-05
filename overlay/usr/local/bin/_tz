@@ -7,4 +7,4 @@ TZ="/usr/share/zoneinfo/${1}"
 [[ ! -f ${TZ} ]] && _error "_tz: ${1} is not a recognised timezone."
 cp ${TZ} /etc/localtime
 
-apk del .tz
+apk del .tz && _rmrf "/usr/share/zoneinfo/*"
