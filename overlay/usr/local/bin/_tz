@@ -8,3 +8,4 @@ TZ="/usr/share/zoneinfo/${1}"
 cp ${TZ} /etc/localtime
 
 apk del .tz && _rmrf "/usr/share/zoneinfo/*"
+_ok "_tz: Timezone set to ${1}."
