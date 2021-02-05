@@ -56,6 +56,7 @@ jobs:
             bcgdesign/alpine-s6:latest
             bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
             bcgdesign/alpine-s6:alpine-3.13
+            bcgdesign/alpine-s6:alpine-3.13-${{ steps.version.outputs.content }}
             bcgdesign/alpine-s6:alpine-${{ steps.alpine_revision.outputs.content }}
       -
         name: Image digest
