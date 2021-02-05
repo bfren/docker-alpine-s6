@@ -45,3 +45,16 @@ _echo "Installing S6 v${S6_VERSION}..."
 ./installer /
 
 [[ -d /etc/s6 ]] && _done || _error "S6 not installed."
+
+
+#======================================================================================================================
+# Upgrade packages and set timezone
+#======================================================================================================================
+
+_echo "Upgrading packages..."
+apk -U upgrade
+_done
+
+_echo "Setting timezone to Europe/London..."
+_tz "Europe/London"
+_done

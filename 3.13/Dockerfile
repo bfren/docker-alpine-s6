@@ -16,23 +16,13 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
-ARG \
-    # change to a valid timezone
-    TZ=Europe/London
-
-RUN apk -U upgrade \
-    && apk add --virtual .tz tzdata \
-    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
-    && apk del .tz \
-    && rm -rf /var/cache/apk/*
-
 COPY ./overlay /
 COPY ./3.13/repositories /etc/apk/repositories
 
 ARG S6_VERSION=2.2.0.1
 RUN chmod +x /tmp/install /usr/local/bin/_* \
     && /tmp/install \
-    && rm -rf /tmp/* \
+    && rm -rf /var/cache/apk/* /tmp/* \
     && chmod a=rwx,u+t /tmp
 
 ENTRYPOINT [ "/init" ]

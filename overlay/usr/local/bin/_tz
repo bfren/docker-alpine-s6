@@ -1,0 +1,10 @@
+#!/bin/sh
+set -euo pipefail
+[[ -z ${1+x} ]] && _error "_tz: You must specify a timezone ''."
+
+apk add --virtual .tz tzdata
+TZ="/usr/share/zoneinfo/${1}"
+[[ ! -f ${TZ} ]] && _error "_tz: ${1} is not a recognised timezone."
+cp ${TZ} /etc/localtime
+
+apk del .tz
