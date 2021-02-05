@@ -22,7 +22,7 @@ COPY ./3.13/repositories /etc/apk/repositories
 ARG S6_VERSION=2.2.0.1
 RUN chmod +x /tmp/install /usr/local/bin/_* \
     && /tmp/install \
-    && rm -rf /var/cache/apk/* /tmp/* \
+    && rm -rf /tmp/* \
     && chmod a=rwx,u+t /tmp
 
 ENTRYPOINT [ "/init" ]
