@@ -1,6 +1,6 @@
 FROM alpine:3.13.1
 
-ARG TARGETPLATFORM
+ARG TARGETPLATFORM="linux/amd64"
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Alpine + S6" \
