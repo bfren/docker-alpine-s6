@@ -27,6 +27,7 @@ RUN apk -U upgrade \
     && rm -rf /var/cache/apk/*
 
 COPY ./overlay /
+COPY ./3.12/repositories /etc/apk/repositories
 
 ARG S6_VERSION=2.2.0.1
 RUN chmod +x /tmp/install /usr/local/bin/_* \
