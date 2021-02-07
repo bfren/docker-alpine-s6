@@ -22,7 +22,7 @@ apk update && apk add --virtual .tz tzdata
 
 # check the specified timezone exists
 TZ="/usr/share/zoneinfo/${1}"
-if [ ! -f ${TZ} ] ; then 
+if [ ! -f ${TZ} ] ; then
     clean
     _error "_tz: ${1} is not a recognised timezone."
 fi
