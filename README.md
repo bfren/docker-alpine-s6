@@ -31,6 +31,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `_done`      | *None*                                         | Echoes 'done.' to `stdout` in green with prefix (see `_e`).                                   |
 | `_e`         | 1: ANSI colour<br>2: Text                      | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`.                    |
 | `_echo`      | 1: Text                                        | Echoes `$1` to `stdout` in black with prefix (see `_e`).                                      |
+| `_env`       | 1: Path to environment variables file          | Adds contents of `$1` container environment variables.                                        |
 | `_error`     | 1: Text                                        | Echoes `$1` to `stdout` in red with prefix (see `_e`).                                        |
 | `_forward`   | 1: Service name<br>2: Path to error log file   | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`.    |
 | `_notok`     | *None*                                         | Echoes `$1` to `stdout` in green with prefix (see `_e`).                                      |

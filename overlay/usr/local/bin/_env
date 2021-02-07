@@ -4,9 +4,10 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Start cron
-#   -f  run in foreground mode (allows S6 to supervise the service)
+# Add contents of an environment file to the current container environment.
+#
+# Arguments:
+#   1   Path to environment file
 #======================================================================================================================
 
-_echo "Starting cron"
-/usr/sbin/crond -f
+export $(cat $1 | xargs)
