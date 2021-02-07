@@ -1,11 +1,34 @@
 #!/bin/sh
+
 set -euo pipefail
-[[ -z ${1+x} ]] && _error "_tz: You must specify a timezone ''."
 
+
+#======================================================================================================================
+# Set the timezone.
+#
+# Arguments:
+#   1   Valid timezone (e.g. Europe/London)
+#======================================================================================================================
+
+# remove timezone packages and clear caches / directories
+clean() {
+    apk del .tz
+    rm -rf /var/cache/apk/*
+    rm -rf /usr/share/zoneinfo/*
+}
+
+# install timezone package
 apk update && apk add --virtual .tz tzdata
-TZ="/usr/share/zoneinfo/${1}"
-[[ ! -f ${TZ} ]] && _error "_tz: ${1} is not a recognised timezone."
-cp ${TZ} /etc/localtime
 
-apk del .tz && rm -rf /var/cache/apk/* && rm -rf "/usr/share/zoneinfo/*"
-_ok "_tz: Timezone set to ${1}."
+# check the specified timezone exists
+TZ="/usr/share/zoneinfo/${1}"
+if [ ! -f ${TZ} ] ; then
+    clean
+    _error "_tz: ${1} is not a recognised timezone."
+fi
+
+# copy timezone info
+_echo "Setting timezone to ${1}..."
+cp ${TZ} /etc/localtime
+clean
+_done

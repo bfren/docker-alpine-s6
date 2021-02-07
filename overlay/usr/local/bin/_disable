@@ -4,14 +4,17 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Disable a supervised service.
 #
 # Arguments:
-#   1   Folder path / file glob to delete
+#   1   Service name
 #======================================================================================================================
 
-[[ -z ${1+x} ]] && _error "_rmrf: Cannot remove ''."
+[[ -z ${1+x} ]] && _error "_disable: You must supply the name of a service."
 
-_echo "Removing ${1}..."
-rm -rf ${1}
+SVC=/var/run/s6/services/${1}
+[[ ! -e ${SVC} ]] && _error "_disable: Service ${1} does not exist."
+
+_echo "Disabling ${1} service..."
+s6-svc -d ${SVC}
 _done

@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
 
 
 #======================================================================================================================
-# Echo 'done' in green text.
+# Add contents of an environment file to the current container environment.
 #
 # Arguments:
-#   1   Text to echo
+#   1   Path to environment file
 #======================================================================================================================
 
-_ok "done."
+export $(cat $1 | xargs)
