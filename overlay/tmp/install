@@ -55,5 +55,4 @@ _echo "Upgrading packages..."
 apk -U upgrade
 _done
 
-_echo "Setting timezone..."
 _tz "Europe/London"
