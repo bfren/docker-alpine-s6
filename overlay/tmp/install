@@ -36,9 +36,9 @@ esac
 
 cd /tmp
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
-_echo "Downloading ${URL}..."
-wget -O installer ${URL} && chmod +x installer
+S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
+_echo "Downloading ${S6_URL}..."
+wget -O installer ${S6_URL} && chmod +x installer
 _done
 
 _echo "Installing S6 v${S6_VERSION}..."
@@ -48,11 +48,20 @@ _echo "Installing S6 v${S6_VERSION}..."
 
 
 #======================================================================================================================
-# Upgrade packages and set timezone
+# Upgrade packages and install esh template engine
 #======================================================================================================================
 
 _echo "Upgrading packages..."
 apk -U upgrade
 _done
+
+_echo "Installing esh..."
+apk add esh
+_done
+
+
+#======================================================================================================================
+# Set timezone
+#======================================================================================================================
 
 _tz "Europe/London"

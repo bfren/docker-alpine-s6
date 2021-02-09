@@ -5,8 +5,13 @@ set -euo pipefail
 
 #======================================================================================================================
 # Start cron
-#   -f  run in foreground mode (allows S6 to supervise the service)
+#   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
+#   -l  log level (from 0 to 8 - 0 is the most verbose)
+#   -L  log to file (cron-log service will forward this file to the Docker log)
 #======================================================================================================================
 
 _echo "Starting cron"
-/usr/sbin/crond -f
+/usr/sbin/crond \
+    -f \
+    -l ${CRON_LOG_LEVEL} \
+    -L /var/log/cron.log
