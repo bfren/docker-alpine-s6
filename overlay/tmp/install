@@ -58,7 +58,7 @@ wget -O sempl ${SEMPL_URL} && chmod +x sempl
 _done
 
 _echo "Moving sempl to /usr/local/bin..."
-mv sempl /usr/local/bin/
+mv ./sempl /usr/local/bin/
 TEST=$(/usr/local/bin/sempl -o tmpl)
 [[ -n ${TEST} ]] && _done || _error "Mo not installed."
 
