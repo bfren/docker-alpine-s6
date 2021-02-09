@@ -25,4 +25,8 @@ RUN chmod +x /tmp/install /usr/local/bin/_* \
     && rm -rf /tmp/* \
     && chmod a=rwx,u+t /tmp
 
+ENV \
+    # cron log levels are from 0 (most verbose) to 8 (default)
+    CRON_LOG_LEVEL=8
+
 ENTRYPOINT [ "/init" ]

@@ -6,8 +6,11 @@ set -euo pipefail
 #======================================================================================================================
 # Start cron
 #   -f  run in foreground mode (allows S6 to supervise the service)
+#   -l  log level (from 0 to 8 - 0 is the most verbose)
 #   -L  log to file
 #======================================================================================================================
 
 _echo "Starting cron"
-/usr/sbin/crond -f -L /var/log/cron.log
+/usr/sbin/crond -f \
+    -l ${CRON_LOG_LEVEL} \
+    -L /var/log/cron.log
