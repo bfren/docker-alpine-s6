@@ -48,18 +48,19 @@ _echo "Installing S6 v${S6_VERSION}..."
 
 
 #======================================================================================================================
-# Download mo
-# See https://github.com/tests-always-included/mo
+# Download sempl
+# See https://github.com/nextrevision/sempl
 #======================================================================================================================
 
-MO_URL=https://git.io/get-mo
-_echo "Downloading ${MO_URL}..."
-wget -O mo ${MO_URL} && chmod +x mo
+SEMPL_URL=https://raw.githubusercontent.com/nextrevision/sempl/master/sempl
+_echo "Downloading ${SEMPL_URL}..."
+wget -O sempl ${SEMPL_URL} && chmod +x sempl
 _done
 
-_echo "Moving mo to /usr/local/bin..."
-mv ./mo /usr/local/bin/
-[[ _done | mo ]] && _error "Mo not installed."
+_echo "Moving sempl to /usr/local/bin..."
+mv sempl /usr/local/bin/
+TEST=$(sempl -o tmpl)
+[[ -n ${TEST} ]] && _done || _error "Mo not installed."
 
 
 #======================================================================================================================
@@ -71,4 +72,3 @@ apk -U upgrade
 _done
 
 _tz "Europe/London"
-
