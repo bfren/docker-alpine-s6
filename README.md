@@ -11,6 +11,7 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or o
 ## Contents
 
 * [apk Repositories](#apk-repositories)
+* [Environment Variables](#environment-variables)
 * [Helper Functions](#helper-functions)
 * [Authors / Licence / Copyright](#authors)
 
@@ -22,6 +23,12 @@ Edge repositories are added using tags, so only stable packages are installed/up
 @edgemain # Edge main packages
 @edgecomm # Edge community packages
 ```
+
+## Environment Variables
+
+| Variable         | Values | Description                                      | Default |
+| ---------------- | ------ | ------------------------------------------------ | ------- |
+| `CRON_LOG_LEVEL` | 0-8    | Sets the cron log level (0 is the most verbose). | 8       |
 
 ## Helper Functions
 
