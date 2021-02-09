@@ -59,7 +59,7 @@ _done
 
 _echo "Moving sempl to /usr/local/bin..."
 mv sempl /usr/local/bin/
-TEST=$(sempl -o tmpl)
+TEST=$(/usr/local/bin/sempl -o tmpl)
 [[ -n ${TEST} ]] && _done || _error "Mo not installed."
 
 
