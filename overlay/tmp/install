@@ -48,29 +48,16 @@ _echo "Installing S6 v${S6_VERSION}..."
 
 
 #======================================================================================================================
-# Upgrade packages and install bash
+# Upgrade packages and install esh template engine
 #======================================================================================================================
 
 _echo "Upgrading packages..."
 apk -U upgrade
-apk add bash
 _done
 
-
-#======================================================================================================================
-# Download sempl
-# See https://github.com/nextrevision/sempl
-#======================================================================================================================
-
-# SEMPL_URL=https://raw.githubusercontent.com/nextrevision/sempl/master/sempl
-# _echo "Downloading ${SEMPL_URL}..."
-# wget -O sempl ${SEMPL_URL} && chmod +x sempl
-# _done
-
-# _echo "Moving sempl to /usr/local/bin..."
-# mv ./sempl /usr/local/bin/
-# TEST=$(/usr/local/bin/sempl -o tmpl)
-# [[ -n ${TEST} ]] && _done || _error "Mo not installed."
+_echo "Installing esh..."
+apk add esh
+_done
 
 
 #======================================================================================================================
