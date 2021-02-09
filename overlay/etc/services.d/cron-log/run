@@ -4,10 +4,8 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Start cron
-#   -f  run in foreground mode (allows S6 to supervise the service)
-#   -L  log to file
+# Forward Cron error log to Docker
 #======================================================================================================================
 
-_echo "Starting cron"
-/usr/sbin/crond -f -L /var/log/cron.log
+FILE=/var/log/cron.log && touch ${FILE}
+_forward "cron-log" ${FILE}
