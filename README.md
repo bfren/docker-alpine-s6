@@ -25,20 +25,21 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ## Helper Functions
 
-| Function     | Arguments                                      | Description                                                                                   |
-| ------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `_disable`   | 1: Service name                                | Uses S6 to disable the service named `$1`.                                                    |
-| `_done`      | *None*                                         | Echoes 'done.' to `stdout` in green with prefix (see `_e`).                                   |
-| `_e`         | 1: ANSI colour<br>2: Text                      | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`.                    |
-| `_echo`      | 1: Text                                        | Echoes `$1` to `stdout` in black with prefix (see `_e`).                                      |
-| `_env`       | 1: Path to environment variables file          | Adds contents of `$1` container environment variables.                                        |
-| `_error`     | 1: Text                                        | Echoes `$1` to `stdout` in red with prefix (see `_e`).                                        |
-| `_forward`   | 1: Service name<br>2: Path to error log file   | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`.    |
-| `_notok`     | *None*                                         | Echoes `$1` to `stdout` in green with prefix (see `_e`).                                      |
-| `_ok`        | *None*                                         | Echoes 'ok.' to `stdout` in red with prefix (see `_e`).                                       |
-| `_rmrf`      | 1: Path                                        | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                      |
-| `_terminate` | *None*                                         | Terminates all running services - used in `finish` file of a service in `services.d`.         |
-| `_tz`        | 1: Timezone                                    | Sets the container's timezone to `$1`.                                                        |
+| Function        | Arguments                                    | Description                                                                                |
+| --------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `_disable`      | 1: Service name                              | Uses S6 to disable the service named `$1`.                                                 |
+| `_disable-cron` | *None*                                       | Disables the `cron` service.                                                               |
+| `_done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `_e`).                                |
+| `_e`            | 1: ANSI colour<br>2: Text                    | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`.                 |
+| `_echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `_e`).                                   |
+| `_env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
+| `_error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `_e`).                                     |
+| `_forward`      | 1: Service name<br>2: Path to error log file | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
+| `_notok`        | *None*                                       | Echoes `$1` to `stdout` in green with prefix (see `_e`).                                   |
+| `_ok`           | *None*                                       | Echoes 'ok.' to `stdout` in red with prefix (see `_e`).                                    |
+| `_rmrf`         | 1: Path                                      | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                   |
+| `_terminate`    | *None*                                       | Terminates all running services - used in `finish` file of a service in `services.d`.      |
+| `_tz`           | 1: Timezone                                  | Sets the container's timezone to `$1`.                                                     |
 
 ## Authors
 
