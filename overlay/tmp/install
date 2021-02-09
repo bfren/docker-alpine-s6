@@ -36,15 +36,30 @@ esac
 
 cd /tmp
 
-URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
-_echo "Downloading ${URL}..."
-wget -O installer ${URL} && chmod +x installer
+S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
+_echo "Downloading ${S6_URL}..."
+wget -O installer ${S6_URL} && chmod +x installer
 _done
 
 _echo "Installing S6 v${S6_VERSION}..."
 ./installer /
 
 [[ -d /etc/s6 ]] && _done || _error "S6 not installed."
+
+
+#======================================================================================================================
+# Download mo
+# See https://github.com/tests-always-included/mo
+#======================================================================================================================
+
+MO_URL=https://git.io/get-mo
+_echo "Downloading ${MO_URL}..."
+wget -O mo ${MO_URL} && chmod +x mo
+_done
+
+_echo "Moving mo to /usr/local/bin..."
+mv ./mo /usr/local/bin/
+[[ _done | mo ]] && _error "Mo not installed."
 
 
 #======================================================================================================================
@@ -56,3 +71,4 @@ apk -U upgrade
 _done
 
 _tz "Europe/London"
+
