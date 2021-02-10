@@ -10,11 +10,11 @@ set -euo pipefail
 #   1   Service name
 #======================================================================================================================
 
-[[ -z ${1+x} ]] && _error "_disable: You must supply the name of a service."
+[[ -z ${1+x} ]] && bcg-error "bcg-disable: You must supply the name of a service."
 
 SVC=/var/run/s6/services/${1}
-[[ ! -e ${SVC} ]] && _error "_disable: Service ${1} does not exist."
+[[ ! -e ${SVC} ]] && bcg-error "bcg-disable: Service ${1} does not exist."
 
-_echo "Disabling ${1} service..."
+bcg-echo "Disabling ${1} service..."
 s6-svc -d ${SVC}
-_done
+bcg-done

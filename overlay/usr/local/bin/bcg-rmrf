@@ -4,13 +4,14 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Echo text in a specified ANSI colour.
+# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
 #
 # Arguments:
-#   1   ANSI colour code
-#   2   Text to echo
+#   1   Folder path / file glob to delete
 #======================================================================================================================
 
-DATE=$(date '+%Y-%m-%d %H:%M:%S')
-NC="\e[39m"
-echo -e "[bcg] ${DATE} | ${1}${2}${NC}"
+[[ -z ${1+x} ]] && bcg-error "bcg-rmrf: Cannot remove ''."
+
+bcg-echo "Removing ${1}..."
+rm -rf ${1}
+bcg-done

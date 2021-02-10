@@ -20,7 +20,7 @@ COPY ./overlay /
 COPY ./3.12/repositories /etc/apk/repositories
 
 ARG S6_VERSION=2.2.0.1
-RUN chmod +x /tmp/install /usr/local/bin/_* \
+RUN chmod +x /tmp/install /usr/local/bin/bcg-* \
     && /tmp/install \
     && rm -rf /tmp/* \
     && chmod a=rwx,u+t /tmp

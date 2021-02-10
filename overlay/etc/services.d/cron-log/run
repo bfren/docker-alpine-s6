@@ -8,4 +8,4 @@ set -euo pipefail
 #======================================================================================================================
 
 FILE=/var/log/cron.log && touch ${FILE}
-_forward "cron-log" ${FILE}
+bcg-forward "cron-log" ${FILE}
