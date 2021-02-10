@@ -32,19 +32,26 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ## Helper Functions
 
+### Output
+
+| Function           | Arguments                                    | Description                                                                                |
+| ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `bcg-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bcg-e`).                             |
+| `bcg-e`            | 1: Namespace 2: ANSI colour<br>3: Text       | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
+| `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
+| `bcg-error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `bcg-e`).                                  |
+| `bcg-notok`        | *None*                                       | Echoes `$1` to `stdout` in green with prefix (see `bcg-e`).                                |
+| `bcg-ok`           | *None*                                       | Echoes 'ok.' to `stdout` in red with prefix (see `bcg-e`).                                 |
+
+### Other
+
 | Function           | Arguments                                    | Description                                                                                |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `bcg-disable`      | 1: Service name                              | Uses S6 to disable the service named `$1`.                                                 |
 | `bcg-disable-cron` | *None*                                       | Disables the `cron` service.                                                               |
-| `bcg-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bcg-e`).                             |
-| `bcg-e`            | 1: Namespace 2: ANSI colour<br>3: Text       | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
-| `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
 | `bcg-env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
-| `bcg-error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `bcg-e`).                                  |
 | `bcg-fix-attrs`    | *None*                                       | Re-applies attributes and permissions defined in `fix-attrs.d`.                            |
 | `bcg-forward`      | 1: Service name<br>2: Path to error log file | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
-| `bcg-notok`        | *None*                                       | Echoes `$1` to `stdout` in green with prefix (see `bcg-e`).                                |
-| `bcg-ok`           | *None*                                       | Echoes 'ok.' to `stdout` in red with prefix (see `bcg-e`).                                 |
 | `bcg-rmrf`         | 1: Path                                      | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                   |
 | `bcg-terminate`    | *None*                                       | Terminates all running services - used in `finish` file of a service in `services.d`.      |
 | `bcg-tz`           | 1: Timezone                                  | Sets the container's timezone to `$1`.                                                     |
