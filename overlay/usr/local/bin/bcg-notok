@@ -4,14 +4,10 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Echo text in red.
 #
 # Arguments:
-#   1   Folder path / file glob to delete
+#   1   Text to echo
 #======================================================================================================================
 
-[[ -z ${1+x} ]] && _error "_rmrf: Cannot remove ''."
-
-_echo "Removing ${1}..."
-rm -rf ${1}
-_done
+bcg-e "bcg" "\e[91m" "${1}"

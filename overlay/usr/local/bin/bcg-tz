@@ -24,11 +24,11 @@ apk update && apk add --virtual .tz tzdata
 TZ="/usr/share/zoneinfo/${1}"
 if [ ! -f ${TZ} ] ; then
     clean
-    _error "_tz: ${1} is not a recognised timezone."
+    bcg-error "bcg-tz: ${1} is not a recognised timezone."
 fi
 
 # copy timezone info
-_echo "Setting timezone to ${1}..."
+bcg-echo "Setting timezone to ${1}..."
 cp ${TZ} /etc/localtime
 clean
-_done
+bcg-done

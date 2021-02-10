@@ -4,9 +4,11 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Terminate all running services (will stop the container).
+# Echo text in red and exit 1.
+#
+# Arguments:
+#   1   Text to echo
 #======================================================================================================================
 
-_echo "Terminating all services..."
-s6-svscanctl -t /var/run/s6/services
-_done
+bcg-notok "${1}"
+exit 1

@@ -12,18 +12,18 @@ set -euo pipefail
 #======================================================================================================================
 
 if [ -z "${2}" ] ; then
-    _echo "_forward: Path to log file not defined, disabling ${1}"
-    _disable "${1}"
+    bcg-echo "bcg-forward: Path to log file not defined, disabling ${1}"
+    bcg-disable "${1}"
     exit 0
 fi
 
-_echo "Forwarding ${1}..."
+bcg-echo "Forwarding ${1}..."
 
 if [[ -e ${2} ]] ; then
-    _echo "_forward: ${2}"
+    bcg-echo "bcg-forward: ${2}"
     exec tail -F ${2}
 else
     SLEEP=5
-    _echo "_forward: ${2} not found, sleeping for ${SLEEP}s"
+    bcg-echo "bcg-forward: ${2} not found, sleeping for ${SLEEP}s"
     sleep ${SLEEP}
 fi

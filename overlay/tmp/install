@@ -7,7 +7,7 @@ set -eo pipefail
 # Check for target platform
 #======================================================================================================================
 
-[[ -z "${TARGETPLATFORM}" ]] && _error "Target platform not set."
+[[ -z "${TARGETPLATFORM}" ]] && bcg-error "Target platform not set."
 
 
 #======================================================================================================================
@@ -27,7 +27,7 @@ case "${TARGETPLATFORM}" in
     *)
 esac
 
-[[ -z "${ARCH}" ]] && _error "Unsupported target platform: ${TARGETPLATFORM}."
+[[ -z "${ARCH}" ]] && bcg-error "Unsupported target platform: ${TARGETPLATFORM}."
 
 
 #======================================================================================================================
@@ -37,31 +37,31 @@ esac
 cd /tmp
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
-_echo "Downloading ${S6_URL}..."
+bcg-echo "Downloading ${S6_URL}..."
 wget -O installer ${S6_URL} && chmod +x installer
-_done
+bcg-done
 
-_echo "Installing S6 v${S6_VERSION}..."
+bcg-echo "Installing S6 v${S6_VERSION}..."
 ./installer /
 
-[[ -d /etc/s6 ]] && _done || _error "S6 not installed."
+[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 not installed."
 
 
 #======================================================================================================================
 # Upgrade packages and install esh template engine
 #======================================================================================================================
 
-_echo "Upgrading packages..."
+bcg-echo "Upgrading packages..."
 apk -U upgrade
-_done
+bcg-done
 
-_echo "Installing esh..."
+bcg-echo "Installing esh..."
 apk add esh
-_done
+bcg-done
 
 
 #======================================================================================================================
 # Set timezone
 #======================================================================================================================
 
-_tz "Europe/London"
+bcg-tz "Europe/London"

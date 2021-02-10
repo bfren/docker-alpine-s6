@@ -12,13 +12,15 @@ COPY ./overlay /
 COPY ./3.13/repositories /etc/apk/repositories
 
 ARG S6_VERSION=2.2.0.1
-RUN chmod +x /tmp/install /usr/local/bin/_* \
+RUN chmod +x /tmp/install /usr/local/bin/bcg-* \
     && /tmp/install \
     && rm -rf /tmp/* \
     && chmod a=rwx,u+t /tmp
 
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
-    CRON_LOG_LEVEL=8
+    CRON_LOG_LEVEL=8 \
+    # include hidden files and directories when fix-attrs.d processes them
+    S6_FIX_ATTRS_HIDDEN=1
 
 ENTRYPOINT [ "/init" ]
