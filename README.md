@@ -41,6 +41,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
 | `bcg-env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
 | `bcg-error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `bcg-e`).                                  |
+| `bcg-fix-attrs`    | *None*                                       | Re-applies attributes and permissions defined in `fix-attrs.d`.                            |
 | `bcg-forward`      | 1: Service name<br>2: Path to error log file | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
 | `bcg-notok`        | *None*                                       | Echoes `$1` to `stdout` in green with prefix (see `bcg-e`).                                |
 | `bcg-ok`           | *None*                                       | Echoes 'ok.' to `stdout` in red with prefix (see `bcg-e`).                                 |
