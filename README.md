@@ -37,7 +37,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bcg-disable`      | 1: Service name                              | Uses S6 to disable the service named `$1`.                                                 |
 | `bcg-disable-cron` | *None*                                       | Disables the `cron` service.                                                               |
 | `bcg-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bcg-e`).                             |
-| `bcg-e`            | 1: ANSI colour<br>2: Text                    | Echoes `$2` to `stdout` in `$1` with prefix:<br>`[bcg] %Y-%m-%d %H:%M:%S`.                 |
+| `bcg-e`            | 1: Namespace 2: ANSI colour<br>3: Text       | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
 | `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
 | `bcg-env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
 | `bcg-error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `bcg-e`).                                  |
