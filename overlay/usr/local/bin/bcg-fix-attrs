@@ -29,10 +29,10 @@ foreground
                             s6-basename "$d"
                         }
                         importas -ui i i
-                        if { bcg-echo "_fix-attrs: ${i}: applying... " }
+                        if { bcg-echo "bcg-fix-attrs: ${i}: applying... " }
                         foreground { redirfd -r 0 /var/run/s6/etc/fix-attrs.d/${i} fix-attrs }
                         importas -u ? ?
-                        if { bcg-echo "_fix-attrs: ${i}: exited ${?}." }
+                        if { bcg-echo "bcg-fix-attrs: ${i}: exited ${?}." }
                         ifelse { s6-test ${S6_BEHAVIOUR_IF_STAGE2_FAILS} -eq 0 } { exit 0 }
                         exit ${?}
                     }
