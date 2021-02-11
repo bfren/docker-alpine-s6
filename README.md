@@ -54,6 +54,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bcg-fix-attrs`    | *None*                                       | Re-applies attributes and permissions defined in `fix-attrs.d`.                            |
 | `bcg-forward`      | 1: Service name<br>2: Path to error log file | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
 | `bcg-rmrf`         | 1: Path                                      | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                   |
+| `bcg-stop`         | 1: Service name                              | Uses S6 to stop the service named `$1`.                                                    |
 | `bcg-terminate`    | *None*                                       | Terminates all running services - used in `finish` file of a service in `services.d`.      |
 | `bcg-tz`           | 1: Timezone                                  | Sets the container's timezone to `$1`.                                                     |
 
