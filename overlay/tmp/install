@@ -4,6 +4,13 @@ set -eo pipefail
 
 
 #======================================================================================================================
+# Set bcg- executables as, well, executable
+#======================================================================================================================
+
+chmod +x /usr/local/bin/bcg-*
+
+
+#======================================================================================================================
 # Check for target platform
 #======================================================================================================================
 
@@ -34,17 +41,20 @@ esac
 # Download and run S6 installer
 #======================================================================================================================
 
-chmod a=rwx,u+t /tmp && cd /tmp
+cd /tmp
+
+S6_VERSION=$(cat S6_VERSION)
+bcg-echo "S6 Overlay v${S6_VERSION}"
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
 bcg-echo "Downloading ${S6_URL}..."
 wget -O installer ${S6_URL} && chmod +x installer
 bcg-done
 
-bcg-echo "Installing S6 v${S6_VERSION}..."
+bcg-echo "Installing S6 Overlay..."
 ./installer /
 
-[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 not installed."
+[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 Overlay not installed."
 
 
 #======================================================================================================================
