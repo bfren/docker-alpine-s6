@@ -12,9 +12,9 @@ set -euo pipefail
 
 [[ -z ${1+x} ]] && bcg-error "bcg-stop: You must supply the name of a service."
 
-SVC=/var/run/s6/services/${1}
+SVC="/var/run/s6/services/${1}"
 [[ ! -e ${SVC} ]] && bcg-error "bcg-stop: Service ${1} does not exist."
 
 bcg-echo "Stopping ${1} service..."
-s6-svc -t ${SVC}
+s6-svc -t "${SVC}"
 bcg-done

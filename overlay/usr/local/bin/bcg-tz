@@ -29,6 +29,6 @@ fi
 
 # copy timezone info
 bcg-echo "Setting timezone to ${1}..."
-cp ${TZ} /etc/localtime
+cp "${TZ}" /etc/localtime
 clean
 bcg-done

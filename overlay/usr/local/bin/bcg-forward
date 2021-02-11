@@ -19,9 +19,9 @@ fi
 
 bcg-echo "Forwarding ${1}..."
 
-if [[ -e ${2} ]] ; then
+if [[ -e "${2}" ]] ; then
     bcg-echo "bcg-forward: ${2}"
-    exec tail -F ${2}
+    exec tail -F "${2}"
 else
     SLEEP=5
     bcg-echo "bcg-forward: ${2} not found, sleeping for ${SLEEP}s"

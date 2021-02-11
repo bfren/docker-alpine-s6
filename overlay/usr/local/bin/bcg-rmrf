@@ -13,5 +13,5 @@ set -euo pipefail
 [[ -z ${1+x} ]] && bcg-error "bcg-rmrf: Cannot remove ''."
 
 bcg-echo "Removing ${1}..."
-rm -rf ${1}
+rm -rf "${1}"
 bcg-done
