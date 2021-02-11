@@ -17,7 +17,6 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.schema-version="1.0"
 
 COPY ./overlay /
-COPY ./S6_VERSION /tmp/S6_VERSION
 COPY ./3.13/repositories /etc/apk/repositories
 
 RUN chmod +x /tmp/install \
