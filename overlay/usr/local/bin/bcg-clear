@@ -12,5 +12,5 @@ rm -rf /tmp/*
 bcg-done
 
 bcg-echo "Clearing apk cache..."
-/var/cache/apk/*
+rm -rf /var/cache/apk/*
 bcg-done
