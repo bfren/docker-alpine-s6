@@ -47,6 +47,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 | Function           | Arguments                                    | Description                                                                                |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `bcg-clear`        | *None*                                       | Clears contents of `/tmp`/ and `apk` cache.                                                |
 | `bcg-disable`      | 1: Service name                              | Uses S6 to disable the service named `$1`.                                                 |
 | `bcg-disable-cron` | *None*                                       | Disables the `cron` service.                                                               |
 | `bcg-env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
