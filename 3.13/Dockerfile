@@ -22,8 +22,7 @@ COPY ./3.13/repositories /etc/apk/repositories
 ARG S6_VERSION=2.2.0.1
 RUN chmod +x /tmp/install /usr/local/bin/bcg-* \
     && /tmp/install \
-    && rm -rf /tmp/* \
-    && chmod a=rwx,u+t /tmp
+    && bcg-clear
 
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)

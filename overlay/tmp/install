@@ -34,7 +34,7 @@ esac
 # Download and run S6 installer
 #======================================================================================================================
 
-cd /tmp
+chmod a=rwx,u+t /tmp && cd /tmp
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
 bcg-echo "Downloading ${S6_URL}..."

@@ -11,9 +11,9 @@ set -euo pipefail
 #======================================================================================================================
 
 # remove timezone packages and clear caches / directories
-clean() {
+clear() {
     apk del .tz
-    rm -rf /var/cache/apk/*
+    bcg-clear
     rm -rf /usr/share/zoneinfo/*
 }
 
@@ -23,12 +23,12 @@ apk update && apk add --virtual .tz tzdata
 # check the specified timezone exists
 TZ="/usr/share/zoneinfo/${1}"
 if [ ! -f ${TZ} ] ; then
-    clean
+    clear
     bcg-error "bcg-tz: ${1} is not a recognised timezone."
 fi
 
 # copy timezone info
 bcg-echo "Setting timezone to ${1}..."
 cp "${TZ}" /etc/localtime
-clean
+clear
 bcg-done
