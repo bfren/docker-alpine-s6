@@ -4,11 +4,21 @@ set -euo pipefail
 
 
 #======================================================================================================================
+# Check arguments
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "bcg-e: You must provide the namespace of the output."
+[[ -z "${2-}" ]] && bcg-error "bcg-e: You must provide a colour for the output."
+[[ -z "${3-}" ]] && bcg-error "bcg-e: You must provide the text to output."
+
+
+#======================================================================================================================
 # Echo text in a specified ANSI colour.
 #
 # Arguments:
-#   1   ANSI colour code
-#   2   Text to echo
+#   1   Log namespace
+#   2   ANSI colour code
+#   3   Text to echo
 #======================================================================================================================
 
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
