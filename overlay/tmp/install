@@ -14,7 +14,7 @@ chmod +x /usr/local/bin/bcg-*
 # Check for target platform
 #======================================================================================================================
 
-[[ -z "${TARGETPLATFORM}" ]] && bcg-error "Target platform not set."
+[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "Target platform not set."
 
 
 #======================================================================================================================
