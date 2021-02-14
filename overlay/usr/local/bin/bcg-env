@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Check arguments
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "bcg-env: You must provide the name of the Environment variable."
+[[ -z "${2-}" ]] && bcg-error "bcg-env: You must provide the value for the Environment variable."
+
+
+#======================================================================================================================
+# Add an environment variable to the S6 environment.
+#
+# Arguments:
+#   1   Variable name
+#   2   Variable value
+#======================================================================================================================
+
+bcg-echo "bcg-env: ${1}=${2}"
+printf "%s" "${2}" > /var/run/s6/container_environment/${1};
