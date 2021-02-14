@@ -20,4 +20,4 @@ set -euo pipefail
 #======================================================================================================================
 
 bcg-echo "bcg-env: ${1}=${2}"
-printf "%s" "${2}" > /var/run/s6/container_environment/${1};
+echo ${2} > /var/run/s6/container_environment/${1};
