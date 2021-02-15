@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Check argument
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "bcg-adduser: You must provide a name for the user and group."
+
+
+#======================================================================================================================
+# Add the group and the user.
+#
+# Arguments:
+#   1   Group and user name
+#   2   Group ID (optional - default is 1000)
+#   3   User ID (optional - default is 1000)
+#======================================================================================================================
+
+GID=${2:-1000}
+UID=${3:-1000}
+
+bcg-echo "Adding group and user '${1}'..."
+addgroup --gid ${GID} ${1}
+adduser --uid ${UID} --no-create-home --disabled-password --ingroup ${1} ${1}
+bcg-done
