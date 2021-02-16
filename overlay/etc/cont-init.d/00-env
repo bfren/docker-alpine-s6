@@ -8,3 +8,4 @@ set -euo pipefail
 #======================================================================================================================
 
 bcg-env "CRON_LOG_FILE" "/var/log/cron.log"
+bcg-env "S6_SERVICES" "/var/run/s6/services"

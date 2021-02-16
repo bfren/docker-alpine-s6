@@ -4,7 +4,9 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Disable the cron service
+# Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bcg-svc-disable "cron"
+bcg-echo "Terminating all services..."
+s6-svscanctl -t ${S6_SERVICES}
+bcg-done

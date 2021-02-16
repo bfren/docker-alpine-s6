@@ -1,0 +1,53 @@
+#!/bin/sh
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Check arguments
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "bcg-svc: You must provide the control action."
+[[ -z "${2-}" ]] && bcg-error "bcg-svc: You must provide the name of a service."
+
+
+#======================================================================================================================
+# Control a supervised service.
+#
+# Arguments:
+#   1   Control action 'disable', 'restart', 'start', 'stop'
+#   2   Service name
+#======================================================================================================================
+
+SVC=${S6_SERVICES}/${2}
+[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service ${1} does not exist."
+
+case ${1} in
+
+    disable)
+        bcg-echo "Disabling ${2} service..."
+        s6-svc -d ${SVC}
+        ;;
+
+    restart)
+        bcg-echo "Restarting ${2} service..."
+        s6-svc -r ${SVC}
+        ;;
+
+    start)
+        bcg-echo "Starting ${2} service..."
+        s6-svc -u ${SVC}
+        ;;
+
+    stop)
+        bcg-echo "Stopping ${2} service..."
+        s6-svc -t ${SVC}
+        ;;
+
+    *)
+        bcg-error "bcg-svc: Unknown control action '${1}'."
+        ;;
+
+esac
+
+bcg-done
