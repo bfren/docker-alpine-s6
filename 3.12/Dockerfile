@@ -16,17 +16,17 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
+ENV \
+    # cron log levels are from 0 (most verbose) to 8 (default)
+    CRON_LOG_LEVEL=8 \
+    # include hidden files and directories when fix-attrs.d processes them
+    S6_FIX_ATTRS_HIDDEN=1
+
 COPY ./overlay /
 COPY ./3.12/repositories /etc/apk/repositories
 
 RUN chmod +x /tmp/install \
     && /tmp/install \
     && bcg-clear
-
-ENV \
-    # cron log levels are from 0 (most verbose) to 8 (default)
-    CRON_LOG_LEVEL=8 \
-    # include hidden files and directories when fix-attrs.d processes them
-    S6_FIX_ATTRS_HIDDEN=1
 
 ENTRYPOINT [ "/init" ]
