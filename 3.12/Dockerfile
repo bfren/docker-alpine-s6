@@ -25,6 +25,6 @@ ENV \
 COPY ./overlay /
 COPY ./3.12/repositories /etc/apk/repositories
 
-RUN bcg-install
+RUN chmod +x /usr/local/bin/bcg-* && bcg-install
 
 ENTRYPOINT [ "/init" ]
