@@ -7,9 +7,9 @@ set -euo pipefail
 # Set environment variables.
 #======================================================================================================================
 
-SCRIPTS=/etc/scripts
-bcg-env "SCRIPTS" "${SCRIPTS}"
-bcg-env "SCRIPTS_INC" "${SCRIPTS}/inc"
+LIB=/usr/lib/bcg
+bcg-env "LIB" "${LIB}"
+bcg-env "LIB_INC" "${LIB}/inc"
 
 bcg-env "CRON_LOG_FILE" "/var/log/cron.log"
 bcg-env "S6_SERVICES" "/var/run/s6/services"
