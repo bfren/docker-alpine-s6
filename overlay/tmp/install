@@ -30,9 +30,11 @@ case "${TARGETPLATFORM}" in
 
     "")
         bcg-error "Target platform not set."
+        ;;
 
     *)
         bcg-error "Unsupported target platform: ${TARGETPLATFORM}."
+        ;;
 
 esac
 
