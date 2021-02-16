@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Run install script in /tmp.
+#
+# Arguments:
+#   1   Text to echo
+#======================================================================================================================
+
+INSTALL=/tmp/install
+[[ ! -e ${INSTALL} ]] bcg-error "Install script not found."
+
+chmod +x ${INSTALL} && ${INSTALL}
+
+bcg-clear
