@@ -8,6 +8,8 @@
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or overlay `/etc/crontabs/root` (be warned this will override Alpine's default behaviour).
 
+[esh](https://github.com/jirutka/esh) - a shell templating engine - comes preinstalled, and is used extensively in the [bcg|design Docker ecosystem](https://github.com/bencgreen/docker).
+
 ## Contents
 
 * [apk Repositories](#apk-repositories)
