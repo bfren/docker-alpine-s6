@@ -14,4 +14,4 @@ bcg-echo "Starting cron"
 /usr/sbin/crond \
     -f \
     -l ${CRON_LOG_LEVEL} \
-    -L /var/log/cron.log
+    -L ${CRON_LOG_FILE}

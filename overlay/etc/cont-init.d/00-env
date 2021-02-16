@@ -4,8 +4,7 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Forward cron log to Docker
+# Set environment variables
 #======================================================================================================================
 
-[[ ! -f ${CRON_LOG_FILE} ]] && touch ${CRON_LOG_FILE}
-bcg-forward "cron-log" ${CRON_LOG_FILE}
+bcg-env "CRON_LOG_FILE" "/var/log/cron.log"
