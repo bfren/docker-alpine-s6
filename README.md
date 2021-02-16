@@ -45,17 +45,17 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ### Other
 
-| Function            | Arguments                                                                                      | Description                                                                                |
-| ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `bcg-adduser`       | 1: Group &amp; user name<br>2: GID (optional, default 1000)<br>3: UID (optional, default 1000) | Create group with id `$2`, user with id `$3`, both with name `$1`.                         |
-| `bcg-clear`         | *None*                                                                                         | Clears contents of `/tmp`/ and `apk` cache.                                                |
-| `bcg-env`           | 1: Path to environment variables file                                                          | Adds contents of `$1` container environment variables.                                     |
-| `bcg-fix-attrs`     | *None*                                                                                         | Re-applies attributes and permissions defined in `fix-attrs.d`.                            |
-| `bcg-forward`       | 1: Service name<br>2: Path to error log file                                                   | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
-| `bcg-rmrf`          | 1: Path                                                                                        | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                   |
-| `bcg-svc`           | 1: Control action 'disable', 'restart', 'start', or 'stop'<br>2: Service name                  | Uses S6 to control the service named `$2`.                                                 |
-| `bcg-svc-terminate` | *None*                                                                                         | Terminates all running services - used in `finish` file of a service in `services.d`.      |
-| `bcg-tz`            | 1: Timezone                                                                                    | Sets the container's timezone to `$1`.                                                     |
+| Function            | Arguments                                                                                      | Description                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `bcg-adduser`       | 1: Group &amp; user name<br>2: GID (optional, default 1000)<br>3: UID (optional, default 1000) | Create group with id `$2`, user with id `$3`, both with name `$1`, and no home or password. |
+| `bcg-clear`         | *None*                                                                                         | Clears contents of `/tmp`/ and `apk` cache.                                                 |
+| `bcg-env`           | 1: Path to environment variables file                                                          | Adds contents of `$1` container environment variables.                                      |
+| `bcg-fix-attrs`     | *None*                                                                                         | Re-applies attributes and permissions defined in `fix-attrs.d`.                             |
+| `bcg-forward`       | 1: Service name<br>2: Path to error log file                                                   | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`.  |
+| `bcg-rmrf`          | 1: Path                                                                                        | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                    |
+| `bcg-svc`           | 1: Control action 'disable', 'restart', 'start', or 'stop'<br>2: Service name                  | Uses S6 to control the service named `$2`.                                                  |
+| `bcg-svc-terminate` | *None*                                                                                         | Terminates all running services - used in `finish` file of a service in `services.d`.       |
+| `bcg-tz`            | 1: Timezone                                                                                    | Sets the container's timezone to `$1`.                                                      |
 
 ## Authors
 

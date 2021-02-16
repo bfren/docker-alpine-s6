@@ -11,7 +11,7 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Add the group and the user.
+# Add a group and user without home directory or password.
 #
 # Arguments:
 #   1   Group and user name
