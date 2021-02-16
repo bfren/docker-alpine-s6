@@ -58,12 +58,8 @@ bcg-echo "Installing S6 Overlay..."
 
 
 #======================================================================================================================
-# Upgrade packages and install esh template engine
+# Install esh template engine
 #======================================================================================================================
-
-#bcg-echo "Upgrading packages..."
-#apk -U upgrade
-#bcg-done
 
 bcg-echo "Installing esh..."
 apk add --no-cache esh
