@@ -17,15 +17,14 @@ set -euo pipefail
 #   1   Valid timezone (e.g. Europe/London)
 #======================================================================================================================
 
-# remove timezone packages and clear caches / directories
+# remove timezone packages and clear zone info
 clear() {
     apk del .tz
-    bcg-clear
     rm -rf /usr/share/zoneinfo/*
 }
 
 # install timezone package
-apk update && apk add --virtual .tz tzdata
+apk add --no-cache --virtual .tz tzdata
 
 # check the specified timezone exists
 TZ="/usr/share/zoneinfo/${1}"
