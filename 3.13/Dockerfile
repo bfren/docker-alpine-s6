@@ -20,8 +20,7 @@ COPY ./overlay /
 COPY ./3.13/repositories /etc/apk/repositories
 
 RUN chmod +x /tmp/install \
-    && /tmp/install \
-    && bcg-clear
+    && /tmp/install
 
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
