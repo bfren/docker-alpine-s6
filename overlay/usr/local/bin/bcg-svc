@@ -20,7 +20,7 @@ set -euo pipefail
 #======================================================================================================================
 
 SVC=${S6_SERVICES}/${2}
-[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service ${1} does not exist."
+[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
 
 case ${1} in
 
@@ -49,5 +49,3 @@ case ${1} in
         ;;
 
 esac
-
-bcg-done
