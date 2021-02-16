@@ -11,30 +11,30 @@ chmod +x /usr/local/bin/bcg-*
 
 
 #======================================================================================================================
-# Check for target platform
-#======================================================================================================================
-
-[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "Target platform not set."
-
-
-#======================================================================================================================
 # Get correct installer for target platform
 #======================================================================================================================
 
 case "${TARGETPLATFORM}" in
+
     "linux/amd64")
         ARCH="amd64"
         ;;
+
     "linux/arm/v7")
         ARCH="armhf"
         ;;
+
     "linux/arm64")
         ARCH="aarch64"
         ;;
-    *)
-esac
 
-[[ -z "${ARCH}" ]] && bcg-error "Unsupported target platform: ${TARGETPLATFORM}."
+    "")
+        bcg-error "Target platform not set."
+
+    *)
+        bcg-error "Unsupported target platform: ${TARGETPLATFORM}."
+
+esac
 
 
 #======================================================================================================================
