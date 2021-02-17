@@ -1,5 +1,5 @@
 /etc/templates true root:root 0444 0555
 /tmp true root:root 1777 1777
-/usr/lib/bcg true root:root 0755 0755
-/usr/local/bin/bcg-* false root:root 0755 0755
+/usr/lib/bcg true root:root 0555 0555
+/usr/local/bin/bcg-* false root:root 0555 0555
 /usr/local/bin/healthcheck false root:root 0500 0500
