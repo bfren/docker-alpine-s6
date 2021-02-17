@@ -10,6 +10,7 @@ on:
       - '.github/workflows/build_3_12-dev.yml'
       - '3.12/**'
       - 'overlay/**'
+      - 'Dockerfile'
       - 'VERSION'
 
 jobs:
