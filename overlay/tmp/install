@@ -7,7 +7,7 @@ set -eo pipefail
 # Ensure target platform is set.
 #======================================================================================================================
 
-[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "Target platform not set."
+[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "install: Target platform not set."
 
 
 #======================================================================================================================
@@ -16,15 +16,15 @@ set -eo pipefail
 
 case "${TARGETPLATFORM}" in
 
-    "linux/amd64")
+    linux/amd64)
         ARCH="amd64"
         ;;
 
-    "linux/arm/v7")
+    linux/arm/v7)
         ARCH="armhf"
         ;;
 
-    "linux/arm64")
+    linux/arm64)
         ARCH="aarch64"
         ;;
 
@@ -34,33 +34,43 @@ case "${TARGETPLATFORM}" in
 
 esac
 
+bcg-debug "install: Platform architecture ${ARCH}."
+
 
 #======================================================================================================================
-# Download and run S6 installer.
+# Get S6 Overlay and esh versions.
 #======================================================================================================================
 
 cd /tmp
 
 S6_VERSION=$(cat S6_VERSION)
-bcg-echo "S6 Overlay v${S6_VERSION}"
+bcg-debug "install: S6 Overlay version ${S6_VERSION}."
+
+ESH_VERSION=$(cat ESH_VERSION)
+bcg-debug "install: esh version ${ESH_VERSION}."
+
+
+#======================================================================================================================
+# Download and isntall S6 Overlay.
+#======================================================================================================================
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
 bcg-echo "Downloading ${S6_URL}..."
 wget -O installer ${S6_URL} && chmod +x installer
 bcg-done
 
-bcg-echo "Installing S6 Overlay..."
+bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
 ./installer /
 
-[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 Overlay not installed."
+[[ -d /etc/s6 ]] && bcg-done || bcg-error "install: S6 Overlay not installed."
 
 
 #======================================================================================================================
 # Install esh template engine.
 #======================================================================================================================
 
-bcg-echo "Installing esh..."
-apk add --no-cache esh && bcg-done || bcg-error "esh not installed."
+bcg-echo "Installing esh v${ESH_VERSION}..."
+apk add --no-cache esh=${ESH_VERSION} && bcg-done || bcg-error "install: esh not installed."
 
 
 #======================================================================================================================
