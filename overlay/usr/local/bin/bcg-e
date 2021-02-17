@@ -15,7 +15,7 @@ set -euo pipefail
 #======================================================================================================================
 # Echo text in a specified ANSI colour.
 #
-# Arguments:
+# Arguments
 #   1   Log namespace
 #   2   ANSI colour code
 #   3   Text to echo

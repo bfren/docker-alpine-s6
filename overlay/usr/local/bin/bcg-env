@@ -15,7 +15,7 @@ set -euo pipefail
 # Add an environment variable to the S6 environment.
 #   (We use printf because echo adds a newline.)
 #
-# Arguments:
+# Arguments
 #   1   Variable name
 #   2   Variable value
 #======================================================================================================================

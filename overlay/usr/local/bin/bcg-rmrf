@@ -13,7 +13,7 @@ set -euo pipefail
 #======================================================================================================================
 # Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
 #
-# Arguments:
+# Arguments
 #   1   Folder path / file glob to delete
 #======================================================================================================================
 
