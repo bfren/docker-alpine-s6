@@ -4,12 +4,10 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Run install script in /tmp and then perform cleanup.
+# Echo debug message in grey if DEBUG flag is set - otherwise do nothing.
+#
+# Arguments
+#   1   Text to echo
 #======================================================================================================================
 
-INSTALL=/tmp/install
-[[ ! -e ${INSTALL} ]] && bcg-error "bcg-install: Script not found."
-
-chmod +x ${INSTALL} && ${INSTALL}
-
-bcg-clear
+[[ "${DEBUG-}" = "1" ]] && bcg-e "bcg" "\e[1;30m" "${1-}"

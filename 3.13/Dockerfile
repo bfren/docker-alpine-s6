@@ -17,6 +17,8 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.schema-version="1.0"
 
 ENV \
+    # set to 1 for additional log output
+    DEBUG=0 \
     # cron log levels are from 0 (most verbose) to 8 (default)
     CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them

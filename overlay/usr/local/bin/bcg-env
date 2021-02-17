@@ -18,5 +18,5 @@ set -euo pipefail
 #   (Use printf because echo adds a newline.)
 #======================================================================================================================
 
-bcg-echo "bcg-env: ${1}=${2}"
+bcg-debug "bcg-env: ${1}=${2}"
 printf "%s" ${2} > /var/run/s6/container_environment/${1}
