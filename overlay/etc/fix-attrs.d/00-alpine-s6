@@ -1,3 +1,4 @@
+/etc/periodic true root:root 0555 0555
 /etc/templates true root:root 0444 0555
 /tmp true root:root 1777 1777
 /usr/lib/bcg true root:root 0555 0555
