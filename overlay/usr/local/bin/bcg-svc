@@ -5,22 +5,20 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
+#   1   Control action 'disable', 'restart', 'start', 'stop'
+#   2   Service name
 #======================================================================================================================
 
 [[ -z "${1-}" ]] && bcg-error "bcg-svc: You must provide the control action."
 [[ -z "${2-}" ]] && bcg-error "bcg-svc: You must provide the name of a service."
 
+SVC=${S6_SERVICES}/${2}
+[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
+
 
 #======================================================================================================================
 # Control a supervised service.
-#
-# Arguments
-#   1   Control action 'disable', 'restart', 'start', 'stop'
-#   2   Service name
 #======================================================================================================================
-
-SVC=${S6_SERVICES}/${2}
-[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
 
 case ${1} in
 

@@ -5,6 +5,8 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
+#   1   Variable name
+#   2   Variable value
 #======================================================================================================================
 
 [[ -z "${1-}" ]] && bcg-error "bcg-env: You must provide the name of the Environment variable."
@@ -13,11 +15,7 @@ set -euo pipefail
 
 #======================================================================================================================
 # Add an environment variable to the S6 environment.
-#   (We use printf because echo adds a newline.)
-#
-# Arguments
-#   1   Variable name
-#   2   Variable value
+#   (Use printf because echo adds a newline.)
 #======================================================================================================================
 
 bcg-echo "bcg-env: ${1}=${2}"
