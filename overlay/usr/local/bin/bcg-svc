@@ -25,6 +25,7 @@ case ${1} in
     disable)
         bcg-echo "Disabling ${2} service..."
         s6-svc -d ${SVC}
+        bcg-done
         ;;
 
     restart)
@@ -40,6 +41,7 @@ case ${1} in
     stop)
         bcg-echo "Stopping ${2} service..."
         s6-svc -t ${SVC}
+        bcg-done
         ;;
 
     *)
