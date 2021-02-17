@@ -13,3 +13,5 @@ bcg-env "LIB_INC" "${LIB}/inc"
 
 bcg-env "CRON_LOG_FILE" "/var/log/cron.log"
 bcg-env "S6_SERVICES" "/var/run/s6/services"
+
+bcg-env "TEMPLATES" "/etc/templates"
