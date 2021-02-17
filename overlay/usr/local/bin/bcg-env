@@ -15,8 +15,7 @@ set -euo pipefail
 
 #======================================================================================================================
 # Add an environment variable to the S6 environment.
-#   (Use printf because echo adds a newline.)
 #======================================================================================================================
 
 bcg-debug "bcg-env: ${1}=${2}"
-printf "%s" ${2} > /var/run/s6/container_environment/${1}
+printf "%s" ${2} > /var/run/s6/container_environment/${1} # use printf because echo adds a newline

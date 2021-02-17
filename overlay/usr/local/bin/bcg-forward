@@ -8,7 +8,7 @@ set -euo pipefail
 #   2   Absolute path to log file
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "bcg-forwrad: You must provide the name of the log service directory."
+[[ -z "${1-}" ]] && bcg-error "bcg-forward: You must provide the name of the log service directory."
 if [ -z "${2-}" ] ; then
     bcg-echo "bcg-forward: Path to log file not defined, disabling ${1}"
     bcg-disable "${1}"
@@ -22,7 +22,7 @@ fi
 
 bcg-echo "Forwarding ${1}..."
 
-if [[ -f "${2}" ]] ; then
+if [ -f ${2} ] ; then
     bcg-debug "bcg-forward: ${2}"
     exec tail -F "${2}"
 else

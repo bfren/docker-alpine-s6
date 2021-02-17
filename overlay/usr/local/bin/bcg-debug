@@ -12,6 +12,6 @@ set -euo pipefail
 
 if [ "${DEBUG-}" = "1" ] ; then
     GREY="\e[1;30m"
-    OUTPUT=$(bcg-e "bcg" "${GREY}" "${1-}")
+    OUTPUT=$(bcg-e "bcg" "${GREY}" "${1-}") # capture output so the whole thing can be output in grey
     echo -e "${GREY}${OUTPUT}"
 fi
