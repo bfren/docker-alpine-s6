@@ -13,7 +13,7 @@ set -euo pipefail
 [[ -z "${2-}" ]] && bcg-error "bcg-svc: You must provide the name of a service."
 
 SVC=${S6_SERVICES}/${2}
-[[ ! -e ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
+[[ ! -d ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
 
 
 #======================================================================================================================
