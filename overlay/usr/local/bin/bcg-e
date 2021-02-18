@@ -17,6 +17,9 @@ set -euo pipefail
 
 if [ -n "${4-}" ] ; then
     PREFIX="${4}: "
+    if [ -n "${BCG_E-}" ] ; then
+        PREFIX="${BCG_E}/${PREFIX}"
+    fi
 elif [ -n "${BCG_E-}" ] ; then
     PREFIX="${BCG_E}: "
 else
