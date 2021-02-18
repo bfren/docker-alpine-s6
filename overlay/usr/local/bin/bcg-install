@@ -9,7 +9,7 @@ export BCG_E=`basename ${0}`
 #======================================================================================================================
 
 INSTALL=/tmp/install
-[[ ! -f ${INSTALL} ]] && bcg-error "Script not found." "bcg-install"
+[[ ! -f ${INSTALL} ]] && bcg-error "Script not found."
 
 chmod +x ${INSTALL} && ${INSTALL}
 
