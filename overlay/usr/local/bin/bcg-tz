@@ -17,13 +17,13 @@ set -euo pipefail
 
 # remove timezone packages and clear zone info
 clear() {
-    bcg-debug "Removing tzdata packages" "bcg-tz"
+    bcg-debug "Removing tzdata packages." "bcg-tz"
     apk del .tz
     rm -rf /usr/share/zoneinfo/*
 }
 
 # install timezone package
-bcg-debug "Installing tzdata packages" "bcg-tz"
+bcg-debug "Installing tzdata packages." "bcg-tz"
 apk add --no-cache --virtual .tz tzdata
 
 # check the specified timezone exists

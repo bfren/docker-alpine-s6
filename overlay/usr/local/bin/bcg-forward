@@ -27,6 +27,6 @@ if [ -f ${2} ] ; then
     exec tail -F "${2}"
 else
     SLEEP=5
-    bcg-debug "${2} not found, sleeping for ${SLEEP}s" "bcg-forward"
+    bcg-debug "${2} not found, sleeping for ${SLEEP}s." "bcg-forward"
     sleep ${SLEEP}
 fi
