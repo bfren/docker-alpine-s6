@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E="cron/$(basename ${0})"
 
 
 #======================================================================================================================
@@ -12,7 +13,7 @@ set -euo pipefail
 #   -L  log to file (cron-log service will forward this file to the Docker log)
 #======================================================================================================================
 
-bcg-echo "Starting cron" "cron|run"
+bcg-echo "Starting cron"
 /usr/sbin/crond \
     -f \
     -l ${CRON_LOG_LEVEL} \
