@@ -51,7 +51,7 @@ bcg-debug "install: esh version ${ESH_VERSION}."
 
 
 #======================================================================================================================
-# Download and isntall S6 Overlay.
+# Download and install S6 Overlay.
 #======================================================================================================================
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"

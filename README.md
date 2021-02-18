@@ -38,6 +38,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 | Function           | Arguments                                    | Description                                                                                |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `bcg-debug`        | 1: Script / executable name<br>2: Text       | Echoes `$1: $2` to `stdout` in grey with prefix (see `bcg-e`).                             |
 | `bcg-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bcg-e`).                             |
 | `bcg-e`            | 1: Namespace<br>2: ANSI colour<br>3: Text    | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
 | `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
