@@ -21,11 +21,11 @@ fi
 # Forward the contents of a log file to Docker.
 #======================================================================================================================
 
-bcg-echo "Forwarding ${1}..." "bcg-forward"
+bcg-echo "Forwarding ${1}." "bcg-forward"
 
 if [ -f ${2} ] ; then
     bcg-debug "${2}" "bcg-forward"
-    exec tail -F "${2}"
+    exec tail -F ${2}
 else
     SLEEP=5
     bcg-debug "${2} not found, sleeping for ${SLEEP}s." "bcg-forward"
