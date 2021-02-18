@@ -7,4 +7,5 @@ set -euo pipefail
 # Placeholder so permissions can be set in base image.
 #======================================================================================================================
 
+bcg-debug "Base healthcheck always returns healthy." "healthcheck"
 exit 0

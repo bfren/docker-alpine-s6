@@ -8,13 +8,13 @@ set -euo pipefail
 #   1   Folder path / file glob to delete
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "bcg-rmrf: Cannot remove ''."
+[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
 
 
 #======================================================================================================================
 # Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
 #======================================================================================================================
 
-bcg-echo "Removing ${1}..."
+bcg-echo "Removing ${1}..." "bcg-rmrf"
 rm -rf "${1}"
-bcg-done
+bcg-done "bcg-rmrf"

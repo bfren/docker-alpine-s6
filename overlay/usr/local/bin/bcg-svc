@@ -9,11 +9,11 @@ set -euo pipefail
 #   2   Service name
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "bcg-svc: You must provide the control action."
-[[ -z "${2-}" ]] && bcg-error "bcg-svc: You must provide the name of a service."
+[[ -z "${1-}" ]] && bcg-error "You must provide the control action." "bcg-svc"
+[[ -z "${2-}" ]] && bcg-error "You must provide the name of a service." "bcg-svc"
 
 SVC=${S6_SERVICES}/${2}
-[[ ! -d ${SVC} ]] && bcg-error "bcg-svc: Service '${2}' does not exist."
+[[ ! -d ${SVC} ]] && bcg-error "Service '${2}' does not exist." "bcg-svc"
 
 
 #======================================================================================================================
@@ -23,29 +23,29 @@ SVC=${S6_SERVICES}/${2}
 case ${1} in
 
     disable)
-        bcg-echo "Disabling ${2} service..."
+        bcg-echo "Disabling ${2} service..." "bcg-svc"
         s6-svc -d ${SVC}
-        bcg-done
+        bcg-done "bcg-svc"
         ;;
 
     restart)
-        bcg-echo "Restarting ${2} service..."
+        bcg-echo "Restarting ${2} service..." "bcg-svc"
         s6-svc -r ${SVC}
         ;;
 
     start)
-        bcg-echo "Starting ${2} service..."
+        bcg-echo "Starting ${2} service..." "bcg-svc"
         s6-svc -u ${SVC}
         ;;
 
     stop)
-        bcg-echo "Stopping ${2} service..."
+        bcg-echo "Stopping ${2} service..." "bcg-svc"
         s6-svc -t ${SVC}
-        bcg-done
+        bcg-done "bcg-svc"
         ;;
 
     *)
-        bcg-error "bcg-svc: Unknown control action '${1}'."
+        bcg-error "Unknown control action '${1}'." "bcg-svc"
         ;;
 
 esac

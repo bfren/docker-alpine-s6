@@ -1,13 +1,14 @@
 #!/bin/sh
 
 set -eo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
 # Ensure target platform is set.
 #======================================================================================================================
 
-[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "install: Target platform not set."
+[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "Target platform not set."
 
 
 #======================================================================================================================
@@ -34,7 +35,7 @@ case "${TARGETPLATFORM}" in
 
 esac
 
-bcg-debug "install: Platform architecture ${ARCH}."
+bcg-debug "Platform architecture ${ARCH}."
 
 
 #======================================================================================================================
@@ -44,10 +45,10 @@ bcg-debug "install: Platform architecture ${ARCH}."
 cd /tmp
 
 S6_VERSION=$(cat S6_VERSION)
-bcg-debug "install: S6 Overlay version ${S6_VERSION}."
+bcg-debug "S6 Overlay version ${S6_VERSION}."
 
 ESH_VERSION=$(cat ESH_VERSION)
-bcg-debug "install: esh version ${ESH_VERSION}."
+bcg-debug "esh version ${ESH_VERSION}."
 
 
 #======================================================================================================================
@@ -62,7 +63,7 @@ bcg-done
 bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
 ./installer /
 
-[[ -d /etc/s6 ]] && bcg-done || bcg-error "install: S6 Overlay not installed."
+[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 Overlay not installed."
 
 
 #======================================================================================================================
@@ -70,7 +71,7 @@ bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
 #======================================================================================================================
 
 bcg-echo "Installing esh v${ESH_VERSION}..."
-apk add --no-cache esh=${ESH_VERSION} && bcg-done || bcg-error "install: esh not installed."
+apk add --no-cache esh=${ESH_VERSION} && bcg-done || bcg-error "esh not installed."
 
 
 #======================================================================================================================

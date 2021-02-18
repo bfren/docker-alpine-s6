@@ -19,7 +19,7 @@ foreground
             if
                 {
                     if -t { s6-test -d /var/run/s6/etc/fix-attrs.d }
-                    if { bcg-echo "Applying ownership & permissions fixes..." }
+                    if { bcg-echo "bcg-fixattrs" "Applying ownership & permissions fixes..." }
                     if
                     {
                         elglob -s0 g "/var/run/s6/etc/fix-attrs.d/*"
@@ -29,14 +29,14 @@ foreground
                             s6-basename "$d"
                         }
                         importas -ui i i
-                        if { bcg-echo "bcg-fix-attrs: ${i}: applying... " }
+                        if { bcg-echo "bcg-fixattrs" "${i}: applying... " }
                         foreground { redirfd -r 0 /var/run/s6/etc/fix-attrs.d/${i} fix-attrs }
                         importas -u ? ?
-                        if { bcg-echo "bcg-fix-attrs: ${i}: exited ${?}." }
+                        if { bcg-echo "bcg-fixattrs" "${i}: exited ${?}." }
                         ifelse { s6-test ${S6_BEHAVIOUR_IF_STAGE2_FAILS} -eq 0 } { exit 0 }
                         exit ${?}
                     }
-                    if { bcg-done }
+                    if { bcg-done "bcg-fixattrs" }
                 }
         }
     }

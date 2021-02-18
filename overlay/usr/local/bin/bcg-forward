@@ -8,9 +8,9 @@ set -euo pipefail
 #   2   Absolute path to log file
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "bcg-forward: You must provide the name of the log service directory."
+[[ -z "${1-}" ]] && bcg-error "You must provide the name of the log service directory." "bcg-forward"
 if [ -z "${2-}" ] ; then
-    bcg-echo "bcg-forward: Path to log file not defined, disabling ${1}"
+    bcg-echo "Path to log file not defined, disabling ${1}" "bcg-forward"
     bcg-disable "${1}"
     exit 0
 fi
@@ -20,13 +20,13 @@ fi
 # Forward the contents of a log file to Docker.
 #======================================================================================================================
 
-bcg-echo "Forwarding ${1}..."
+bcg-echo "Forwarding ${1}..." "bcg-forward"
 
 if [ -f ${2} ] ; then
-    bcg-debug "bcg-forward: ${2}"
+    bcg-debug "${2}" "bcg-forward"
     exec tail -F "${2}"
 else
     SLEEP=5
-    bcg-debug "bcg-forward: ${2} not found, sleeping for ${SLEEP}s"
+    bcg-debug "${2} not found, sleeping for ${SLEEP}s" "bcg-forward"
     sleep ${SLEEP}
 fi

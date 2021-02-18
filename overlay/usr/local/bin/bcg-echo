@@ -8,6 +8,7 @@ set -euo pipefail
 #
 # Arguments
 #   1   Text to echo
+#   4   Script / executable name (optional)
 #======================================================================================================================
 
-bcg-e "bcg" "\e[39m" "${1-}"
+bcg-e "bcg" "\e[39m" "${1-}" "${2-}"

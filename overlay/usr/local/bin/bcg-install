@@ -8,7 +8,7 @@ set -euo pipefail
 #======================================================================================================================
 
 INSTALL=/tmp/install
-[[ ! -f ${INSTALL} ]] && bcg-error "bcg-install: Script not found."
+[[ ! -f ${INSTALL} ]] && bcg-error "Script not found." "bcg-install"
 
 chmod +x ${INSTALL} && ${INSTALL}
 
