@@ -12,6 +12,6 @@ INSTALL=/tmp/install
 [[ ! -f ${INSTALL} ]] && bcg-error "Script not found." "bcg-install"
 
 chmod +x ${INSTALL} && ${INSTALL}
-bcg-done
 
 bcg-clear
+bcg-done
