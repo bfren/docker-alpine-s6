@@ -15,15 +15,19 @@ set -euo pipefail
 [[ -z "${2-}" ]] && bcg-error "You must provide a colour for the output." "bcg-e" || COLOUR=${2}
 [[ -z "${3-}" ]] && bcg-error "You must provide the text to output." "bcg-e" || TEXT=${3}
 
+# if 4 is set, use it as the namespace prefix,
+# or as a sub-command within a larger script
 if [ -n "${4-}" ] ; then
-    PREFIX="${4}: "
     if [ -n "${BCG_E-}" ] ; then
-        PREFIX="${BCG_E}/${PREFIX}"
+        PREFIX="${BCG_E}: "
+        SUFFIX=" (${4})"
+    else
+        PREFIX="${4}: "
     fi
+
+# if BCG_E is set, use it as the namespace prefix
 elif [ -n "${BCG_E-}" ] ; then
     PREFIX="${BCG_E}: "
-else
-    PREFIX=""
 fi
 
 
@@ -33,4 +37,4 @@ fi
 
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 NC="\e[0;39m"
-echo -e "[${NS}] ${DATE} | ${COLOUR}${PREFIX}${TEXT}${NC}"
+echo -e "[${NS}] ${DATE} | ${COLOUR}${PREFIX-}${TEXT}${SUFFIX-}${NC}"
