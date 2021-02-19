@@ -11,7 +11,7 @@ set -euo pipefail
 
 [[ -z "${1-}" ]] && bcg-error "You must provide the name of the log service directory." "bcg-forward"
 if [ -z "${2-}" ] ; then
-    bcg-echo "Path to log file not defined, disabling ${1}" "bcg-forward"
+    bcg-debug "Path to log file not defined, disabling ${1}" "bcg-forward"
     bcg-svc disable "${1}"
     exit 0
 fi
@@ -21,10 +21,8 @@ fi
 # Forward the contents of a log file to Docker.
 #======================================================================================================================
 
-bcg-echo "Forwarding ${1}." "bcg-forward"
-
 if [ -f ${2} ] ; then
-    bcg-debug "${2}" "bcg-forward"
+    bcg-echo "Forwarding ${1} (${2})." "bcg-forward"
     exec tail -F ${2}
 else
     SLEEP=5
