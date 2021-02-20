@@ -9,4 +9,4 @@ set -euo pipefail
 
 bcg-echo "Clearing ${SRC}..." "bcg-clear-src"
 rm -rf /src/*
-bcg-done "bcg-clear"
+bcg-done "bcg-clear-src"
