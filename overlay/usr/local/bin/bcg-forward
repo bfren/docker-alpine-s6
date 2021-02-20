@@ -22,7 +22,7 @@ fi
 #======================================================================================================================
 
 if [ -f ${2} ] ; then
-    bcg-echo "Forwarding ${1} (${2})." "bcg-forward"
+    bcg-echo "Forwarding ${1} - ${2}." "bcg-forward"
     exec tail -F ${2}
 else
     SLEEP=5
