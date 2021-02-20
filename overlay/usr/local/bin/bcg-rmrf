@@ -15,6 +15,5 @@ set -euo pipefail
 # Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
 #======================================================================================================================
 
-bcg-echo "Removing ${1}..." "bcg-rmrf"
+bcg-debug "Removing ${1}." "bcg-rmrf"
 rm -rf ${1}
-bcg-done "bcg-rmrf"
