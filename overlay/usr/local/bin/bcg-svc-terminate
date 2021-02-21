@@ -14,6 +14,5 @@ set -euo pipefail
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bcg-echo "Terminating all services..." "bcg-svc-terminate"
+bcg-notok "Terminating all services." "bcg-svc-terminate"
 s6-svscanctl -t ${S6_SERVICES}
-bcg-done "bcg-svc-terminate"

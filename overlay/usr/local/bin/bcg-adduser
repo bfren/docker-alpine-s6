@@ -11,6 +11,7 @@ set -euo pipefail
 #======================================================================================================================
 
 [[ -z "${1-}" ]] && bcg-error "You must provide a name for the user and group." "bcg-adduser"
+NAME=${1}
 
 GID=${2:-1000}
 UID=${3:-1000}
@@ -20,7 +21,7 @@ UID=${3:-1000}
 # Add a group and user without home directory or password.
 #======================================================================================================================
 
-bcg-echo "Adding group and user '${1}'..." "bcg-adduser"
-addgroup --gid ${GID} ${1}
-adduser --uid ${UID} --no-create-home --disabled-password --ingroup ${1} ${1}
+bcg-echo "Adding group and user '${NAME}'..." "bcg-adduser"
+addgroup --gid "${GID}" "${NAME}"
+adduser --uid "${UID}" --no-create-home --disabled-password --ingroup "${NAME}" "${NAME}"
 bcg-done "bcg-adduser"

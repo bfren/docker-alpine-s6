@@ -10,12 +10,15 @@ set -euo pipefail
 #======================================================================================================================
 
 [[ -z "${1-}" ]] && bcg-error "You must provide the name of the Environment variable." "bcg-env"
+NAME=$(echo "${1}" | tr '[:lower:]' '[:upper:]')
+
 [[ -z "${2-}" ]] && bcg-error "You must provide the value for the Environment variable." "bcg-env"
+VALUE=${2}
 
 
 #======================================================================================================================
 # Add an environment variable to the S6 environment.
 #======================================================================================================================
 
-bcg-debug "${1}=${2}." "bcg-env"
-printf "%s" ${2} > /var/run/s6/container_environment/${1} # use printf because echo adds a newline
+bcg-debug "${NAME}=${VALUE}." "bcg-env"
+printf "%s" "${VALUE}" > "/var/run/s6/container_environment/${NAME}" # use printf because echo adds a newline

@@ -11,7 +11,11 @@ set -euo pipefail
 if [ -z "${1-}" ] ; then
     LEN=40
 else
-    LEN=${1}
+    # hat-tip https://stackoverflow.com/a/16444570/8199362
+    case ${1#[-+]} in
+        (*[!0-9]*|'') bcg-error "'${1}' is not a number.";;
+        (*) LEN=${1};;
+    esac
 fi
 
 
