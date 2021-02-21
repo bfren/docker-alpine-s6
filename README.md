@@ -62,6 +62,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bcg-svc`           | 1: Control action 'disable', 'restart', 'start', or 'stop'<br>2: Service name                  | Uses S6 to control the service named `$2`.                                                  |
 | `bcg-svc-finish`    | -s Service name<br>-t: Terminate all running services                                          | Outputs service closing down debug message and optionally terminates all running services.  |
 | `bcg-svc-terminate` | *None*                                                                                         | Terminates all running services - used in `finish` file of a service in `services.d`.       |
+| `bcg-test-url`      | 1: URL                                                                                         | Uses `wget` to test URL `$1`.                                                               |
 | `bcg-tz`            | 1: Timezone                                                                                    | Sets the container's timezone to `$1`.                                                      |
 
 ## Authors
