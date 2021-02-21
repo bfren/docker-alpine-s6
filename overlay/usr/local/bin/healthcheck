@@ -1,11 +1,12 @@
-#!/usr/bin/with-contenv bash
+#!/bin/sh
 
 set -euo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
 # Placeholder so permissions can be set in base image.
 #======================================================================================================================
 
-bcg-debug "Base healthcheck always returns healthy." "healthcheck"
+bcg-debug "Base healthcheck always returns healthy."
 exit 0
