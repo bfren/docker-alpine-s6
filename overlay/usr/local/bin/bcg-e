@@ -11,9 +11,14 @@ set -euo pipefail
 #   4   Script / executable name (optional)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide the namespace of the output." "bcg-e" || NS=${1}
-[[ -z "${2-}" ]] && bcg-error "You must provide a colour for the output." "bcg-e" || COLOUR=${2}
-[[ -z "${3-}" ]] && bcg-error "You must provide the text to output." "bcg-e" || TEXT=${3}
+[[ -z "${1-}" ]] && bcg-error "You must provide the namespace of the output." "bcg-e" \
+    || NAMESPACE=${1}
+
+[[ -z "${2-}" ]] && bcg-error "You must provide a colour for the output." "bcg-e" \
+    || COLOUR=${2}
+
+[[ -z "${3-}" ]] && bcg-error "You must provide the text to output." "bcg-e" \
+    || TEXT=${3}
 
 # if 4 is set, use it as the namespace prefix,
 # or as a sub-command within a larger script
@@ -36,5 +41,5 @@ fi
 #======================================================================================================================
 
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
-NC="\e[0;39m"
-echo -e "[${NS}] ${DATE} | ${COLOUR}${PREFIX-}${TEXT}${SUFFIX-}${NC}"
+RESET_COLOUR="\e[0;39m"
+echo -e "[${NAMESPACE}] ${DATE} | ${COLOUR}${PREFIX-}${TEXT}${SUFFIX-}${RESET_COLOUR}"
