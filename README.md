@@ -60,6 +60,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bcg-rmrf`          | 1: Path                                                                                        | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                    |
 | `bcg-rnd`           | 1: Number of characters                                                                        | Generates a string of random letters and numbers of length `$1`.                            |
 | `bcg-svc`           | 1: Control action 'disable', 'restart', 'start', or 'stop'<br>2: Service name                  | Uses S6 to control the service named `$2`.                                                  |
+| `bcg-svc-finish`    | -s Service name<br>-t: Terminate all running services                                          | Outputs service closing down debug message and optionally terminates all running services.  |
 | `bcg-svc-terminate` | *None*                                                                                         | Terminates all running services - used in `finish` file of a service in `services.d`.       |
 | `bcg-tz`            | 1: Timezone                                                                                    | Sets the container's timezone to `$1`.                                                      |
 
