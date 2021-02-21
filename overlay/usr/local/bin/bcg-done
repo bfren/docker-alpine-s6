@@ -7,7 +7,7 @@ set -euo pipefail
 # Echo 'done' in green text.
 #
 # Arguments
-#   4   Script / executable name (optional)
+#   1   Script / executable name (optional)
 #======================================================================================================================
 
 bcg-ok "done." "${1-}"
