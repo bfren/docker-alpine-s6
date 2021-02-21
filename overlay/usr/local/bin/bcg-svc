@@ -33,25 +33,23 @@ SVC=${S6_SERVICES}/${NAME}
 case "${ACTION}" in
 
     disable)
-        bcg-echo "Disabling service '${NAME}'..." "bcg-svc"
+        bcg-echo "Disabling service '${NAME}'." "bcg-svc"
         s6-svc -d "${SVC}"
-        bcg-done "bcg-svc"
         ;;
 
     restart)
-        bcg-echo "Restarting service '${NAME}'..." "bcg-svc"
+        bcg-echo "Restarting service '${NAME}'." "bcg-svc"
         s6-svc -r "${SVC}"
         ;;
 
     start)
-        bcg-echo "Starting service '${NAME}'..." "bcg-svc"
+        bcg-echo "Starting service '${NAME}'." "bcg-svc"
         s6-svc -u "${SVC}"
         ;;
 
     stop)
-        bcg-echo "Stopping service '${NAME}'..." "bcg-svc"
+        bcg-echo "Stopping service '${NAME}'." "bcg-svc"
         s6-svc -t "${SVC}"
-        bcg-done "bcg-svc"
         ;;
 
     *)
