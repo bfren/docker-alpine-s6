@@ -5,23 +5,23 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   Group and user name
-#   2   Group ID (optional - default is 1000)
-#   3   User ID (optional - default is 1000)
+#   1   User and Group name
+#   2   User ID (optional - default is 1000)
+#   3   Group ID (optional - default is to use UID)
 #======================================================================================================================
 
 [[ -z "${1-}" ]] && bcg-error "You must provide a name for the user and group." "bcg-adduser"
 NAME=${1}
 
-GID=${2:-1000}
-UID=${3:-1000}
+UID=${2:-1000}
+GID=${3:-${UID}}
 
 
 #======================================================================================================================
-# Add a group and user without home directory or password.
+# Add a user and group without home directory or password.
 #======================================================================================================================
 
-bcg-echo "Adding group and user '${NAME}'..." "bcg-adduser"
+bcg-echo "Adding user and group '${NAME}'..." "bcg-adduser"
 addgroup --gid "${GID}" "${NAME}"
 adduser --uid "${UID}" --no-create-home --disabled-password --ingroup "${NAME}" "${NAME}"
 bcg-done "bcg-adduser"

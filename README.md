@@ -50,7 +50,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 | Function            | Arguments                                                                                      | Description                                                                                 |
 | ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `bcg-adduser`       | 1: Group &amp; user name<br>2: GID (optional, default 1000)<br>3: UID (optional, default 1000) | Create group with id `$2`, user with id `$3`, both with name `$1`, and no home or password. |
+| `bcg-adduser`       | 1: User &amp; group name<br>2: UID (optional, default 1000)<br>3: GID (optional, default UID)  | Create user with id `$2`, group with id `$3`, both with name `$1`, and no home or password. |
 | `bcg-clear`         | *None*                                                                                         | Clears contents of `/tmp` and `apk` cache.                                                  |
 | `bcg-clear-src`     | *None*                                                                                         | Clears contents of `/src`.                                                                  |
 | `bcg-env`           | 1: Name of environment variable<br>2: Value of environment variable                            | Adds a container environment variable called `$1` with value `$2`.                          |
