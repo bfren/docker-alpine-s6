@@ -9,7 +9,7 @@ set -euo pipefail
 #   2   Absolute path to log file
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide the name of the log service directory." "bcg-forward"
+[[ -z "${1-}" ]] && bcg-error "You must provide the name of the log service." "bcg-forward"
 SVC=${1}
 
 if [ -z "${2-}" ] ; then
