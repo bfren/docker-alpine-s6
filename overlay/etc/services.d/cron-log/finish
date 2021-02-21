@@ -1,12 +1,10 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
 
 
 #======================================================================================================================
-# Terminate all running services (will stop the container).
+# Show helpful log message.
 #======================================================================================================================
 
-bcg-echo "Terminating all services..."
-s6-svscanctl -t /var/run/s6/services
-bcg-done
+bcg-svc-finish -s ${PWD##*/}

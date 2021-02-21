@@ -4,9 +4,11 @@
 
 [Usage Guide](https://github.com/bencgreen/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
 
-[Alpine](https://alpinelinux.org/)'s base image (v3.12.3 and v3.13.1) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.1).
+[Alpine](https://alpinelinux.org/)'s base image (v3.12.3 and v3.13.2) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or overlay `/etc/crontabs/root` (be warned this will override Alpine's default behaviour).
+
+[esh](https://github.com/jirutka/esh) - a shell templating engine - comes preinstalled, and is used extensively in the [bcg|design Docker ecosystem](https://github.com/bencgreen/docker).
 
 ## Contents
 
@@ -36,6 +38,7 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 | Function           | Arguments                                    | Description                                                                                |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `bcg-debug`        | 1: Script / executable name<br>2: Text       | Echoes `$1: $2` to `stdout` in grey with prefix (see `bcg-e`).                             |
 | `bcg-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bcg-e`).                             |
 | `bcg-e`            | 1: Namespace<br>2: ANSI colour<br>3: Text    | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
 | `bcg-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bcg-e`).                                |
@@ -45,16 +48,22 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ### Other
 
-| Function           | Arguments                                    | Description                                                                                |
-| ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `bcg-disable`      | 1: Service name                              | Uses S6 to disable the service named `$1`.                                                 |
-| `bcg-disable-cron` | *None*                                       | Disables the `cron` service.                                                               |
-| `bcg-env`          | 1: Path to environment variables file        | Adds contents of `$1` container environment variables.                                     |
-| `bcg-fix-attrs`    | *None*                                       | Re-applies attributes and permissions defined in `fix-attrs.d`.                            |
-| `bcg-forward`      | 1: Service name<br>2: Path to error log file | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`. |
-| `bcg-rmrf`         | 1: Path                                      | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                   |
-| `bcg-terminate`    | *None*                                       | Terminates all running services - used in `finish` file of a service in `services.d`.      |
-| `bcg-tz`           | 1: Timezone                                  | Sets the container's timezone to `$1`.                                                     |
+| Function            | Arguments                                                                                      | Description                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `bcg-adduser`       | 1: User &amp; group name<br>2: UID (optional, default 1000)<br>3: GID (optional, default UID)  | Create user with id `$2`, group with id `$3`, both with name `$1`, and no home or password. |
+| `bcg-clear`         | *None*                                                                                         | Clears contents of `/tmp` and `apk` cache.                                                  |
+| `bcg-clear-src`     | *None*                                                                                         | Clears contents of `/src`.                                                                  |
+| `bcg-env`           | 1: Name of environment variable<br>2: Value of environment variable                            | Adds a container environment variable called `$1` with value `$2`.                          |
+| `bcg-fix-attrs`     | *None*                                                                                         | Re-applies attributes and permissions defined in `fix-attrs.d`.                             |
+| `bcg-forward`       | 1: Service name<br>2: Path to error log file                                                   | Forwards errors logged in `$2` to Docker logs - if `$2` is not set, disables service `$1`.  |
+| `bcg-install`       | *None*                                                                                         | Runs `/tmp/install` - if it doesn't exist, throws an error.                                 |
+| `bcg-rmrf`          | 1: Path                                                                                        | Runs `rm -rf $1` safely: doing nothing if `$1` is empty.                                    |
+| `bcg-rnd`           | 1: Number of characters                                                                        | Generates a string of random letters and numbers of length `$1`.                            |
+| `bcg-svc`           | 1: Control action 'disable', 'restart', 'start', or 'stop'<br>2: Service name                  | Uses S6 to control the service named `$2`.                                                  |
+| `bcg-svc-finish`    | -s Service name<br>-t: Terminate all running services                                          | Outputs service closing down debug message and optionally terminates all running services.  |
+| `bcg-svc-terminate` | *None*                                                                                         | Terminates all running services - used in `finish` file of a service in `services.d`.       |
+| `bcg-test-url`      | 1: URL                                                                                         | Uses `wget` to test URL `$1`.                                                               |
+| `bcg-tz`            | 1: Timezone                                                                                    | Sets the container's timezone to `$1`.                                                      |
 
 ## Authors
 

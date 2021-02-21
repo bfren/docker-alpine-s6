@@ -2,14 +2,15 @@ name: 3.13-dev
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'main'
     tags-ignore:
       - '**'
     paths:
       - '.github/workflows/build_3_13-dev.yml'
       - '3.13/**'
       - 'overlay/**'
+      - 'VERSION'
 
 jobs:
   main:
@@ -18,6 +19,12 @@ jobs:
       -
         name: Checkout code
         uses: actions/checkout@v2
+      -
+        name: Read image version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./VERSION
+        id: version
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -42,6 +49,7 @@ jobs:
           tags: |
             bcgdesign/alpine-s6:dev
             bcgdesign/alpine-s6:dev-alpine-3.13
+            bcgdesign/alpine-s6:alpine-3.13-${{ steps.version.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

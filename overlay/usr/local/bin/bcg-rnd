@@ -5,16 +5,23 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   Folder path / file glob to delete
+#   1   Number of characters (optional)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
-GLOB=${1}
+if [ -z "${1-}" ] ; then
+    LEN=40
+else
+    # hat-tip https://stackoverflow.com/a/16444570/8199362
+    case ${1} in
+        *[!0-9]*|'') bcg-error "'${1}' is not a positive integer." "bcg-rnd" ;;
+        *) LEN=${1} ;;
+    esac
+fi
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Output a string of random characters.
+# See https://baserow.io/docs/guides%2Finstallation%2Finstall-on-ubuntu#install-and-amp-configure-supervisor
 #======================================================================================================================
 
-bcg-debug "Removing ${GLOB}." "bcg-rmrf"
-rm -rf ${GLOB}
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${LEN} | head -n 1

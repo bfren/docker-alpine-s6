@@ -5,16 +5,23 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   Folder path / file glob to delete
+#   1   User and Group name
+#   2   User ID (optional - default is 1000)
+#   3   Group ID (optional - default is to use UID)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
-GLOB=${1}
+[[ -z "${1-}" ]] && bcg-error "You must provide a name for the user and group." "bcg-adduser"
+NAME=${1}
+
+UID=${2:-1000}
+GID=${3:-${UID}}
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Add a user and group without home directory or password.
 #======================================================================================================================
 
-bcg-debug "Removing ${GLOB}." "bcg-rmrf"
-rm -rf ${GLOB}
+bcg-echo "Adding user and group '${NAME}'..." "bcg-adduser"
+addgroup --gid "${GID}" "${NAME}"
+adduser --uid "${UID}" --no-create-home --disabled-password --ingroup "${NAME}" "${NAME}"
+bcg-done "bcg-adduser"

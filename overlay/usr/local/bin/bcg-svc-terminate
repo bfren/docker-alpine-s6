@@ -1,20 +1,18 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
 
 
 #======================================================================================================================
-# Check arguments.
-#   1   Folder path / file glob to delete
+# Check environment variable.
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
-GLOB=${1}
+[[ -z "${S6_SERVICES-}" ]] && bcg-error "S6_SERVICES environment variable is not set." "bcg-svc-terminate"
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bcg-debug "Removing ${GLOB}." "bcg-rmrf"
-rm -rf ${GLOB}
+bcg-notok "Terminating all services." "bcg-svc-terminate"
+s6-svscanctl -t ${S6_SERVICES}

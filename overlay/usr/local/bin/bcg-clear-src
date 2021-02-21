@@ -4,17 +4,16 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Check arguments.
-#   1   Folder path / file glob to delete
+# Check environment variable.
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
-GLOB=${1}
+[[ -z "${BCG_SRC-}" ]] && bcg-error "BCG_SRC environment variable is not set." "bcg-clear-src"
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Clear source directory.
 #======================================================================================================================
 
-bcg-debug "Removing ${GLOB}." "bcg-rmrf"
-rm -rf ${GLOB}
+bcg-echo "Clearing ${BCG_SRC}..." "bcg-clear-src"
+rm -rf ${BCG_SRC}/*
+bcg-done "bcg-clear-src"

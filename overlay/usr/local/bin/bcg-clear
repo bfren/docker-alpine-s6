@@ -4,11 +4,14 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Echo text in red.
-#
-# Arguments
-#   1   Text to echo
-#   2   Script / executable name (optional)
+# Clear temporary directories and caches.
 #======================================================================================================================
 
-bcg-e "bcg" "\e[91m" "${1-}" "${2-}"
+bcg-echo "Clearing /tmp..." "bcg-clear"
+rm -rf /tmp/*
+bcg-done "bcg-clear"
+
+bcg-echo "Clearing caches..." "bcg-clear"
+rm -rf /var/cache/apk/*
+rm -rf /var/cache/misc/*
+bcg-done "bcg-clear"

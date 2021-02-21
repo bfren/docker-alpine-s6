@@ -1,14 +1,11 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Echo text in red.
-#
-# Arguments
-#   1   Text to echo
-#   2   Script / executable name (optional)
+# Clear temporary files and caches.
 #======================================================================================================================
 
-bcg-e "bcg" "\e[91m" "${1-}" "${2-}"
+bcg-clear

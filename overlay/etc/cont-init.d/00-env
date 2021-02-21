@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv sh
+
+set -euo pipefail
+export BCG_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Set environment variables.
+#======================================================================================================================
+
+LIB=/usr/lib/bcg
+bcg-env "BCG_LIB" "${LIB}"
+bcg-env "BCG_INC" "${LIB}/inc"
+
+ETC=/etc/bcg
+bcg-env "BCG_TEMPLATES" "${ETC}/templates"
+bcg-env "BCG_SRC" "${ETC}/src"
+
+bcg-env "CRON_LOG_FILE" "/var/log/cron.log"
+bcg-env "S6_SERVICES" "/var/run/s6/services"

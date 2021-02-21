@@ -1,11 +1,12 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
-# Forward Cron error log to Docker
+# Forward cron log to Docker.
 #======================================================================================================================
 
-FILE=/var/log/cron.log && touch ${FILE}
-bcg-forward "cron-log" ${FILE}
+[[ ! -f ${CRON_LOG_FILE} ]] && touch ${CRON_LOG_FILE}
+bcg-forward ${PWD##*/} ${CRON_LOG_FILE}
