@@ -63,7 +63,8 @@ bcg-done
 bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
 ./installer /
 
-[[ -d /etc/s6 ]] && bcg-done || bcg-error "S6 Overlay not installed."
+[[ -d /etc/s6 ]] && bcg-done \
+    || bcg-error "S6 Overlay not installed."
 
 
 #======================================================================================================================
@@ -71,7 +72,8 @@ bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
 #======================================================================================================================
 
 bcg-echo "Installing esh v${ESH_VERSION}..."
-apk add --no-cache esh=${ESH_VERSION} && bcg-done || bcg-error "esh not installed."
+apk add --no-cache esh=${ESH_VERSION} && bcg-done \
+    || bcg-error "esh not installed."
 
 
 #======================================================================================================================
