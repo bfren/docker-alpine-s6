@@ -1,4 +1,4 @@
-name: 3.13-dev
+name: publish-dev-3_12
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/build_3_13-dev.yml'
-      - '3.13/**'
+      - '.github/workflows/publish-dev-3_12.yml'
+      - '3.12/**'
       - 'overlay/**'
       - 'VERSION'
 
 jobs:
-  3_13-dev:
+  publish-dev-3_12:
     runs-on: ubuntu-latest
     steps:
       -
@@ -43,13 +43,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./3.13/Dockerfile
+          file: ./3.12/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/alpine-s6:dev
-            bcgdesign/alpine-s6:dev-alpine-3.13
-            bcgdesign/alpine-s6:alpine-3.13-${{ steps.version.outputs.content }}
+            bcgdesign/alpine-s6:dev-alpine-3.12
+            bcgdesign/alpine-s6:alpine-3.12-${{ steps.version.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
