@@ -13,7 +13,7 @@ on:
       - 'VERSION'
 
 jobs:
-  3.13-dev:
+  3_13-dev:
     runs-on: ubuntu-latest
     steps:
       -
