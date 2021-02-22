@@ -1,4 +1,4 @@
-name: publish-main-3_12
+name: publish-3_12
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/publish-main-3_12.yml'
+      - '.github/workflows/publish-3_12.yml'
       - '3.12/**'
       - 'overlay/**'
       - 'VERSION'
 
 jobs:
-  publish-main-3_12:
+  publish-3_12:
     runs-on: ubuntu-latest
     steps:
       -
