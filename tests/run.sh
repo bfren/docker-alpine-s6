@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -euo pipefail
 
@@ -14,7 +14,7 @@ echo "Welcome to the test suite."
 # Welcome message.
 #======================================================================================================================
 
-export SHUNIT2=${GITHUB_WORKSPACE}/tests/shunit2
+export SHUNIT2=${GITHUB_WORKSPACE}/shunit2
 
 
 #======================================================================================================================

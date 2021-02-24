@@ -1,4 +1,7 @@
-#!/bin/sj
+#!/bin/sh
+
+set -euo pipefail
+
 
 testEquality() {
     assertEqual 1 1
