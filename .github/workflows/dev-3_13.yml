@@ -26,7 +26,7 @@ jobs:
         with:
           repository: kward/shunit2
           ref: v2.1.8
-          path: shunit2
+          path: ./tests/shunit2
       -
         name: Run tests
         run: |
