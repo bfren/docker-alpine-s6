@@ -10,6 +10,7 @@ set -euo pipefail
 echo "Welcome to the test suite."
 
 ls /
+ls .
 ls /shUnit2
 
 
