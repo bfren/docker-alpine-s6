@@ -22,7 +22,7 @@ jobs:
       -
         name: Run tests
         run: |
-          cd /tests && chmod +x run.sh && run.sh
+          cd ./tests && chmod +x run.sh && run.sh
   build-3_12:
     runs-on: ubuntu-latest
     steps:

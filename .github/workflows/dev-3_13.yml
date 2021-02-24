@@ -20,13 +20,9 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v2
       -
-        name: Install dependencies
-        run: |
-          sudo apt-get install -y curl
-      -
         name: Run tests
         run: |
-          cd /tests && chmod +x run.sh && run.sh
+          cd ./tests && chmod +x run.sh && run.sh
   build-3_13:
     runs-on: ubuntu-latest
     steps:
