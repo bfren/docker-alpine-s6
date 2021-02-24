@@ -21,6 +21,12 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v2
       -
+        name: Checkout shUnit2
+        uses: actions/checkout@v2
+        with:
+          repository: kward/shunit2
+          ref: v2.1.8
+      -
         name: Run tests
         run: |
           RUN=./tests/run.sh && chmod +x ${RUN} && ${RUN}
