@@ -19,12 +19,26 @@ jobs:
       -
         name: Checkout code
         uses: actions/checkout@v2
+      -
+        name: Install dependencies
+        run: |
+          apt install -y curl
+      -
+        name: Run tests
+        run: |
+          ./tests/run.sh
   build-3_12:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v2
+      -
+        name: Read image version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./VERSION_MINOR
+        id: version_minor
       -
         name: Read image version
         uses: bencgreen/read-file-action@v1
@@ -54,6 +68,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bcgdesign/alpine-s6:alpine-3.12-dev
+            bcgdesign/alpine-s6:alpine-3.12-${{ steps.version_minor.outputs.content }}-beta
             bcgdesign/alpine-s6:alpine-3.12-${{ steps.version.outputs.content }}-beta
       -
         name: Image digest
