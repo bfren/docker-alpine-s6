@@ -26,7 +26,9 @@ jobs:
       -
         name: Run tests
         run: |
-          ./tests/run.sh
+          RUN=./tests/run.sh \
+          && chmod +x ${RUN} \
+          && ${RUN}
   build-3_13:
     runs-on: ubuntu-latest
     steps:
