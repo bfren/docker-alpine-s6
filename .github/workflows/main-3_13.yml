@@ -1,4 +1,4 @@
-name: publish-3_13
+name: main-3_13
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/publish-3_13.yml'
+      - '.github/workflows/main-3_13.yml'
       - '3.13/**'
       - 'overlay/**'
       - 'VERSION'
@@ -32,6 +32,12 @@ jobs:
           path: ./VERSION
         id: version
       -
+        name: Read image version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./VERSION_MINOR
+        id: version_minor
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -54,8 +60,10 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bcgdesign/alpine-s6:latest
+            bcgdesign/alpine-s6:${{ steps.version_minor.outputs.content }}
             bcgdesign/alpine-s6:${{ steps.version.outputs.content }}
             bcgdesign/alpine-s6:alpine-3.13
+            bcgdesign/alpine-s6:alpine-3.13-${{ steps.version_minor.outputs.content }}
             bcgdesign/alpine-s6:alpine-3.13-${{ steps.version.outputs.content }}
             bcgdesign/alpine-s6:alpine-${{ steps.alpine_revision.outputs.content }}
       -
