@@ -30,7 +30,7 @@ jobs:
       -
         name: Run tests
         run: |
-          RUN=./tests/run.sh && chmod +x ${RUN} && ${RUN}
+          RUN=./tests/run-git.sh && chmod +x ${RUN} && ${RUN}
   build-3_13:
     runs-on: ubuntu-latest
     steps:
