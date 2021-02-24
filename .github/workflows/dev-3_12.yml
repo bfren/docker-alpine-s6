@@ -10,6 +10,7 @@ on:
       - '.github/workflows/dev-3_12.yml'
       - '3.12/**'
       - 'overlay/**'
+      - 'tests/**'
       - 'VERSION'
 
 jobs:
