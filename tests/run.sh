@@ -23,7 +23,7 @@ export SHUNIT2=${GITHUB_WORKSPACE}/tests/shunit2
 
 for FILE in $(find . -type f -name "test-*.sh") ; do
     echo "Running tests in ${FILE}."
-    ${FILE}
+    chmod +x ${FILE} && ${FILE}
 done
 
 
