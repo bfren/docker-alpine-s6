@@ -14,7 +14,8 @@ echo "Welcome to the test suite."
 # Welcome message.
 #======================================================================================================================
 
-export SHUNIT2=${GITHUB_WORKSPACE}/shunit2
+export SHUNIT2=${GITHUB_WORKSPACE}/shunit2/shunit2
+chmod +x ${SHUNIT2}
 
 
 #======================================================================================================================
