@@ -16,5 +16,5 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 bcg-echo "Starting cron."
 /usr/sbin/crond \
     -f \
-    -l ${CRON_LOG_LEVEL} \
+    -l ${BCG_CRON_LOG_LEVEL} \
     -L ${CRON_LOG_FILE}
