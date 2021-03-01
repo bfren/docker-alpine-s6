@@ -8,7 +8,7 @@ set -euo pipefail
 #======================================================================================================================
 
 usage () {
-    echo "Usage: `basename ${0}` [-o|-m] [-t f|d] FILE_OR_DIRECTORY_GLOB" 2>&1
+    echo "Usage: `basename ${0}` [-o|-m] [-t f|d] [-r] FILE_OR_DIRECTORY_GLOB" 2>&1
     echo
     echo "Set change action:"
     echo "    -o    Use chown: Set ownership to this user / group."
@@ -16,18 +16,20 @@ usage () {
     echo
     echo "Additional optional arguments:"
     echo "    -t    Only apply to matching files (f) or directories (d)."
+    echo "    -r    If type is not specified, adds -R to recurse."
     echo
     echo "Usage:"
     echo "    -h    Show this usage message."
     exit 2
 }
 
-while getopts ":hm:o:t:" C ; do
+while getopts ":hm:o:t:r" C ; do
     case ${C} in
         h) usage ;;
         m) MODE="${OPTARG}" ;;
         o) OWNER="${OPTARG}" ;;
         t) TYPE="${OPTARG}" ;;
+        r) RECURSE=1 ;;
         ?) bcg-notok "Invalid option: -${OPTARG}" "bcg-ch" && usage ;;
     esac
 done
@@ -46,12 +48,17 @@ GLOB="${1-}"
 if [ -n "${OWNER-}" ] ; then
 
     bcg-debug "Applying chown ${OWNER} to ${GLOB}." "bcg-ch"
-    [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
 
-    case "${TYPE-}" in
-        f|d) find ${GLOB} -type ${TYPE} -exec chown ${OWNER} {} + ;;
-        *) chown ${OWNER} ${GLOB} ;;
-    esac
+    if [ "${RECURSE-}" = "1" ] ; then
+        bcg-debug " .. recursively." "bcg-ch"
+        chown -R ${OWNER} ${GLOB}
+    else
+        [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
+        case "${TYPE-}" in
+            f|d) find ${GLOB} -type ${TYPE} -exec chown ${OWNER} {} + ;;
+            *) chown ${OWNER} ${GLOB} ;;
+        esac
+    fi
 
 fi
 
@@ -63,11 +70,16 @@ fi
 if [ -n "${MODE-}" ] ; then
 
     bcg-debug "Applying chmod ${MODE} to ${GLOB}." "bcg-ch"
-    [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
 
-    case "${TYPE-}" in
-        f|d) find ${GLOB} -type ${TYPE} -exec chmod ${MODE} {} + ;;
-        *) chmod ${MODE} ${GLOB} ;;
-    esac
+    if [ "${RECURSE-}" = "1" ] ; then
+        bcg-debug " .. recursively." "bcg-ch"
+        chmod -R ${MODE} ${GLOB}
+    else
+        [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
+        case "${TYPE-}" in
+            f|d) find ${GLOB} -type ${TYPE} -exec chmod ${MODE} {} + ;;
+            *) chmod ${MODE} ${GLOB} ;;
+        esac
+    fi
 
 fi
