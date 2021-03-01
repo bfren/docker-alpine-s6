@@ -18,9 +18,9 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 ENV \
     # set to 0 to disable additional log output
-    DEBUG=1 \
+    BCG_DEBUG=1 \
     # cron log levels are from 0 (most verbose) to 8 (default)
-    CRON_LOG_LEVEL=8 \
+    BCG_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
     S6_FIX_ATTRS_HIDDEN=1
 
