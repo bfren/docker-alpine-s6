@@ -1,4 +1,4 @@
-name: main-alpine3_12
+name: publish-alpine3_12
 
 on:
   release:
