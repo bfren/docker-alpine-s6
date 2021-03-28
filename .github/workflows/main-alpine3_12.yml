@@ -1,16 +1,8 @@
 name: main-alpine3_12
 
 on:
-  push:
-    branches:
-      - 'main'
-    tags-ignore:
-      - '**'
-    paths:
-      - '.github/workflows/main-alpine3_12.yml'
-      - '3.12/**'
-      - 'overlay/**'
-      - 'VERSION'
+  release:
+    types: [published]
 
 jobs:
   publish-alpine3_12:
