@@ -4,7 +4,7 @@
 
 [Usage Guide](https://github.com/bencgreen/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
 
-[Alpine](https://alpinelinux.org/)'s base image (v3.12.6 and v3.13.4) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
+[Alpine](https://alpinelinux.org/)'s base image (v3.12.6, v3.13.4, and edge) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or overlay `/etc/crontabs/root` (be warned this will override Alpine's default behaviour).
 
@@ -19,7 +19,7 @@ Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or o
 
 ## apk Repositories
 
-Edge repositories are added using tags, so only stable packages are installed/upgraded by default, but edge ones can be used like so: `apk add curl@edgemain`.
+Edge repositories are added using tags, so only stable packages are installed/upgraded by default, but in stable images edge packages can be installed like so: `apk add curl@edgemain`.  (In the edge images, the edge repositories are used by default.)
 
 ```bash
 @edgemain # Edge main packages
