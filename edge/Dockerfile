@@ -25,7 +25,6 @@ ENV \
     S6_FIX_ATTRS_HIDDEN=1
 
 COPY ./overlay /
-COPY ./edge/repositories /etc/apk/repositories
 
 RUN chmod +x /usr/local/bin/bcg-*
 RUN bcg-install
