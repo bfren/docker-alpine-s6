@@ -5,14 +5,14 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM alpine:3.13.4
+FROM alpine:edge
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Alpine + S6" \
-    org.label-schema.version="3.13" \
+    org.label-schema.version="edge" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
