@@ -1,10 +1,11 @@
 # Docker Alpine + S6
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-alpine-s6) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_12?label=github+3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_13?label=github+3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpineedge?label=github+edge) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bcgdesign/alpine-s6?label=docker) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/alpine-s6/latest?label=size)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/alpine-s6/latest?label=size)<br/>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_12?label=3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_13?label=3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpineedge?label=edge)
 
 [Usage Guide](https://github.com/bencgreen/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
 
-[Alpine](https://alpinelinux.org/)'s base image (v3.12.6, v3.13.4, and edge) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
+[Alpine](https://alpinelinux.org/)'s base image (v3.12.7, v3.13.5, and edge) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or overlay `/etc/crontabs/root` (be warned this will override Alpine's default behaviour).
 
