@@ -3,6 +3,7 @@ name: publish-alpine3_13
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   publish-alpine3_13:
