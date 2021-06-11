@@ -7,13 +7,13 @@ set -euo pipefail
 # Check environment variable.
 #======================================================================================================================
 
-[[ -z "${BCG_SRC-}" ]] && bf-error "BCG_SRC environment variable is not set." "bf-clear-src"
+[[ -z "${BF_SRC-}" ]] && bf-error "BF_SRC environment variable is not set." "bf-clear-src"
 
 
 #======================================================================================================================
 # Clear source directory.
 #======================================================================================================================
 
-bf-echo "Clearing ${BCG_SRC}..." "bf-clear-src"
-rm -rf ${BCG_SRC}/*
+bf-echo "Clearing ${BF_SRC}..." "bf-clear-src"
+rm -rf ${BF_SRC}/*
 bf-done "bf-clear-src"

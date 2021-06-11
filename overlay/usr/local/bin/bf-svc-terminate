@@ -14,12 +14,12 @@ set -euo pipefail
 # Check if it has already been called (multiple services may try to bring it down).
 #======================================================================================================================
 
-if [ "${BCG_TERMINATING-}" = "1" ] ; then
+if [ "${BF_TERMINATING-}" = "1" ] ; then
     bf-debug "Services already being terminated." "bf-svc-terminate"
     exit 0
 fi
 
-bf-env "BCG_TERMINATING" "1"
+bf-env "BF_TERMINATING" "1"
 
 
 #======================================================================================================================

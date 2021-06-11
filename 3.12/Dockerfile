@@ -12,9 +12,9 @@ ARG TARGETPLATFORM
 
 ENV \
     # set to 0 to disable additional log output
-    BCG_DEBUG=1 \
+    BF_DEBUG=1 \
     # cron log levels are from 0 (most verbose) to 8 (default)
-    BCG_CRON_LOG_LEVEL=8 \
+    BF_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
     S6_FIX_ATTRS_HIDDEN=1
 

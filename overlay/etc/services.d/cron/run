@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
-export BCG_E="${PWD##*/}/$(basename ${0})"
+export BF_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
@@ -16,5 +16,5 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 bf-echo "Starting cron."
 /usr/sbin/crond \
     -f \
-    -l ${BCG_CRON_LOG_LEVEL} \
+    -l ${BF_CRON_LOG_LEVEL} \
     -L ${CRON_LOG_FILE}

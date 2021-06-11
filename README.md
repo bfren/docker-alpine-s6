@@ -31,8 +31,8 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 | Variable             | Values | Description                                      | Default |
 | -------------------- | ------ | ------------------------------------------------ | ------- |
-| `BCG_CRON_LOG_LEVEL` | 0-8    | Sets the cron log level (0 is the most verbose). | 8       |
-| `BCG_DEBUG`          | 0 or 1 | Set to 0 to disable debug log output messages.   | 1       |
+| `BF_CRON_LOG_LEVEL` | 0-8    | Sets the cron log level (0 is the most verbose). | 8       |
+| `BF_DEBUG`          | 0 or 1 | Set to 0 to disable debug log output messages.   | 1       |
 
 ## Helper Functions
 

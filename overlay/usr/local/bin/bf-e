@@ -23,16 +23,16 @@ TEXT=${3}
 # if 4 is set, use it as the namespace prefix,
 # or as a sub-command within a larger script
 if [ -n "${4-}" ] ; then
-    if [ -n "${BCG_E-}" ] ; then
-        PREFIX="${BCG_E}: "
+    if [ -n "${BF_E-}" ] ; then
+        PREFIX="${BF_E}: "
         SUFFIX=" (${4})"
     else
         PREFIX="${4}: "
     fi
 
-# if BCG_E is set, use it as the namespace prefix
-elif [ -n "${BCG_E-}" ] ; then
-    PREFIX="${BCG_E}: "
+# if BF_E is set, use it as the namespace prefix
+elif [ -n "${BF_E-}" ] ; then
+    PREFIX="${BF_E}: "
 fi
 
 
