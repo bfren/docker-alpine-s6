@@ -4,24 +4,17 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Check arguments.
-#   1   Number of characters (optional)
+# Check argument.
+#   1   URL to test
 #======================================================================================================================
 
-if [ -z "${1-}" ] ; then
-    LEN=40
-else
-    # hat-tip https://stackoverflow.com/a/16444570/8199362
-    case ${1} in
-        *[!0-9]*|'') bcg-error "'${1}' is not a positive integer." "bcg-rnd" ;;
-        *) LEN=${1} ;;
-    esac
-fi
+[[ -z "${1-}" ]] && bf-error "You must provide a URL to test." "bf-test-url"
+URL=${1}
 
 
 #======================================================================================================================
-# Output a string of random characters.
-# See https://baserow.io/docs/guides%2Finstallation%2Finstall-on-ubuntu#install-and-amp-configure-supervisor
+# Attempt to load the URL using wget.
 #======================================================================================================================
 
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${LEN} | head -n 1
+bf-debug "Loading ${URL}." "bf-test-url"
+wget --no-verbose --spider --tries=1 "${URL}" || exit 1

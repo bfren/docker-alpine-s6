@@ -4,12 +4,10 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Echo text in red and exit 1.
+# Echo 'done' in green text.
 #
 # Arguments
-#   1   Text to echo
-#   2   Script / executable name (optional)
+#   1   Script / executable name (optional)
 #======================================================================================================================
 
-bcg-notok "${1-}" "${2-}"
-exit 1
+bf-ok "done." "${1-}"

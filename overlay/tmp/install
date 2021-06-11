@@ -8,7 +8,7 @@ export BCG_E=`basename ${0}`
 # Ensure target platform is set.
 #======================================================================================================================
 
-[[ -z "${TARGETPLATFORM-}" ]] && bcg-error "Target platform not set."
+[[ -z "${TARGETPLATFORM-}" ]] && bf-error "Target platform not set."
 
 
 #======================================================================================================================
@@ -30,12 +30,12 @@ case "${TARGETPLATFORM}" in
         ;;
 
     *)
-        bcg-error "Unsupported target platform: ${TARGETPLATFORM}."
+        bf-error "Unsupported target platform: ${TARGETPLATFORM}."
         ;;
 
 esac
 
-bcg-debug "Platform architecture ${ARCH}."
+bf-debug "Platform architecture ${ARCH}."
 
 
 #======================================================================================================================
@@ -45,10 +45,10 @@ bcg-debug "Platform architecture ${ARCH}."
 cd /tmp
 
 S6_VERSION=$(cat S6_VERSION)
-bcg-debug "S6 Overlay version ${S6_VERSION}."
+bf-debug "S6 Overlay version ${S6_VERSION}."
 
 ESH_VERSION=$(cat ESH_VERSION)
-bcg-debug "esh version ${ESH_VERSION}."
+bf-debug "esh version ${ESH_VERSION}."
 
 
 #======================================================================================================================
@@ -56,37 +56,37 @@ bcg-debug "esh version ${ESH_VERSION}."
 #======================================================================================================================
 
 S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
-bcg-echo "Downloading ${S6_URL}..."
+bf-echo "Downloading ${S6_URL}..."
 wget -O installer ${S6_URL} && chmod +x installer
-bcg-done
+bf-done
 
-bcg-echo "Installing S6 Overlay v${S6_VERSION}..."
+bf-echo "Installing S6 Overlay v${S6_VERSION}..."
 ./installer /
 
-[[ -d /etc/s6 ]] && bcg-done \
-    || bcg-error "S6 Overlay not installed."
+[[ -d /etc/s6 ]] && bf-done \
+    || bf-error "S6 Overlay not installed."
 
 
 #======================================================================================================================
 # Install esh template engine.
 #======================================================================================================================
 
-bcg-echo "Installing esh v${ESH_VERSION}..."
-apk add --no-cache esh=${ESH_VERSION} && bcg-done \
-    || bcg-error "esh not installed."
+bf-echo "Installing esh v${ESH_VERSION}..."
+apk add --no-cache esh=${ESH_VERSION} && bf-done \
+    || bf-error "esh not installed."
 
 
 #======================================================================================================================
 # Set timezone.
 #======================================================================================================================
 
-bcg-tz "Europe/London"
+bf-tz "Europe/London"
 
 
 #======================================================================================================================
 # Create bcg directories.
 #======================================================================================================================
 
-bcg-debug "Creating bcg directories."
+bf-debug "Creating bcg directories."
 mkdir -p /etc/bcg/src
 mkdir /etc/bcg/templates

@@ -30,15 +30,15 @@ while getopts ":hm:o:t:r" C ; do
         o) OWNER="${OPTARG}" ;;
         t) TYPE="${OPTARG}" ;;
         r) RECURSE=1 ;;
-        ?) bcg-notok "Invalid option: -${OPTARG}" "bcg-ch" && usage ;;
+        ?) bf-notok "Invalid option: -${OPTARG}" "bf-ch" && usage ;;
     esac
 done
 
 shift $(($OPTIND -1))
 
 GLOB="${1-}"
-[[ -z "${GLOB-}" ]] && bcg-error "You must provide the path of the file or directory to change." "bcg-ch"
-[[ -z "${OWNER-}" ]] && [[ -z "${MODE-}" ]] && bcg-error "You must use either -o or -m." "bcg-ch"
+[[ -z "${GLOB-}" ]] && bf-error "You must provide the path of the file or directory to change." "bf-ch"
+[[ -z "${OWNER-}" ]] && [[ -z "${MODE-}" ]] && bf-error "You must use either -o or -m." "bf-ch"
 
 
 #======================================================================================================================
@@ -47,13 +47,13 @@ GLOB="${1-}"
 
 if [ -n "${OWNER-}" ] ; then
 
-    bcg-debug "Applying chown ${OWNER} to ${GLOB}." "bcg-ch"
+    bf-debug "Applying chown ${OWNER} to ${GLOB}." "bf-ch"
 
     if [ "${RECURSE-}" = "1" ] ; then
-        bcg-debug " .. recursively." "bcg-ch"
+        bf-debug " .. recursively." "bf-ch"
         chown -R ${OWNER} ${GLOB}
     else
-        [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
+        [[ -n "${TYPE-}" ]] && bf-debug " .. type ${TYPE}." "bf-ch"
         case "${TYPE-}" in
             f|d) find ${GLOB} -type ${TYPE} -exec chown ${OWNER} {} + ;;
             *) chown ${OWNER} ${GLOB} ;;
@@ -69,13 +69,13 @@ fi
 
 if [ -n "${MODE-}" ] ; then
 
-    bcg-debug "Applying chmod ${MODE} to ${GLOB}." "bcg-ch"
+    bf-debug "Applying chmod ${MODE} to ${GLOB}." "bf-ch"
 
     if [ "${RECURSE-}" = "1" ] ; then
-        bcg-debug " .. recursively." "bcg-ch"
+        bf-debug " .. recursively." "bf-ch"
         chmod -R ${MODE} ${GLOB}
     else
-        [[ -n "${TYPE-}" ]] && bcg-debug " .. type ${TYPE}." "bcg-ch"
+        [[ -n "${TYPE-}" ]] && bf-debug " .. type ${TYPE}." "bf-ch"
         case "${TYPE-}" in
             f|d) find ${GLOB} -type ${TYPE} -exec chmod ${MODE} {} + ;;
             *) chmod ${MODE} ${GLOB} ;;

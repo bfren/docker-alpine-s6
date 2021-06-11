@@ -1,17 +1,15 @@
 #!/bin/sh
 
 set -euo pipefail
-export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Run install script in /tmp and then perform cleanup.
+# Echo text in red and exit 1.
+#
+# Arguments
+#   1   Text to echo
+#   2   Script / executable name (optional)
 #======================================================================================================================
 
-INSTALL=/tmp/install
-[[ ! -f ${INSTALL} ]] && bcg-error "${INSTALL} does not exist."
-
-chmod +x ${INSTALL} && ${INSTALL}
-bcg-done
-
-bcg-clear
+bf-notok "${1-}" "${2-}"
+exit 1

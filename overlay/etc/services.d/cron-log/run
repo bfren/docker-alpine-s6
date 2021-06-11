@@ -9,4 +9,4 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 #======================================================================================================================
 
 [[ ! -f ${CRON_LOG_FILE} ]] && touch ${CRON_LOG_FILE}
-bcg-forward ${PWD##*/} ${CRON_LOG_FILE}
+bf-forward ${PWD##*/} ${CRON_LOG_FILE}

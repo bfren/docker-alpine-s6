@@ -8,5 +8,5 @@ export BCG_E=`basename ${0}`
 # Placeholder so permissions can be set in base image.
 #======================================================================================================================
 
-bcg-debug "Base healthcheck always returns healthy."
+bf-debug "Base healthcheck always returns healthy."
 exit 0

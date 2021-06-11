@@ -7,7 +7,7 @@ set -euo pipefail
 # Check environment variable.
 #======================================================================================================================
 
-[[ -z "${S6_SERVICES-}" ]] && bcg-error "S6_SERVICES environment variable is not set." "bcg-svc-terminate"
+[[ -z "${S6_SERVICES-}" ]] && bf-error "S6_SERVICES environment variable is not set." "bf-svc-terminate"
 
 
 #======================================================================================================================
@@ -15,16 +15,16 @@ set -euo pipefail
 #======================================================================================================================
 
 if [ "${BCG_TERMINATING-}" = "1" ] ; then
-    bcg-debug "Services already being terminated." "bcg-svc-terminate"
+    bf-debug "Services already being terminated." "bf-svc-terminate"
     exit 0
 fi
 
-bcg-env "BCG_TERMINATING" "1"
+bf-env "BCG_TERMINATING" "1"
 
 
 #======================================================================================================================
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bcg-notok "Terminating all services." "bcg-svc-terminate"
+bf-notok "Terminating all services." "bf-svc-terminate"
 s6-svscanctl -t ${S6_SERVICES}

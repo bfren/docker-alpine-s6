@@ -4,17 +4,17 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Check argument.
-#   1   URL to test
+# Check arguments.
+#   1   Folder path / file glob to delete
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide a URL to test." "bcg-test-url"
-URL=${1}
+[[ -z "${1-}" ]] && bf-error "Cannot remove ''." "bf-rmrf"
+GLOB=${1}
 
 
 #======================================================================================================================
-# Attempt to load the URL using wget.
+# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
 #======================================================================================================================
 
-bcg-debug "Loading ${URL}." "bcg-test-url"
-wget --no-verbose --spider --tries=1 "${URL}" || exit 1
+bf-debug "Removing ${GLOB}." "bf-rmrf"
+rm -rf ${GLOB}

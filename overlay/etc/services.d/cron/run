@@ -13,7 +13,7 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 #   -L  log to file (cron-log service will forward this file to the Docker log)
 #======================================================================================================================
 
-bcg-echo "Starting cron."
+bf-echo "Starting cron."
 /usr/sbin/crond \
     -f \
     -l ${BCG_CRON_LOG_LEVEL} \

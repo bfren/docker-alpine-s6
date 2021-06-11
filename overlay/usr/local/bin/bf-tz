@@ -8,7 +8,7 @@ set -euo pipefail
 #   1   Valid timezone (e.g. Europe/London)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide a timezone." "bcg-tz"
+[[ -z "${1-}" ]] && bf-error "You must provide a timezone." "bf-tz"
 TZ=/usr/share/zoneinfo/${1}
 
 
@@ -18,23 +18,23 @@ TZ=/usr/share/zoneinfo/${1}
 
 # remove timezone packages and clear zone info
 clear() {
-    bcg-debug "Removing tzdata packages." "bcg-tz"
+    bf-debug "Removing tzdata packages." "bf-tz"
     apk del .tz
     rm -rf /usr/share/zoneinfo/*
 }
 
 # install timezone package
-bcg-debug "Installing tzdata packages." "bcg-tz"
+bf-debug "Installing tzdata packages." "bf-tz"
 apk add --no-cache --virtual .tz tzdata
 
 # check the specified timezone exists
 if [ ! -f "${TZ}" ] ; then
     clear
-    bcg-error "${1} is not a recognised timezone." "bcg-tz"
+    bf-error "${1} is not a recognised timezone." "bf-tz"
 fi
 
 # copy timezone info
-bcg-echo "Setting timezone to ${1}..." "bcg-tz"
+bf-echo "Setting timezone to ${1}..." "bf-tz"
 cp "${TZ}" /etc/localtime
 clear
-bcg-done "bcg-tz"
+bf-done "bf-tz"

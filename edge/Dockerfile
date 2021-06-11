@@ -27,7 +27,7 @@ ENV \
 COPY ./overlay /
 
 RUN chmod +x /usr/local/bin/bcg-*
-RUN bcg-install
+RUN bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
 
