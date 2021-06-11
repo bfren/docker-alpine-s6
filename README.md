@@ -1,22 +1,22 @@
 # Docker Alpine + S6
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/alpine-s6/latest?label=size)<br/>
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_12?label=3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpine3_13?label=3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-alpine-s6/dev-alpineedge?label=edge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/alpine-s6/latest?label=size)<br/>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpine3_12?label=3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpine3_13?label=3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpineedge?label=edge)
 
-[Usage Guide](https://github.com/bencgreen/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
+[Usage Guide](https://github.com/bfren/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bfren ecosystem](https://github.com/bfren/docker)
 
 [Alpine](https://alpinelinux.org/)'s base image (v3.12.7, v3.13.5, and edge) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
 
 Cron is enabled by default - include jobs in `/etc/periodic/*` directories, or overlay `/etc/crontabs/root` (be warned this will override Alpine's default behaviour).
 
-[esh](https://github.com/jirutka/esh) - a shell templating engine - comes preinstalled, and is used extensively in the [bcg|design Docker ecosystem](https://github.com/bencgreen/docker).
+[esh](https://github.com/jirutka/esh) - a shell templating engine - comes preinstalled, and is used extensively in the [bfren Docker ecosystem](https://github.com/bfren/docker).
 
 ## Contents
 
 * [apk Repositories](#apk-repositories)
 * [Environment Variables](#environment-variables)
 * [Helper Functions](#helper-functions)
-* [Authors / Licence / Copyright](#authors)
+* [Licence / Copyright](#licence)
 
 ## apk Repositories
 
@@ -38,11 +38,11 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ### Output
 
-| Function           | Arguments                                    | Description                                                                                |
-| ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Function          | Arguments                                    | Description                                                                               |
+| ----------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `bf-debug`        | 1: Script / executable name<br>2: Text       | Echoes `$1: $2` to `stdout` in grey with prefix (see `bf-e`).                             |
 | `bf-done`         | *None*                                       | Echoes 'done.' to `stdout` in green with prefix (see `bf-e`).                             |
-| `bf-e`            | 1: Namespace<br>2: ANSI colour<br>3: Text    | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                  |
+| `bf-e`            | 1: Namespace<br>2: ANSI colour<br>3: Text    | Echoes `$3` to `stdout` in `$2` with prefix:<br>`[$1] %Y-%m-%d %H:%M:%S`.                 |
 | `bf-echo`         | 1: Text                                      | Echoes `$1` to `stdout` in black with prefix (see `bf-e`).                                |
 | `bf-error`        | 1: Text                                      | Echoes `$1` to `stdout` in red with prefix (see `bf-e`).                                  |
 | `bf-notok`        | *None*                                       | Echoes `$1` to `stdout` in green with prefix (see `bf-e`).                                |
@@ -50,8 +50,8 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ### Other
 
-| Function            | Arguments                                                                                                                        | Description                                                                                 |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Function           | Arguments                                                                                                                        | Description                                                                                 |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `bf-adduser`       | 1: User &amp; group name<br>2: UID (optional, default 1000)<br>3: GID (optional, default UID)                                    | Create user with id `$2`, group with id `$3`, both with name `$1`, and no home or password. |
 | `bf-ch`            | -o Change ownership to user<br>-m Change permissions mode<br>-t Search type (f|d)<br>-r Apply recursively (overrides -t)<br>Glob | Changes ownership and/or permissions of file / directory glob.                              |
 | `bf-clear`         | *None*                                                                                                                           | Clears contents of `/tmp` and `apk` cache.                                                  |
@@ -68,15 +68,11 @@ Edge repositories are added using tags, so only stable packages are installed/up
 | `bf-test-url`      | 1: URL                                                                                                                           | Uses `wget` to test URL `$1`.                                                               |
 | `bf-tz`            | 1: Timezone                                                                                                                      | Sets the container's timezone to `$1`.                                                      |
 
-## Authors
+## Licence
 
-* [Ben Green](https://github.com/bencgreen)
-
-## License
-
-> [MIT](https://mit.bcgdesign.com/2020)
+> [MIT](https://mit.bfren.uk/2020)
 
 ## Copyright
 
-> Copyright (c) 2021 Ben Green <https://bcgdesign.com>
+> Copyright (c) 2021 bfren.uk
 > Unless otherwise stated
