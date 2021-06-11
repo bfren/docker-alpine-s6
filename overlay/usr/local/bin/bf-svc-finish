@@ -20,11 +20,11 @@ while getopts ":hs:t" C ; do
         h) usage ;;
         s) NAME=${OPTARG} ;;
         t) TERMINATE=1 ;;
-        ?) bcg-notok "Invalid option: -${OPTARG}" "bcg-svc-finish" && usage ;;
+        ?) bf-notok "Invalid option: -${OPTARG}" "bf-svc-finish" && usage ;;
     esac
 done
 
-[[ -z "${NAME-}" ]] && bcg-error "You must provide the name of the service." "bcg-svc-finish"
+[[ -z "${NAME-}" ]] && bf-error "You must provide the name of the service." "bf-svc-finish"
 
 shift $(($OPTIND -1))
 
@@ -33,11 +33,11 @@ shift $(($OPTIND -1))
 # Echo service finish debug message.
 #======================================================================================================================
 
-bcg-debug "Service closing down." "${NAME}/finish"
+bf-debug "Service closing down." "${NAME}/finish"
 
 
 #======================================================================================================================
 # Terminate all services if the -t flag is set.
 #======================================================================================================================
 
-[[ "${TERMINATE-}" = "1" ]] && bcg-svc-terminate
+[[ "${TERMINATE-}" = "1" ]] && bf-svc-terminate

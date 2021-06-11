@@ -34,13 +34,13 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Read image version
-        uses: bencgreen/read-file-action@v1
+        uses: bfren/read-file-action@v1
         with:
           path: ./VERSION_MINOR
         id: version_minor
       -
         name: Read image version
-        uses: bencgreen/read-file-action@v1
+        uses: bfren/read-file-action@v1
         with:
           path: ./VERSION
         id: version
@@ -66,10 +66,10 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/alpine-s6:dev
-            bcgdesign/alpine-s6:alpine3.13-dev
-            bcgdesign/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}-beta
-            bcgdesign/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}-beta
+            bfren/alpine-s6:dev
+            bfren/alpine-s6:alpine3.13-dev
+            bfren/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}-beta
+            bfren/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

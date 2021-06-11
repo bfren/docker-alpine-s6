@@ -11,28 +11,28 @@ set -euo pipefail
 #   4   Script / executable name (optional)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide the namespace of the output." "bcg-e"
+[[ -z "${1-}" ]] && bf-error "You must provide the namespace of the output." "bf-e"
 NAMESPACE=${1}
 
-[[ -z "${2-}" ]] && bcg-error "You must provide a colour for the output." "bcg-e"
+[[ -z "${2-}" ]] && bf-error "You must provide a colour for the output." "bf-e"
 COLOUR=${2}
 
-[[ -z "${3-}" ]] && bcg-error "You must provide the text to output." "bcg-e"
+[[ -z "${3-}" ]] && bf-error "You must provide the text to output." "bf-e"
 TEXT=${3}
 
 # if 4 is set, use it as the namespace prefix,
 # or as a sub-command within a larger script
 if [ -n "${4-}" ] ; then
-    if [ -n "${BCG_E-}" ] ; then
-        PREFIX="${BCG_E}: "
+    if [ -n "${BF_E-}" ] ; then
+        PREFIX="${BF_E}: "
         SUFFIX=" (${4})"
     else
         PREFIX="${4}: "
     fi
 
-# if BCG_E is set, use it as the namespace prefix
-elif [ -n "${BCG_E-}" ] ; then
-    PREFIX="${BCG_E}: "
+# if BF_E is set, use it as the namespace prefix
+elif [ -n "${BF_E-}" ] ; then
+    PREFIX="${BF_E}: "
 fi
 
 

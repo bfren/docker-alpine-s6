@@ -5,23 +5,23 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   User and Group name
-#   2   User ID (optional - default is 1000)
-#   3   Group ID (optional - default is to use UID)
+#   1   Number of characters (optional)
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide a name for the user and group." "bcg-adduser"
-NAME=${1}
-
-UID=${2:-1000}
-GID=${3:-${UID}}
+if [ -z "${1-}" ] ; then
+    LEN=40
+else
+    # hat-tip https://stackoverflow.com/a/16444570/8199362
+    case ${1} in
+        *[!0-9]*|'') bf-error "'${1}' is not a positive integer." "bf-rnd" ;;
+        *) LEN=${1} ;;
+    esac
+fi
 
 
 #======================================================================================================================
-# Add a user and group without home directory or password.
+# Output a string of random characters.
+# See https://baserow.io/docs/guides%2Finstallation%2Finstall-on-ubuntu#install-and-amp-configure-supervisor
 #======================================================================================================================
 
-bcg-echo "Adding user and group '${NAME}'..." "bcg-adduser"
-addgroup --gid "${GID}" "${NAME}"
-adduser --uid "${UID}" --no-create-home --disabled-password --ingroup "${NAME}" "${NAME}"
-bcg-done "bcg-adduser"
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${LEN} | head -n 1

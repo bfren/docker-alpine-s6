@@ -5,16 +5,20 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   Folder path / file glob to delete
+#   1   Variable name
+#   2   Variable value
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "Cannot remove ''." "bcg-rmrf"
-GLOB=${1}
+[[ -z "${1-}" ]] && bf-error "You must provide the name of the Environment variable." "bf-env"
+NAME=$(echo "${1}" | tr '[:lower:]' '[:upper:]')
+
+[[ -z "${2-}" ]] && bf-error "You must provide the value for the Environment variable." "bf-env"
+VALUE=${2}
 
 
 #======================================================================================================================
-# Safely remove a folder and all its contents (i.e. don't allow 'blank' which deletes everything in /).
+# Add an environment variable to the S6 environment.
 #======================================================================================================================
 
-bcg-debug "Removing ${GLOB}." "bcg-rmrf"
-rm -rf ${GLOB}
+bf-debug "${NAME}=${VALUE}." "bf-env"
+printf "%s" "${VALUE}" > "/var/run/s6/container_environment/${NAME}" # use printf because echo adds a newline
