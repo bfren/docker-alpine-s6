@@ -10,12 +10,6 @@ COPY --from=build /log /log
 
 ARG TARGETPLATFORM
 
-LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
-    org.label-schema.name="Alpine + S6" \
-    org.label-schema.version="3.12" \
-    org.label-schema.vendor="Ben Green" \
-    org.label-schema.schema-version="1.0"
-
 ENV \
     # set to 0 to disable additional log output
     BCG_DEBUG=1 \
