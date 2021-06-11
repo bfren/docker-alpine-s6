@@ -52,10 +52,6 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/alpine-s6:alpine3.12
-            bcgdesign/alpine-s6:alpine3.12-${{ steps.version_minor.outputs.content }}
-            bcgdesign/alpine-s6:alpine3.12-${{ steps.version.outputs.content }}
-            bcgdesign/alpine-s6:alpine${{ steps.alpine_revision.outputs.content }}
             bfren/alpine-s6:alpine3.12
             bfren/alpine-s6:alpine3.12-${{ steps.version_minor.outputs.content }}
             bfren/alpine-s6:alpine3.12-${{ steps.version.outputs.content }}
