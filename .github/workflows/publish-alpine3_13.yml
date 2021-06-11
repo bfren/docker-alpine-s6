@@ -59,6 +59,13 @@ jobs:
             bcgdesign/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}
             bcgdesign/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}
             bcgdesign/alpine-s6:alpine${{ steps.alpine_revision.outputs.content }}
+            bfren/alpine-s6:latest
+            bfren/alpine-s6:${{ steps.version_minor.outputs.content }}
+            bfren/alpine-s6:${{ steps.version.outputs.content }}
+            bfren/alpine-s6:alpine3.13
+            bfren/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}
+            bfren/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}
+            bfren/alpine-s6:alpine${{ steps.alpine_revision.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
