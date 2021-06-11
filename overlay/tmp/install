@@ -84,9 +84,9 @@ bf-tz "Europe/London"
 
 
 #======================================================================================================================
-# Create bcg directories.
+# Create bf directories.
 #======================================================================================================================
 
-bf-debug "Creating bcg directories."
-mkdir -p /etc/bcg/src
-mkdir /etc/bcg/templates
+bf-debug "Creating bf directories."
+mkdir -p /etc/bf/src
+mkdir /etc/bf/templates

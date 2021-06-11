@@ -8,11 +8,11 @@ export BF_E=`basename ${0}`
 # Set environment variables.
 #======================================================================================================================
 
-LIB=/usr/lib/bcg
+LIB=/usr/lib/bf
 bf-env "BF_LIB" "${LIB}"
 bf-env "BF_INC" "${LIB}/inc"
 
-ETC=/etc/bcg
+ETC=/etc/bf
 bf-env "BF_TEMPLATES" "${ETC}/templates"
 bf-env "BF_SRC" "${ETC}/src"
 

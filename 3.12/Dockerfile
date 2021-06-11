@@ -21,7 +21,7 @@ ENV \
 COPY ./overlay /
 COPY ./3.12/repositories /etc/apk/repositories
 
-RUN chmod +x /usr/local/bin/bcg-*
+RUN chmod +x /usr/local/bin/bf-*
 RUN bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
