@@ -1,9 +1,9 @@
 # Docker Alpine + S6
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/alpine-s6/latest?label=size)<br/>
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/docker/pulls/bfren/alpine-s6?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bfren/alpine-s6/latest?label=size)<br/>
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpine3_12?label=3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpine3_13?label=3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-alpine-s6/dev-alpineedge?label=edge)
 
-[Usage Guide](https://github.com/bfren/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bcgdesign/alpine-s6) - [bfren ecosystem](https://github.com/bfren/docker)
+[Usage Guide](https://github.com/bfren/docker/wiki/alpine-s6) - [Docker Repository](https://hub.docker.com/r/bfren/alpine-s6) - [bfren ecosystem](https://github.com/bfren/docker)
 
 [Alpine](https://alpinelinux.org/)'s base image (v3.12.7, v3.13.5, and edge) with [S6 overlay](https://github.com/just-containers/s6-overlay) pre-installed (version 2.2.0.3).
 
@@ -29,8 +29,8 @@ Edge repositories are added using tags, so only stable packages are installed/up
 
 ## Environment Variables
 
-| Variable             | Values | Description                                      | Default |
-| -------------------- | ------ | ------------------------------------------------ | ------- |
+| Variable            | Values | Description                                      | Default |
+| ------------------- | ------ | ------------------------------------------------ | ------- |
 | `BF_CRON_LOG_LEVEL` | 0-8    | Sets the cron log level (0 is the most verbose). | 8       |
 | `BF_DEBUG`          | 0 or 1 | Set to 0 to disable debug log output messages.   | 1       |
 
