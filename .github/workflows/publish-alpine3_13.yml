@@ -52,9 +52,6 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/alpine-s6:latest
-            bfren/alpine-s6:${{ steps.version_minor.outputs.content }}
-            bfren/alpine-s6:${{ steps.version.outputs.content }}
             bfren/alpine-s6:alpine3.13
             bfren/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}
             bfren/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}

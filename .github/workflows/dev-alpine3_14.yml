@@ -1,4 +1,4 @@
-name: dev-alpine3_13
+name: dev-alpine3_14
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-alpine3_13:
+  test-alpine3_14:
     runs-on: ubuntu-latest
     steps:
       -
@@ -26,7 +26,7 @@ jobs:
         name: Run tests
         run: |
           RUN=./tests/run-git.sh && chmod +x ${RUN} && ${RUN}
-  build-alpine3_13:
+  build-alpine3_14:
     runs-on: ubuntu-latest
     steps:
       -
@@ -62,13 +62,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./3.13/Dockerfile
+          file: ./3.14/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/alpine-s6:alpine3.13-dev
-            bfren/alpine-s6:alpine3.13-${{ steps.version_minor.outputs.content }}-beta
-            bfren/alpine-s6:alpine3.13-${{ steps.version.outputs.content }}-beta
+            bfren/alpine-s6:dev
+            bfren/alpine-s6:alpine3.14-dev
+            bfren/alpine-s6:alpine3.14-${{ steps.version_minor.outputs.content }}-beta
+            bfren/alpine-s6:alpine3.14-${{ steps.version.outputs.content }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
