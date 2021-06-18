@@ -1,4 +1,4 @@
-FROM alpine:3.13.5
+FROM alpine:3.14.0
 
 ARG TARGETPLATFORM="linux/amd64"
 
@@ -11,7 +11,7 @@ ENV \
     S6_FIX_ATTRS_HIDDEN=1
 
 COPY ./overlay /
-COPY ./3.13/repositories /etc/apk/repositories
+COPY ./3.14/repositories /etc/apk/repositories
 
 RUN chmod +x /usr/local/bin/bf-*
 RUN bf-install
