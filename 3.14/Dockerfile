@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM alpine:3.14.1
+FROM alpine:3.14.2
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
