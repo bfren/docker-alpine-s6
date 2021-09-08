@@ -24,4 +24,6 @@ fi
 # See https://baserow.io/docs/guides%2Finstallation%2Finstall-on-ubuntu#install-and-amp-configure-supervisor
 #======================================================================================================================
 
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${LEN} | head -n 1
+RND=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${LEN} | head -n 1 || true)
+[[ "${LEN}" -eq "${#RND}" ]] && echo "${RND}" \
+    || bf-error "Unable to generate random characters."
