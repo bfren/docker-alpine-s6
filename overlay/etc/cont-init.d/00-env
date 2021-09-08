@@ -16,5 +16,5 @@ ETC=/etc/bf
 bf-env "BF_TEMPLATES" "${ETC}/templates"
 bf-env "BF_SRC" "${ETC}/src"
 
-bf-env "CRON_LOG_FILE" "/var/log/cron.log"
+bf-env "BF_CRON_LOG_FILE" "/var/log/cron.log"
 bf-env "S6_SERVICES" "/var/run/s6/services"

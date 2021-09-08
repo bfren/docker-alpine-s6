@@ -8,5 +8,5 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 # Forward cron log to Docker.
 #======================================================================================================================
 
-[[ ! -f ${CRON_LOG_FILE} ]] && touch ${CRON_LOG_FILE}
-bf-forward ${PWD##*/} ${CRON_LOG_FILE}
+[[ ! -f ${BF_CRON_LOG_FILE} ]] && touch ${BF_CRON_LOG_FILE}
+bf-forward ${PWD##*/} ${BF_CRON_LOG_FILE}
