@@ -17,4 +17,4 @@ bf-echo "Starting cron."
 /usr/sbin/crond \
     -f \
     -l ${BF_CRON_LOG_LEVEL} \
-    -L ${CRON_LOG_FILE}
+    -L ${BF_CRON_LOG_FILE}
