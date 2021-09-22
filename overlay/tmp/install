@@ -90,3 +90,5 @@ bf-tz "Europe/London"
 bf-debug "Creating bf directories."
 mkdir -p /etc/bf/src
 mkdir /etc/bf/templates
+mkdir /etc/periodic/1min
+mkdir -p /usr/lib/bf/inc
