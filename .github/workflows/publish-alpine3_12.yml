@@ -14,19 +14,19 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Read Alpine version - revision
-        uses: bfren/read-file-action@v1
+        uses: bfren/read-file@v1.0.0
         with:
           path: ./3.12/ALPINE_REVISION
         id: alpine_revision
       -
         name: Read image version
-        uses: bfren/read-file-action@v1
+        uses: bfren/read-file@v1.0.0
         with:
           path: ./VERSION_MINOR
         id: version_minor
       -
         name: Read image version
-        uses: bfren/read-file-action@v1
+        uses: bfren/read-file@v1.0.0
         with:
           path: ./VERSION
         id: version
