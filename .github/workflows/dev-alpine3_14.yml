@@ -36,13 +36,13 @@ jobs:
         name: Read image version
         uses: bfren/read-file@v1
         with:
-          path: ./VERSION_MINOR
+          file: ./VERSION_MINOR
         id: version_minor
       -
         name: Read image version
         uses: bfren/read-file@v1
         with:
-          path: ./VERSION
+          file: ./VERSION
         id: version
       -
         name: Set up QEMU
