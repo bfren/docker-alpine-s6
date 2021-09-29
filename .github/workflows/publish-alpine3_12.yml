@@ -53,9 +53,9 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/alpine-s6:alpine3.12
-            bfren/alpine-s6:alpine3.12-${{ steps.version_minor.outputs.content }}
-            bfren/alpine-s6:alpine3.12-${{ steps.version.outputs.content }}
-            bfren/alpine-s6:alpine${{ steps.alpine_revision.outputs.content }}
+            bfren/alpine-s6:alpine3.12-${{ steps.version_minor.outputs.contents }}
+            bfren/alpine-s6:alpine3.12-${{ steps.version.outputs.contents }}
+            bfren/alpine-s6:alpine${{ steps.alpine_revision.outputs.contents }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

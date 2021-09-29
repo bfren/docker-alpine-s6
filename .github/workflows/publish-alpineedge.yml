@@ -47,8 +47,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/alpine-s6:alpineedge
-            bfren/alpine-s6:alpineedge-${{ steps.version_minor.outputs.content }}
-            bfren/alpine-s6:alpineedge-${{ steps.version.outputs.content }}
+            bfren/alpine-s6:alpineedge-${{ steps.version_minor.outputs.contents }}
+            bfren/alpine-s6:alpineedge-${{ steps.version.outputs.contents }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

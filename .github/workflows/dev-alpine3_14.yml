@@ -68,8 +68,8 @@ jobs:
           tags: |
             bfren/alpine-s6:dev
             bfren/alpine-s6:alpine3.14-dev
-            bfren/alpine-s6:alpine3.14-${{ steps.version_minor.outputs.content }}-beta
-            bfren/alpine-s6:alpine3.14-${{ steps.version.outputs.content }}-beta
+            bfren/alpine-s6:alpine3.14-${{ steps.version_minor.outputs.contents }}-beta
+            bfren/alpine-s6:alpine3.14-${{ steps.version.outputs.contents }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
