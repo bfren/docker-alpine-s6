@@ -16,7 +16,7 @@ jobs:
         name: Read Alpine version - revision
         uses: bfren/read-file@v1
         with:
-          path: ./3.14/ALPINE_REVISION
+          file: ./3.14/ALPINE_REVISION
         id: alpine_revision
       -
         name: Read image version
