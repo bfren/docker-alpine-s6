@@ -2,8 +2,12 @@ name: dev-alpine3_14
 
 on:
   push:
+    branches-ignore:
+      - 'main'
     tags-ignore:
       - '**'
+  pull_request:
+    types: [closed]
   workflow_dispatch:
 
 jobs:

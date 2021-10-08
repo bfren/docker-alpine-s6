@@ -2,8 +2,12 @@ name: dev-alpineedge
 
 on:
   push:
+    branches-ignore:
+      - 'main'
     tags-ignore:
       - '**'
+  pull_request:
+    types: [closed]
   workflow_dispatch:
 
 jobs:
