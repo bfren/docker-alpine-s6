@@ -5,7 +5,7 @@
 
 [Docker Repository](https://hub.docker.com/r/bfren/alpine-s6) - [bfren ecosystem](https://github.com/bfren/docker)
 
-[Documentation and Usage Guide](https://docs.bfren.dev/docker/alpine-s6) 
+[Documentation and Usage Guide](https://docs.bfren.dev/docker/alpine-s6)
 
 ## Licence
 
