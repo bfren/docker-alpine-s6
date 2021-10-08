@@ -2,7 +2,7 @@ name: dev-alpine3_14
 
 on:
   push:
-    tags-ignore: [**]
+    tags-ignore: ['**']
   workflow_dispatch:
 
 jobs:
