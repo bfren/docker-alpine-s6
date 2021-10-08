@@ -13,5 +13,5 @@
 
 ## Copyright
 
-> Copyright (c) 2020-21 bfren
+> Copyright (c) 2020-21 bfren<br/>
 > Unless otherwise stated
