@@ -1,4 +1,0 @@
-#!/bin/sh
-apk fix
-apk verify
-/init
