@@ -8,7 +8,7 @@ export BF_E=`basename ${0}`
 # Fix and verify packages and repository sources.
 #======================================================================================================================
 
-if [ "${BF_APK_VERIFY}" = "1" ] ; then
+if [ "${BF_APK_VERIFY-}" = "1" ] ; then
     apk fix
     apk verify
 fi
