@@ -22,6 +22,12 @@ jobs:
         name: Read image version
         uses: bfren/read-file@v1
         with:
+          file: ./VERSION_MAJOR
+        id: version_major
+      -
+        name: Read image version
+        uses: bfren/read-file@v1
+        with:
           file: ./VERSION_MINOR
         id: version_minor
       -
@@ -53,9 +59,11 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/alpine-s6:latest
+            bfren/alpine-s6:${{ steps.version_major.outputs.contents }}
             bfren/alpine-s6:${{ steps.version_minor.outputs.contents }}
             bfren/alpine-s6:${{ steps.version.outputs.contents }}
             bfren/alpine-s6:alpine3.14
+            bfren/alpine-s6:alpine3.14-${{ steps.version_major.outputs.contents }}
             bfren/alpine-s6:alpine3.14-${{ steps.version_minor.outputs.contents }}
             bfren/alpine-s6:alpine3.14-${{ steps.version.outputs.contents }}
             bfren/alpine-s6:alpine${{ steps.alpine_revision.outputs.contents }}
