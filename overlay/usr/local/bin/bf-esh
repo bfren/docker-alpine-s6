@@ -5,14 +5,14 @@ set -euo pipefail
 
 #======================================================================================================================
 # Check arguments.
-#   1   Template file path
-#   2   Output file path
+#   1   Path to input (template) file
+#   2   Path to output (generated) file
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bf-error "You must provide the path to the template file." "bf-esh"
+[[ -z "${1-}" ]] && bf-error "You must provide the path to the input (template) file." "bf-esh"
 INPUT=${1}
 
-[[ -z "${2-}" ]] && bf-error "You must provide the path to the output file." "bf-esh"
+[[ -z "${2-}" ]] && bf-error "You must provide the path to the output (generated) file." "bf-esh"
 OUTPUT=${2}
 
 
