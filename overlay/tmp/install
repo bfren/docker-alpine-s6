@@ -44,8 +44,8 @@ bf-debug "Platform architecture ${ARCH}."
 
 cd /tmp
 
-ESH_VERSION=$(cat ESH_VERSION)
-bf-debug "esh version ${ESH_VERSION}."
+S6_VERSION=$(cat S6_VERSION)
+bf-debug "S6 Overlay version ${S6_VERSION}."
 
 
 #======================================================================================================================
