@@ -69,6 +69,7 @@ bf-echo "Installing S6 Overlay v${S6_VERSION}..."
 #======================================================================================================================
 
 bf-debug "Creating bf directories."
+mkdir /etc/periodic/1min
 mkdir -p /etc/bf/src
-mkdir /etc/bf/templates
+mkdir -p /etc/bf/templates
 mkdir -p /usr/lib/bf/inc
