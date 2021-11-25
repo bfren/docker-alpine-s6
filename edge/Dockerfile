@@ -5,14 +5,12 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM alpine:edge
+FROM bfren/alpine:alpineedge-1.0.3
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
 
 ENV \
-    # set to 0 to disable additional log output
-    BF_DEBUG=1 \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
@@ -20,7 +18,6 @@ ENV \
 
 COPY ./overlay /
 
-RUN chmod +x /usr/local/bin/bf-*
 RUN bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
