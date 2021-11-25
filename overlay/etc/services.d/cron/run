@@ -10,11 +10,9 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 # Crond flags
 #   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
 #   -l  log level (from 0 to 8 - 0 is the most verbose)
-#   -L  log to file (cron-log service will forward this file to the Docker log)
 #======================================================================================================================
 
 bf-echo "Starting cron."
 /usr/sbin/crond \
     -f \
-    -l ${BF_CRON_LOG_LEVEL} \
-    -L ${BF_CRON_LOG_FILE}
+    -l ${BF_CRON_LOG_LEVEL}
