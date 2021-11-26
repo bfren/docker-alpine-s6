@@ -1,7 +1,7 @@
 # min   hour    day     month   weekday command
-*       *       *       *       *       run-parts /etc/periodic/1min > /dev/null 2>&1
-*/15    *       *       *       *       run-parts /etc/periodic/15min
-0       *       *       *       *       run-parts /etc/periodic/hourly
-0       2       *       *       *       run-parts /etc/periodic/daily
-0       3       *       *       6       run-parts /etc/periodic/weekly
-0       5       1       *       *       run-parts /etc/periodic/monthly
+*       *       *       *       *       bf-cron -q /etc/periodic/1min
+*/15    *       *       *       *       bf-cron /etc/periodic/15min
+0       *       *       *       *       bf-cron /etc/periodic/hourly
+0       2       *       *       *       bf-cron /etc/periodic/daily
+0       3       *       *       6       bf-cron /etc/periodic/weekly
+0       5       1       *       *       bf-cron /etc/periodic/monthly
