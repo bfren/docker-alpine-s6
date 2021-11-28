@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+BASE_REVISION="1.2.1"
+echo "Base: ${BASE_REVISION}"
+
+ALPINE_VERSIONS="3.12 3.13 3.14 3.15 edge"
+for V in ${ALPINE_VERSIONS} ; do
+
+    echo "Alpine: ${V}"
+    ALPINE_REVISION=`cat ./${V}/ALPINE_REVISION`
+
+    DOCKERFILE=$(docker run \
+        -v /mnt/q/src/docker/alpine-s6/Dockerfile.esh:/Dockerfile.esh \
+        bfren/alpine esh \
+        "/Dockerfile.esh" \
+        BASE_REVISION=${BASE_REVISION} \
+        ALPINE_REVISION=${ALPINE_REVISION}
+    )
+
+    echo "${DOCKERFILE}" > ./${V}/Dockerfile
+
+done
+
+echo "Done."
