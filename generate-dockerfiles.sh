@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-BASE_REVISION="1.2.1"
+BASE_REVISION="1.2.2"
 echo "Base: ${BASE_REVISION}"
 
 ALPINE_VERSIONS="3.12 3.13 3.14 3.15 edge"
