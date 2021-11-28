@@ -12,9 +12,9 @@ for V in ${ALPINE_VERSIONS} ; do
     ALPINE_REVISION=`cat ./${V}/ALPINE_REVISION`
 
     DOCKERFILE=$(docker run \
-        -v /mnt/q/src/docker/alpine-s6/Dockerfile.esh:/Dockerfile.esh \
+        -v ${PWD}:/ws \
         bfren/alpine esh \
-        "/Dockerfile.esh" \
+        "/ws/Dockerfile.esh" \
         BASE_REVISION=${BASE_REVISION} \
         ALPINE_REVISION=${ALPINE_REVISION}
     )
