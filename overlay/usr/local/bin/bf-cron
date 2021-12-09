@@ -23,9 +23,15 @@ while getopts ":hq" C ; do
 done
 
 shift $(($OPTIND -1))
-DIRECTORY="${1-}"
+[[ -z "${1-}" ]] && bf-error "You must provide the name of the cron directory." "bf-cron"
 
-[[ -z "${DIRECTORY-}" ]] && bf-error "You must provide the name of the cron directory." "bf-cron"
+
+#======================================================================================================================
+# Ensure cron directory exists.
+#======================================================================================================================
+
+DIRECTORY="/etc/periodic/${1}"
+[[ ! -d "${DIRECTORY}" ]] bf-error "Cron directory does not exist: ${DIRECTORY}." "bf-cron"
 
 
 #======================================================================================================================
