@@ -31,7 +31,7 @@ shift $(($OPTIND -1))
 #======================================================================================================================
 
 DIRECTORY="/etc/periodic/${1}"
-[[ ! -d "${DIRECTORY}" ]] bf-error "Cron directory does not exist: ${DIRECTORY}." "bf-cron"
+[[ ! -d "${DIRECTORY}" ]] && bf-error "Cron directory does not exist: ${DIRECTORY}." "bf-cron"
 
 
 #======================================================================================================================
