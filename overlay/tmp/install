@@ -52,13 +52,13 @@ bf-debug "S6 Overlay version ${S6_VERSION}."
 # Download and install S6 Overlay.
 #======================================================================================================================
 
-S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
+S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}.tar.xz"
 bf-echo "Downloading ${S6_URL}..."
-wget -O installer ${S6_URL} && chmod +x installer
+wget -O s6.tar.xz ${S6_URL}
 bf-done
 
 bf-echo "Installing S6 Overlay v${S6_VERSION}..."
-./installer /
+tar -C / -Jxpf ./s6.tar.xz
 
 [[ -d /etc/s6 ]] && bf-done \
     || bf-error "S6 Overlay not installed."
