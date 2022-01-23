@@ -18,11 +18,11 @@ export BF_E=`basename ${0}`
 case "${TARGETPLATFORM}" in
 
     linux/amd64)
-        ARCH="amd64"
+        ARCH="x86_64"
         ;;
 
     linux/arm/v7)
-        ARCH="armhf"
+        ARCH="arm32"
         ;;
 
     linux/arm64)
