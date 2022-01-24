@@ -52,10 +52,16 @@ bf-debug "S6 Overlay version ${S6_VERSION}."
 # Download and install S6 Overlay.
 #======================================================================================================================
 
-S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}.tar.xz"
+FILE="s6-overlay-${ARCH}-${S6_VERSION}.tar.xz"
+S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${FILE}"
 bf-echo "Downloading ${S6_URL}..."
-wget -O s6.tar.xz ${S6_URL}
+wget ${S6_URL}
 bf-done
+
+bf-echo "Checking download integrity..."
+wget ${S6_URL}.sha256
+sha256sum --check --status ${FILE}.sha256 && bf-done \
+    || bf-error "S6 Overlay download does not match checksum."
 
 bf-echo "Installing S6 Overlay v${S6_VERSION}..."
 tar -C / -Jxpf ./s6.tar.xz
