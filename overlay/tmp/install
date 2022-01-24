@@ -52,21 +52,32 @@ bf-debug "S6 Overlay version ${S6_VERSION}."
 # Download and install S6 Overlay.
 #======================================================================================================================
 
-FILE="s6-overlay-${ARCH}-${S6_VERSION}.tar.xz"
-S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${FILE}"
-bf-echo "Downloading ${S6_URL}..."
-wget ${S6_URL}
-bf-done
+install () {
 
-bf-echo "Checking download integrity..."
-wget ${S6_URL}.sha256
-sha256sum -cs ${FILE}.sha256 && bf-done \
-    || bf-error "S6 Overlay download does not match checksum."
+    # build filename - argument 1 is the architecture
+    FILE="s6-overlay-${1}-${S6_VERSION}.tar.xz"
+
+    # download file
+    URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${FILE}"
+    bf-debug " .. downloading ${URL}..."
+    wget ${URL}
+
+    # check integrity
+    wget ${URL}.sha256
+    sha256sum -cs ${FILE}.sha256 \
+        || bf-error " .. S6 Overlay download does not match checksum."
+
+    # extract
+    bf-debug " .. extracting ${FILE}..."
+    tar -C / -Jxpf ${FILE} \
+        || bf-error " .. unable to extract ${FILE}."
+
+}
 
 bf-echo "Installing S6 Overlay v${S6_VERSION}..."
-tar -C / -Jxpf ./${FILE} && bf-done \
-    || bf-error "S6 Overlay not installed."
-
+install "noarch"
+install ${ARCH}
+bf-done
 
 #======================================================================================================================
 # Create bf directories.
