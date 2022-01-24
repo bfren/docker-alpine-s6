@@ -93,4 +93,4 @@ mkdir -p /usr/lib/bf/inc
 # Set attributes.
 #======================================================================================================================
 
-bf-fix-attrs
+chmod +x /usr/local/bin/bf-fix-attrs && bf-fix-attrs
