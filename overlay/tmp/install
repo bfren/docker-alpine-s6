@@ -22,7 +22,7 @@ case "${TARGETPLATFORM}" in
         ;;
 
     linux/arm/v7)
-        ARCH="arm32"
+        ARCH="arm"
         ;;
 
     linux/arm64)
