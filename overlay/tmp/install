@@ -60,7 +60,7 @@ bf-done
 
 bf-echo "Checking download integrity..."
 wget ${S6_URL}.sha256
-sha256sum --check --status ${FILE}.sha256 && bf-done \
+sha256sum -cs ${FILE}.sha256 && bf-done \ # -c: check file, -s: print nothing, return status
     || bf-error "S6 Overlay download does not match checksum."
 
 bf-echo "Installing S6 Overlay v${S6_VERSION}..."
