@@ -1,0 +1,5 @@
+foreground
+{
+    /usr/local/bin/bf-fix-attrs
+    /usr/local/bin/bf-cont-init
+}

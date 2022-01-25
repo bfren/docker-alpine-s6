@@ -87,5 +87,5 @@ bf-done
 bf-debug "Creating bf directories."
 mkdir /etc/periodic/1min
 mkdir -p /etc/bf/src
-mkdir -p /etc/bf/templates
+mkdir /etc/bf/templates
 mkdir -p /usr/lib/bf/inc
