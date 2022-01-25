@@ -1,1 +1,5 @@
-foreground { bf-cont-init }
+foreground
+{
+    bf-fix-attrs
+    bf-cont-init
+}
