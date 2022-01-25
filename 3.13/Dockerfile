@@ -20,6 +20,7 @@ ENV \
     S6_FIX_ATTRS_HIDDEN=1
 
 COPY ./overlay /
+COPY ./S6_VERSION /tmp/
 
 RUN bf-install
 
