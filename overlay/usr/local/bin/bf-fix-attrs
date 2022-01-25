@@ -8,4 +8,4 @@ set -euo pipefail
 #======================================================================================================================
 
 bf-debug "Fixing permissions." "bf-fix-attrs"
-/etc/s6-rc/scripts/fix-attrs
+/package/admin/s6-overlay/etc/s6-rc/scripts/fix-attrs
