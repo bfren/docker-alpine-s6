@@ -7,7 +7,7 @@ docker pull bfren/alpine
 BASE_REVISION="1.3.3"
 echo "Base: ${BASE_REVISION}"
 
-ALPINE_VERSIONS="3.12 3.13 3.14 3.15 edge"
+ALPINE_VERSIONS="3.8 3.12 3.13 3.14 3.15 edge"
 for V in ${ALPINE_VERSIONS} ; do
 
     echo "Alpine ${V}"
