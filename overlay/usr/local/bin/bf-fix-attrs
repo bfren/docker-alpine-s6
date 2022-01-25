@@ -4,8 +4,37 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Run fix-attrs.
+# Set variables.
 #======================================================================================================================
 
-bf-debug "Fixing permissions." "bf-fix-attrs"
-/package/admin/s6-overlay/etc/s6-rc/scripts/fix-attrs
+ERR=false
+FIX=/etc/bf/fix-attrs.d
+
+
+#======================================================================================================================
+# Apply attributes file.
+#
+# Arguments:
+#   1   Path to attributes file.
+#======================================================================================================================
+
+apply () {
+    NAME=`basename ${1}`
+    bf-echo "Applying ${NAME}." "bf-fix-attrs"
+    if ! /package/admin/s6-overlay/libexec/fix-attrs < "${1}" ; then
+        ERR=true
+    fi
+}
+
+
+#======================================================================================================================
+# Execute attributes files in alphabetical order.
+#======================================================================================================================
+
+for FILE in `s6-ls "${FIX}" 2>/dev/null | s6-sort` ; do
+    apply "${FIX}/${FILE}"
+done
+
+if ${ERR} ; then
+    bf-error "Failed to apply some attributes files." "bf-fix-attrs"
+fi
