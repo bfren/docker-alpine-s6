@@ -95,6 +95,4 @@ mkdir -p /usr/lib/bf/inc
 # Set attributes.
 #======================================================================================================================
 
-chmod +x /usr/local/bin/bf-*
-bf-env "S6_VERSION" "${S6_VERSION}"
-bf-fix-attrs
+chmod +x /usr/local/bin/bf-fix-attrs && bf-fix-attrs
