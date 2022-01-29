@@ -95,4 +95,6 @@ mkdir -p /usr/lib/bf/inc
 # Add local executables to path.
 #======================================================================================================================
 
-export PATH=/usr/local/bin:${PATH}
+PATH_FILE="/var/run/s6/container_environment/PATH"
+PATH=`cat ${PATH_FILE}`
+echo "/usr/local/bin:${PATH}" > ${PATH_FILE}
