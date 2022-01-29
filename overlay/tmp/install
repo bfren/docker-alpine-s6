@@ -96,13 +96,14 @@ mkdir -p /usr/lib/bf/inc
 #======================================================================================================================
 
 bf-ch -o root:root -m 1777 /etc/bf/src
-bf-ch -o root:root -m 0444 -t f /etc/bf/templates
-bf-ch -o root:root -m 0555 -t d /etc/bf/templates
+bf-ch -o root:root -r /etc/bf/templates
+bf-ch -m 0444 -t f /etc/bf/templates
+bf-ch -m 0555 -t d /etc/bf/templates
 bf-ch -o root:root -m 0500 -r /etc/periodic
 bf-ch -o root:root -m 1777 /tmp
 bf-ch -o root:root -m 0555 -r /usr/lib/bf
 bf-ch -o root:root -m 0555 /usr/local/bin/bf-*
-bf-ch -o root:root -m 0500 /usr/loca/bin/healthcheck
+bf-ch -o root:root -m 0500 /usr/local/bin/healthcheck
 
 
 #======================================================================================================================
