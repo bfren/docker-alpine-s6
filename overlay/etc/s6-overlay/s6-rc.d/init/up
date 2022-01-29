@@ -1,5 +1,4 @@
 foreground
 {
-    if { bf-fix-attrs }
-    if { bf-cont-init }
+    ifelse { bf-fix-attrs } { bf-cont-init } bf-svc-terminate
 }
