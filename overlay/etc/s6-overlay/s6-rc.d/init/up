@@ -1,6 +1,5 @@
 foreground
 {
-    if { chmod +x /usr/local/bin/bf-fix-attrs }
     if { bf-fix-attrs }
     if { bf-cont-init }
 }
