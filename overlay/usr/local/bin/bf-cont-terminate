@@ -1,0 +1,23 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Check if it has already been called (multiple services may try to bring it down).
+#======================================================================================================================
+
+if [ "${BF_TERMINATING-}" = "1" ] ; then
+    bf-debug "Container already being terminated." "bf-cont-terminate"
+    exit 0
+fi
+
+bf-env "BF_TERMINATING" "1"
+
+
+#======================================================================================================================
+# Terminate all running services (will stop / restart the container depending on restart policy).
+#======================================================================================================================
+
+bf-notok "Terminating all services." "bf-cont-terminate"
+/run/s6/basedir/bin/halt

@@ -7,5 +7,5 @@ set -euo pipefail
 # Show helpful log message.
 #======================================================================================================================
 
-bf-svc-finish -s ${PWD##*/}
+bf-svc-finish -s ${PWD##*/} -t
 bf-clear
