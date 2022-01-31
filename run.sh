@@ -1,5 +1,7 @@
 #!/bin/sh
 
+git pull || true
+
 docker buildx build \
     --build-arg BF_IMAGE=alpine-s6 \
     --build-arg BF_VERSION=4.0.0 \
