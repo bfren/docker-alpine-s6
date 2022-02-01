@@ -8,4 +8,4 @@ export BF_E=`basename ${0}`
 # Run container initialisation - if it fails, terminate the container.
 #======================================================================================================================
 
-bf-fix-attrs && bf-cont-init || bf-svc-terminate
+bf-fix-attrs && bf-cont-init || bf-cont-terminate
