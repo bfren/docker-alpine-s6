@@ -1,4 +1,5 @@
 foreground
 {
+    if { export BF_E=${PWD##*/} }
     ifelse { bf-fix-attrs } { bf-cont-init } bf-svc-terminate
 }
