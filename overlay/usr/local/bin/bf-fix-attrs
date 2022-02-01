@@ -34,6 +34,7 @@ bf-echo "Applying ${FIX} files." "bf-fix-attrs"
 for FILE in `s6-ls "${FIX}" 2>/dev/null | s6-sort` ; do
     apply "${FIX}/${FILE}"
 done
+bf-done "bf-fix-attrs"
 
 if ${ERR} ; then
     bf-error "Failed to apply some attributes files." "bf-fix-attrs"

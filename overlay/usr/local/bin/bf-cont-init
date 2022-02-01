@@ -20,11 +20,13 @@ bf-ch -o root:root -m 0500 -t f ${INIT}
 
 #======================================================================================================================
 # Execute initialisation files in alphabetical order.
+# If one fails, stop and show error.
 #======================================================================================================================
 
 bf-echo "Running ${INIT} files." "bf-cont-init"
 for FILE in `s6-ls "${INIT}" 2>/dev/null | s6-sort` ; do
-    bf-echo "${FILE}." "bf-cont-init"
-    ${INIT}/${FILE}
+    bf-echo "${FILE} starting." "bf-cont-init"
+    ${INIT}/${FILE} || bf-error "Error running ${FILE}, unable to continue." "bf-cont-init"
     bf-echo "${FILE} done." "bf-cont-init"
 done
+bf-done "bf-cont-init"
