@@ -30,6 +30,7 @@ apply () {
 # Execute attributes files in alphabetical order.
 #======================================================================================================================
 
+bf-echo "Applying ${FIX} files." "bf-fix-attrs"
 for FILE in `s6-ls "${FIX}" 2>/dev/null | s6-sort` ; do
     apply "${FIX}/${FILE}"
 done
