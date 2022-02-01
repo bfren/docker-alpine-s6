@@ -21,3 +21,4 @@ bf-env "BF_TERMINATING" "1"
 
 bf-notok "Terminating all services." "bf-cont-terminate"
 /run/s6/basedir/bin/halt
+bf-echo "Goodbye."
