@@ -13,15 +13,15 @@ for V in ${ALPINE_VERSIONS} ; do
     echo "Alpine ${V}"
     ALPINE_REVISION=`cat ./${V}/ALPINE_REVISION`
 
-    DOCKERFILE=$(docker run \
-        -v ${PWD}:/ws \
-        bfren/alpine esh \
-        "/ws/Dockerfile.esh" \
-        BASE_REVISION=${BASE_REVISION} \
-        ALPINE_REVISION=${ALPINE_REVISION}
+    SILENT=$(docker run \
+        -v ${PWD}:/in \
+        -v ${PWD}/${V}:/out \
+        -e BASE_REVISION=${BASE_REVISION} \
+        -e ALPINE_REVISION=${ALPINE_REVISION} \
+        bfren/alpine bf-esh \
+        /in/Dockerfile.esh \
+        /out/Dockerfile
     )
-
-    echo "${DOCKERFILE}" > ./${V}/Dockerfile
 
 done
 
