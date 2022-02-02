@@ -1,3 +1,9 @@
+[1;30m[bf] 2022-02-02 12:24:05 | [1;30mbf-init: Initialising container.[0;39m
+[1;30m[bf] 2022-02-02 12:24:05 | [1;30mbf-init: 00-image running.[0;39m
+[bf] 2022-02-02 12:24:05 | [39m00-image: bfren alpine v1.4.1 (bf-image)[0;39m
+[bf] 2022-02-02 12:24:05 | [39m00-image: https://github.com/bfren/docker-alpine (bf-image)[0;39m
+[1;30m[bf] 2022-02-02 12:24:05 | [1;30mbf-init: 00-image done.[0;39m
+[1;30m[bf] 2022-02-02 12:24:05 | [1;30mbf-init: Done.[0;39m
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 
 ARG TARGETPLATFORM
@@ -28,4 +34,4 @@ RUN bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
 
-ENTRYPOINT [ "/init" ]
+ENTRYPOINT [ "bf-init", "/init" ]
