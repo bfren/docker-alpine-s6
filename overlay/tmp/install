@@ -95,15 +95,7 @@ mkdir -p /usr/lib/bf/inc
 # Set permissions.
 #======================================================================================================================
 
-bf-ch -o root:root -m 1777 /etc/bf/src
-bf-ch -o root:root -r /etc/bf/templates && \
-    bf-ch -m 0444 -t f /etc/bf/templates && \
-    bf-ch -m 0555 -t d /etc/bf/templates
 bf-ch -o root:root -m 0500 -t f /etc/periodic
-bf-ch -o root:root -m 1777 /tmp
-bf-ch -o root:root -m 0555 -t f /usr/lib/bf
-bf-ch -o root:root -m 0555 /usr/local/bin/bf-*
-bf-ch -o root:root -m 0500 /usr/local/bin/healthcheck
 
 
 #======================================================================================================================
@@ -112,4 +104,4 @@ bf-ch -o root:root -m 0500 /usr/local/bin/healthcheck
 
 PATH_FILE="/etc/s6-overlay/config/global_path"
 PATH=`cat ${PATH_FILE}`
-echo "/usr/local/bin:${PATH}" > ${PATH_FILE}
+echo "${BF_BIN}:${PATH}" > ${PATH_FILE}
