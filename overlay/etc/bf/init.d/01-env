@@ -11,6 +11,8 @@ export BF_E=`basename ${0}`
 bf-env "BF_IMAGE" `cat /BF_IMAGE`
 bf-env "BF_VERSION" `cat /BF_VERSION`
 
+bf-env "BF_BIN" "${BF_BIN}"
+
 LIB=/usr/lib/bf
 bf-env "BF_LIB" "${LIB}"
 bf-env "BF_INC" "${LIB}/inc"
