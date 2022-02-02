@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.14.3-1.3.4
+FROM bfren/alpine:alpine3.14.3-1.4.1
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
@@ -17,7 +17,9 @@ ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
-    S6_FIX_ATTRS_HIDDEN=1
+    S6_FIX_ATTRS_HIDDEN=1 \
+    # ensure bf executables are added to S6 path
+    S6_GLOBAL_PATH=/usr/bin/bf
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
