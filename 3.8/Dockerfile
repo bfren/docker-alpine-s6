@@ -19,7 +19,7 @@ ENV \
     # include hidden files and directories when fix-attrs.d processes them
     S6_FIX_ATTRS_HIDDEN=1 \
     # ensure bf executables are added to S6 path
-    S6_GLOBAL_PATH=/usr/bin/bf
+    S6_GLOBAL_PATH=${BF_BIN}
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
