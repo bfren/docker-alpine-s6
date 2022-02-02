@@ -1,3 +1,5 @@
+[1;30m[bf] 2022-02-02 14:16:30 | [1;30mbf-init: Initialising container.[0;39m
+[1;30m[bf] 2022-02-02 14:16:30 | [1;30mbf-init: Done.[0;39m
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 
 ARG TARGETPLATFORM
@@ -5,7 +7,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.8.5-1.4.1
+FROM bfren/alpine:alpine3.8.5-1.4.2
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
