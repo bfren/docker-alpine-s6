@@ -1,5 +1,3 @@
-[1;30m[bf] 2022-02-02 14:16:36 | [1;30mbf-init: Initialising container.[0;39m
-[1;30m[bf] 2022-02-02 14:16:36 | [1;30mbf-init: Done.[0;39m
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 
 ARG TARGETPLATFORM
