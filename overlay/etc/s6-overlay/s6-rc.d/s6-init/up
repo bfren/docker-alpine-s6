@@ -1,0 +1,4 @@
+foreground
+{
+    if { bf-s6-init-env }
+}
