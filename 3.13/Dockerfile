@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.13.7-1.4.5
+FROM bfren/alpine:alpine3.13.7-1.4.6-beta
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
@@ -34,4 +34,4 @@ RUN bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
 
-ENTRYPOINT [ "bf-init", "/init" ]
+ENTRYPOINT [ "/init" ]
