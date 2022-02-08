@@ -21,6 +21,10 @@ ENV \
     # ensure bf executables are added to S6 path
     S6_GLOBAL_PATH=${BF_BIN}
 
+ENV \
+    # add S6 executables to PATH
+    PATH=/command:${PATH}
+
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
 
