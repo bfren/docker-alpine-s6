@@ -96,10 +96,3 @@ bf-ch -o root:root -m 0500 -t f /etc/periodic
 PATH_FILE="/etc/s6-overlay/config/global_path"
 PATH=`cat ${PATH_FILE}`
 echo "${BF_BIN}:${PATH}" > ${PATH_FILE}
-
-
-#======================================================================================================================
-# Ensure container environment directory exists.
-#======================================================================================================================
-
-mkdir -p ${S6_CONT_ENV}
