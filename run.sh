@@ -2,6 +2,7 @@
 
 VERSION=`cat VERSION`
 
+git reset --hard
 git pull || true
 chmod +x run.sh
 
