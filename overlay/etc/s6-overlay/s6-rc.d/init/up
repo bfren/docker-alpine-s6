@@ -1,4 +1,4 @@
 foreground
 {
-    if { ${BF_LIB}/init }
+    if { /usr/lib/bf/init }
 }
