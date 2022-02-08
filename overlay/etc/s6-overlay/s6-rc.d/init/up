@@ -1,6 +1,6 @@
 foreground
 {
     if { bf-echo "Initialising container." "init" }
-    if { /usr/lib/bf/init || bf-cont-terminate }
+    ifelse { -n /usr/lib/bf/init } { bf-cont-terminate }
     if { bf-done "init" }
 }
