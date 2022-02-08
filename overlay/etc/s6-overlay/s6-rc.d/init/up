@@ -1,4 +1,4 @@
 foreground
 {
-    if { ${BF_INC}/init }
+    if { ${BF_LIB}/init }
 }
