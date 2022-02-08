@@ -19,6 +19,5 @@ bf-env "BF_TERMINATING" "1"
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bf-notok "Terminating all services." "bf-cont-terminate"
+bf-notok "Terminating container, goodbye." "bf-cont-terminate"
 /run/s6/basedir/bin/halt
-bf-echo "Goodbye."
