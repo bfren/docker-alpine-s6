@@ -1,6 +1,6 @@
 foreground
 {
     if { bf-echo "Initialising container." "init" }
-    ifelse { /usr/lib/bf/init } { bf-error }
+    if { /usr/lib/bf/init || bf-error "Unable to initialise container." "init" }
     if { bf-done "init" }
 }
