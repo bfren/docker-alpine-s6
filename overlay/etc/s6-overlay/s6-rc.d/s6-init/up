@@ -1,4 +1,5 @@
 foreground
 {
-    if { bf-debug "S6 Init" }
+    if { echo "S6_CONT_ENV=$S6_CONT_ENV" }
+    if { ls $S6_CONT_ENV }
 }
