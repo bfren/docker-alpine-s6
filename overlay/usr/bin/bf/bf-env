@@ -21,4 +21,5 @@ VALUE=${2}
 #======================================================================================================================
 
 bf-debug "${NAME}=${VALUE}." "bf-env"
+export ${NAME}=${VALUE}
 printf "%s" "${VALUE}" > "${S6_CONT_ENV}/${NAME}" # use printf because echo adds a newline
