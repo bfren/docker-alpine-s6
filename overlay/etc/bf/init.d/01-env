@@ -13,9 +13,8 @@ bf-env "BF_VERSION" `cat /BF_VERSION`
 
 bf-env "BF_BIN" "${BF_BIN}"
 
-LIB=/usr/lib/bf
-bf-env "BF_LIB" "${LIB}"
-bf-env "BF_INC" "${LIB}/inc"
+bf-env "BF_LIB" "${BF_LIB}"
+bf-env "BF_INC" "${BF_LIB}/inc"
 
 ETC=/etc/bf
 bf-env "BF_TEMPLATES" "${ETC}/templates"

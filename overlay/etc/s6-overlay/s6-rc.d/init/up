@@ -1,0 +1,4 @@
+foreground
+{
+    if { ${BF_INC}/init }
+}

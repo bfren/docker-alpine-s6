@@ -1,5 +1,0 @@
-foreground
-{
-    if { echo "S6_CONT_ENV=$S6_CONT_ENV" }
-    if { ls $S6_CONT_ENV }
-}
