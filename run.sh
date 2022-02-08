@@ -3,6 +3,7 @@
 VERSION=`cat VERSION`
 
 git pull || true
+chmod +x run.sh
 
 docker buildx build \
     --build-arg BF_IMAGE=alpine-s6 \
