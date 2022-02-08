@@ -1,4 +1,4 @@
 foreground
 {
-    if { bf-s6-init-env }
+    if { bf-debug "S6 Init" }
 }
