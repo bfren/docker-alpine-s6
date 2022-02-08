@@ -16,6 +16,8 @@ ARG BF_VERSION
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
+    # container environment directory
+    S6_CONT_ENV=/run/s6/container_environment \
     # include hidden files and directories when fix-attrs.d processes them
     S6_FIX_ATTRS_HIDDEN=1 \
     # ensure bf executables are added to S6 path
