@@ -2,8 +2,7 @@
 
 VERSION=`cat VERSION`
 
-git reset --hard
-git pull || true
+git pull || exit 1
 chmod +x run.sh
 
 docker buildx build \
