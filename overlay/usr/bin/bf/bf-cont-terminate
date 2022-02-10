@@ -19,5 +19,11 @@ bf-env "BF_TERMINATING" "1"
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bf-notok "Terminating container, goodbye." "bf-cont-terminate"
-/run/s6/basedir/bin/halt
+# if legacy-services is active
+ACTIVE=`s6-rc -a list | grep 'legacy-services'`
+if [ -n "${ACTIVE}" ] ; then
+    bf-notok "Terminating container, goodbye." "bf-cont-terminate"
+    halt
+else
+    bf-debug "Container already being terminated." "bf-cont-terminate"
+fi
