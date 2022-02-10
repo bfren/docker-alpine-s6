@@ -85,7 +85,6 @@ bf-done
 #======================================================================================================================
 
 bf-debug "Setting up cron directories."
-mkdir /etc/periodic/1min
 bf-ch -o root:root -m 0500 -t f /etc/periodic
 
 
@@ -94,3 +93,13 @@ bf-ch -o root:root -m 0500 -t f /etc/periodic
 #======================================================================================================================
 
 echo "${BF_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" > /etc/s6-overlay/config/global_path
+
+
+#======================================================================================================================
+# Cleanup.
+#======================================================================================================================
+
+bf-echo "Removing .empty files..."
+rm /etc/bf/ch.d/.empty
+rm /etc/periodic/1min/.empty
+bf-done
