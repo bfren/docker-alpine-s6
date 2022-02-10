@@ -9,9 +9,19 @@ export BF_E=`basename ${0}`
 #======================================================================================================================
 
 for FILE in `ls ${BF_CH_D} | sort` ; do
+
     bf-debug "Applying ${FILE}."
-    while read LINE ; do
-        [[ -n "${LINE}" ]] && bf-ch ${LINE}
+
+    while read GLOB OWNER FMODE DMODE ; do
+
+        [[ -z "${GLOB}" ]] && continue
+
+        bf-ch -o ${OWNER} ${GLOB}
+        [[ -n "${FMODE}" ]] bf-ch -m ${FMODE} -t f ${GLOB}
+        [[ -n "${DMODE}" ]] bf-ch -m ${DMODE} -t d ${GLOB}
+
     done < ${BF_CH_D}/${FILE}
+
     bf-debug "Done."
+
 done
