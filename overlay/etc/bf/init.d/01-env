@@ -17,6 +17,8 @@ bf-env "BF_LIB" "${BF_LIB}"
 bf-env "BF_INC" "${BF_LIB}/inc"
 
 ETC=/etc/bf
+bf-env "BF_CH_D" "${ETC}/ch.d"
+bf-env "BF_INIT_D" "${ETC}/init.d"
 bf-env "BF_TEMPLATES" "${ETC}/templates"
 bf-env "BF_SRC" "${ETC}/src"
 

@@ -1,0 +1,17 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Run custom ch files.
+#======================================================================================================================
+
+for FILE in `ls ${BF_CH} | sort` ; do
+    bf-debug "Applying ${FILE}."
+    while read LINE ; do
+        [[ -n "${LINE}" ]] && bf-echo ${LINE}
+    done < ${BF_CH}/${FILE}
+    bf-debug "Done."
+done
