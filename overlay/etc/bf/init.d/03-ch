@@ -8,10 +8,10 @@ export BF_E=`basename ${0}`
 # Run custom ch files.
 #======================================================================================================================
 
-for FILE in `ls ${BF_CH} | sort` ; do
+for FILE in `ls ${BF_CH_D} | sort` ; do
     bf-debug "Applying ${FILE}."
     while read LINE ; do
         [[ -n "${LINE}" ]] && bf-echo ${LINE}
-    done < ${BF_CH}/${FILE}
+    done < ${BF_CH_D}/${FILE}
     bf-debug "Done."
 done
