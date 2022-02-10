@@ -17,8 +17,8 @@ for FILE in `ls ${BF_CH_D} | sort` ; do
         [[ -z "${GLOB}" ]] && continue
 
         bf-ch -o ${OWNER} ${GLOB}
-        [[ -n "${FMODE}" ]] bf-ch -m ${FMODE} -t f ${GLOB}
-        [[ -n "${DMODE}" ]] bf-ch -m ${DMODE} -t d ${GLOB}
+        [[ -n "${FMODE}" ]] && bf-ch -m ${FMODE} -t f ${GLOB}
+        [[ -n "${DMODE}" ]] && bf-ch -m ${DMODE} -t d ${GLOB}
 
     done < ${BF_CH_D}/${FILE}
 
