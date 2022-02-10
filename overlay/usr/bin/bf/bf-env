@@ -21,4 +21,4 @@ VALUE=${2}
 #======================================================================================================================
 
 bf-debug "${NAME}=${VALUE}." "bf-env"
-printf "%s" "${VALUE}" > "/var/run/s6/container_environment/${NAME}" # use printf because echo adds a newline
+printf "%s" "${VALUE}" > "/run/s6/container_environment/${NAME}" # use printf because echo adds a newline

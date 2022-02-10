@@ -1,0 +1,27 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Run custom ch files.
+#======================================================================================================================
+
+for FILE in `ls ${BF_CH_D} | sort` ; do
+
+    bf-debug "${FILE}."
+
+    while read GLOB OWNER FMODE DMODE ; do
+
+        [[ -z "${GLOB}" ]] && continue
+
+        bf-ch -o ${OWNER} ${GLOB}
+        [[ -n "${FMODE}" ]] && bf-ch -m ${FMODE} -t f ${GLOB}
+        [[ -n "${DMODE}" ]] && bf-ch -m ${DMODE} -t d ${GLOB}
+
+    done < ${BF_CH_D}/${FILE}
+
+    bf-debug "${FILE} done."
+
+done

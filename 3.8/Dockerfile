@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.8-1.3.2
+FROM bfren/alpine:alpine3.8.5-1.4.8
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
@@ -20,6 +20,7 @@ ENV \
     S6_FIX_ATTRS_HIDDEN=1
 
 COPY ./overlay /
+COPY ./S6_VERSION /tmp/
 
 RUN bf-install
 

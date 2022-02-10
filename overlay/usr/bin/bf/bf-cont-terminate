@@ -1,13 +1,6 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 set -euo pipefail
-
-
-#======================================================================================================================
-# Check environment variable.
-#======================================================================================================================
-
-[[ -z "${S6_SERVICES-}" ]] && bf-error "S6_SERVICES environment variable is not set." "bf-svc-terminate"
 
 
 #======================================================================================================================
@@ -15,7 +8,7 @@ set -euo pipefail
 #======================================================================================================================
 
 if [ "${BF_TERMINATING-}" = "1" ] ; then
-    bf-debug "Services already being terminated." "bf-svc-terminate"
+    bf-debug "Container already being terminated." "bf-cont-terminate"
     exit 0
 fi
 
@@ -26,5 +19,11 @@ bf-env "BF_TERMINATING" "1"
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-bf-notok "Terminating all services." "bf-svc-terminate"
-s6-svscanctl -t ${S6_SERVICES}
+# if cron is up, we need to halt the container
+# if cron is down, the container is already being terminated
+if [ `s6-svstat -u /var/run/s6-rc/servicedirs/cron` ] ; then
+    bf-notok "Terminating container, goodbye." "bf-cont-terminate"
+    halt
+else
+    bf-debug "Container already being terminated." "bf-cont-terminate"
+fi

@@ -18,7 +18,7 @@ export BF_E=`basename ${0}`
 case "${TARGETPLATFORM}" in
 
     linux/amd64)
-        ARCH="amd64"
+        ARCH="x86_64"
         ;;
 
     linux/arm/v7)
@@ -52,24 +52,54 @@ bf-debug "S6 Overlay version ${S6_VERSION}."
 # Download and install S6 Overlay.
 #======================================================================================================================
 
-S6_URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-${ARCH}-installer"
-bf-echo "Downloading ${S6_URL}..."
-wget -O installer ${S6_URL} && chmod +x installer
-bf-done
+install () {
+
+    # build filename - argument 1 is the architecture
+    FILE="s6-overlay-${1}-${S6_VERSION}.tar.xz"
+
+    # download file
+    URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${FILE}"
+    bf-debug " .. downloading ${URL}..."
+    wget ${URL}
+
+    # check integrity
+    wget ${URL}.sha256
+    sha256sum -cs ${FILE}.sha256 \
+        || bf-error " .. S6 Overlay download does not match checksum."
+
+    # extract
+    bf-debug " .. extracting ${FILE}..."
+    tar -C / -Jxpf ${FILE} \
+        || bf-error " .. unable to extract ${FILE}."
+
+}
 
 bf-echo "Installing S6 Overlay v${S6_VERSION}..."
-./installer /
-
-[[ -d /etc/s6 ]] && bf-done \
-    || bf-error "S6 Overlay not installed."
+install "noarch"
+install ${ARCH}
+bf-done
 
 
 #======================================================================================================================
-# Create bf directories.
+# Setup cron directories.
 #======================================================================================================================
 
-bf-debug "Creating bf directories."
-mkdir /etc/periodic/1min
-mkdir -p /etc/bf/src
-mkdir -p /etc/bf/templates
-mkdir -p /usr/lib/bf/inc
+bf-debug "Setting up cron directories."
+bf-ch -o root:root -m 0500 -t f /etc/periodic
+
+
+#======================================================================================================================
+# Add BF and Alpine executables to S6 path.
+#======================================================================================================================
+
+echo "${BF_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" > /etc/s6-overlay/config/global_path
+
+
+#======================================================================================================================
+# Cleanup.
+#======================================================================================================================
+
+bf-echo "Removing .empty files..."
+rm /etc/bf/ch.d/.empty
+rm /etc/periodic/1min/.empty
+bf-done

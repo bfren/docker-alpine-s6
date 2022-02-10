@@ -1,11 +1,11 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 set -euo pipefail
-export BF_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Clear temporary files and caches.
+# Show helpful log message.
 #======================================================================================================================
 
+bf-svc-finish -s ${PWD##*/} -t
 bf-clear
