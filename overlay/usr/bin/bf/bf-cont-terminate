@@ -19,8 +19,9 @@ bf-env "BF_TERMINATING" "1"
 # Terminate all running services (will stop / restart the container depending on restart policy).
 #======================================================================================================================
 
-# if legacy-services is active
-ACTIVE=`s6-rc -a list | grep 'legacy-services'`
+# if cron is up, we need to halt the container
+# if cron is down, the container is already being terminated
+ACTIVE=`s6-svstat -u /var/run/s6-rc/servicedirs/cron`
 if [ -n "${ACTIVE}" ] ; then
     bf-notok "Terminating container, goodbye." "bf-cont-terminate"
     halt
