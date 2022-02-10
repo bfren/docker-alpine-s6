@@ -1,1 +1,0 @@
--o root:root -m 0500 -t f /etc/periodic
