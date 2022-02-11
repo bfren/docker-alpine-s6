@@ -92,7 +92,7 @@ bf-ch -o root:root -m 0500 -t f /etc/periodic
 # Add BF and Alpine executables to S6 path.
 #======================================================================================================================
 
-#echo "${BF_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" > /etc/s6-overlay/config/global_path
+echo "${BF_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" > /etc/s6-overlay/config/global_path
 
 
 #======================================================================================================================
