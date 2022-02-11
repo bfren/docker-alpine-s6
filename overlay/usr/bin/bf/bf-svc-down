@@ -6,29 +6,16 @@ set -euo pipefail
 #======================================================================================================================
 # Check arguments.
 #   1   Service name
-#   2   Absolute path to log file
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bf-error "You must provide the name of the log service." "bf-forward"
+[[ -z "${1-}" ]] && bf-error "You must provide the name of the service to stop." "bf-svc-down"
 SVC=${1}
 
-if [ -z "${2-}" ] ; then
-    bf-debug "Path to log file not defined, disabling service '${SVC}'." "bf-forward"
-    bf-svc-down "${SVC}"
-    exit 0
-fi
-FILE=${2}
-
 
 #======================================================================================================================
-# Forward the contents of a log file to Docker.
+# Use S6 to stop a service, disabling output and showing custom error message if it fails.
 #======================================================================================================================
 
-if [ -f "${FILE}" ] ; then
-    bf-echo "Forwarding ${SVC} - ${FILE}." "bf-forward"
-    exec tail -F "${FILE}"
-else
-    SLEEP=5
-    bf-debug "${FILE} not found, sleeping for ${SLEEP}s." "bf-forward"
-    sleep ${SLEEP}
-fi
+bf-echo "Stopping." "bf-svc-down"
+s6-rc -d change "${SVC}" > /dev/null 2>&1 \
+    || bf-error "Exited $? while disabling service ${SVC}, please try again." "bf-svc-down"
