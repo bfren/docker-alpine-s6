@@ -10,7 +10,7 @@ export BF_E=`basename ${0}`
 
 for FILE in `ls ${BF_CH_D} | sort` ; do
 
-    bf-debug "${FILE}."
+    bf-echo "Applying ${FILE}..."
 
     while read GLOB OWNER FMODE DMODE ; do
 
@@ -22,6 +22,6 @@ for FILE in `ls ${BF_CH_D} | sort` ; do
 
     done < ${BF_CH_D}/${FILE}
 
-    bf-debug "${FILE} done."
+    bf-debug "done."
 
 done
