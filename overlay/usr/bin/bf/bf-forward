@@ -14,7 +14,7 @@ SVC=${1}
 
 if [ -z "${2-}" ] ; then
     bf-debug "Path to log file not defined, disabling service '${SVC}'." "bf-forward"
-    bf-svc disable "${SVC}"
+    s6-rc -d change "${SVC}"
     exit 0
 fi
 FILE=${2}
