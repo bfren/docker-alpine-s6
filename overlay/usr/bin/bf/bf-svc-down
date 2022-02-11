@@ -19,4 +19,4 @@ SVC=${1}
 bf-debug "Stopping..." "bf-svc-down"
 s6-rc -d change "${SVC}" > /dev/null 2>&1 \
     || bf-error "Exited $? while disabling service ${SVC}, please try again." "bf-svc-down"
-bf-debug "done." "bf-svc-down"
+bf-debug "stopped." "bf-svc-down"
