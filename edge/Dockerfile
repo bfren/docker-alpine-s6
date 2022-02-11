@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpineedge-1.4.8
+FROM bfren/alpine:alpineedge-1.4.9
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
@@ -18,6 +18,10 @@ ENV \
     BF_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
     S6_FIX_ATTRS_HIDDEN=1
+
+ENV \
+    # add S6 executables to PATH
+    PATH=/command:${PATH}
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
