@@ -1,3 +1,3 @@
 #!/bin/sh
 
-append_path /command
+export PATH=/command:${PATH}
