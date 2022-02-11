@@ -17,7 +17,8 @@ ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
     # include hidden files and directories when fix-attrs.d processes them
-    S6_FIX_ATTRS_HIDDEN=1
+    S6_FIX_ATTRS_HIDDEN=1 \
+    S6_GLOBAL_PATH="${BF_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
