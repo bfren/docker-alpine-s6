@@ -8,23 +8,19 @@ set -euo pipefail
 #======================================================================================================================
 
 usage () {
-    echo "Usage: `basename ${0}` -s SERVICE_NAME [-t] [-h]" 2>&1
-    echo "    -s    The name of the service closing down."
+    echo "Usage: `basename ${0}` [-t] [-h]" 2>&1
     echo "    -t    If set, the container will be terminated."
     echo "    -h    Show this usage message."
     exit 2
 }
 
-while getopts ":hs:t" C ; do
+while getopts ":ht" C ; do
     case ${C} in
         h) usage ;;
-        s) NAME=${OPTARG} ;;
         t) TERMINATE=1 ;;
         ?) bf-notok "Invalid option: -${OPTARG}" "bf-svc-finish" && usage ;;
     esac
 done
-
-[[ -z "${NAME-}" ]] && bf-error "You must provide the name of the service." "bf-svc-finish"
 
 shift $(($OPTIND -1))
 
@@ -33,7 +29,7 @@ shift $(($OPTIND -1))
 # Echo service finish debug message.
 #======================================================================================================================
 
-bf-debug "${NAME}." "bf-svc-finish"
+bf-debug "done." "bf-svc-finish"
 
 
 #======================================================================================================================
