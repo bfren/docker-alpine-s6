@@ -16,8 +16,8 @@ ARG BF_VERSION
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
-    # include hidden files and directories when fix-attrs.d processes them
-    S6_FIX_ATTRS_HIDDEN=1
+    # disable S6 Overlay service timeout - handle by timeout-up instead
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 ENV \
     # add S6 executables to PATH
