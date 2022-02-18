@@ -14,14 +14,16 @@ ARG BF_IMAGE
 ARG BF_VERSION
 
 ENV \
+    # add S6 executables to PATH
+    PATH=/command:${PATH}
+
+ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
     # disable S6 Overlay service timeout - handle by timeout-up instead
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
-
-ENV \
-    # add S6 executables to PATH
-    PATH=/command:${PATH}
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    # set S6 global path
+    S6_GLOBAL_PATH=${PATH}
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
