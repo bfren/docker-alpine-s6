@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.8.5-1.4.12
+FROM bfren/alpine:alpine3.8.5-1.4.13
 COPY --from=build /log /log
 
 ARG TARGETPLATFORM
@@ -21,9 +21,7 @@ ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
     BF_CRON_LOG_LEVEL=8 \
     # disable S6 Overlay service timeout - handle by timeout-up instead
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
-    # set S6 global path
-    S6_GLOBAL_PATH=${PATH}
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 COPY ./overlay /
 COPY ./S6_VERSION /tmp/
