@@ -55,7 +55,7 @@ bf-echo "S6 Overlay version ${S6_VERSION}."
 install () {
 
     # build filename - argument 1 is the architecture
-    FILE="s6-overlay-${1}-${S6_VERSION}.tar.xz"
+    FILE="s6-overlay-${1}.tar.xz"
 
     # download file
     URL="https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/${FILE}"
@@ -78,13 +78,6 @@ bf-echo "Installing S6 Overlay v${S6_VERSION}..."
 install "noarch"
 install ${ARCH}
 bf-done
-
-
-#======================================================================================================================
-# Add BF and Alpine executables to S6 path.
-#======================================================================================================================
-
-echo ${PATH} > /etc/s6-overlay/config/global_path
 
 
 #======================================================================================================================
