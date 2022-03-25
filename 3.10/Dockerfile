@@ -5,8 +5,10 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.10.9-1.5.5
+FROM bfren/alpine:alpine3.10.9-1.5.6
 COPY --from=build /log /log
+
+LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
 
 ARG TARGETPLATFORM
 
@@ -24,7 +26,6 @@ ENV \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 COPY ./overlay /
-COPY ./S6_VERSION /tmp/
 
 RUN bf-install
 
