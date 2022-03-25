@@ -26,7 +26,6 @@ ENV \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 COPY ./overlay /
-COPY ./S6_VERSION /tmp/
 
 RUN bf-install
 
