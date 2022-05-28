@@ -78,11 +78,9 @@ jobs:
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/alpine-s6:dev
             bfren/alpine-s6:alpine3.15-dev
             bfren/alpine-s6:alpine3.15-${{ steps.version_minor.outputs.contents }}-beta
             bfren/alpine-s6:alpine3.15-${{ steps.version.outputs.contents }}-beta
-            ghcr.io/bfren/alpine-s6:dev
             ghcr.io/bfren/alpine-s6:alpine3.15-dev
             ghcr.io/bfren/alpine-s6:alpine3.15-${{ steps.version_minor.outputs.contents }}-beta
             ghcr.io/bfren/alpine-s6:alpine3.15-${{ steps.version.outputs.contents }}-beta
