@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 IMAGE="${1}"
 PLATFORMS="${2}"

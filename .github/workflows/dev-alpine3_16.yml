@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  TEST_IMAGE: bfren/alpine-s6:test
+  TEST_IMAGE: localhost:5000/bfren/alpine-s6:test
   PLATFORMS: linux/amd64,linux/arm/v7,linux/arm64
 
 jobs:
@@ -30,6 +30,11 @@ jobs:
           RUN=./tests/run-git.sh && chmod +x ${RUN} && ${RUN}
   build-alpine3_16:
     runs-on: ubuntu-latest
+    services:
+      registry:
+        image: registry:2
+        ports:
+          - 5000:5000
     steps:
       -
         name: Checkout code
@@ -65,6 +70,7 @@ jobs:
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
+          push: true
           platforms: ${{ env.PLATFORMS }}
           tags: |
             ${{ env.TEST_IMAGE }}
