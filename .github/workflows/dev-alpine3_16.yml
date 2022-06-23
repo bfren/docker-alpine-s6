@@ -60,7 +60,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          load: true
           file: ./3.16/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
