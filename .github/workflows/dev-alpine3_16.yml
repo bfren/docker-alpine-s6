@@ -6,10 +6,6 @@ on:
     tags-ignore: ['**']
   workflow_dispatch:
 
-env:
-  TEST_IMAGE: localhost:5000/bfren/alpine-s6:test
-  PLATFORMS: linux/amd64,linux/arm/v7,linux/arm64
-
 jobs:
   test-alpine3_16:
     runs-on: ubuntu-latest
@@ -30,11 +26,6 @@ jobs:
           RUN=./tests/run-git.sh && chmod +x ${RUN} && ${RUN}
   build-alpine3_16:
     runs-on: ubuntu-latest
-    services:
-      registry:
-        image: registry:2
-        ports:
-          - 5000:5000
     steps:
       -
         name: Checkout code
@@ -61,25 +52,6 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          driver-opts: network=host
-      -
-        name: Build and export for testing
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./3.16/Dockerfile
-          build-args: |
-            BF_IMAGE=${{ env.REPOSITORY_NAME }}
-            BF_VERSION=${{ steps.version.outputs.contents }}
-          push: true
-          platforms: ${{ env.PLATFORMS }}
-          tags: |
-            ${{ env.TEST_IMAGE }}
-      -
-        name: Verify image
-        run: |
-          V=./verify.sh && chmod +x ${V} && ${V} ${{ env.TEST_IMAGE }} ${{ env.PLATFORMS }}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
@@ -104,13 +76,11 @@ jobs:
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
-          platforms: ${{ env.PLATFORMS }}
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/alpine-s6:dev
             bfren/alpine-s6:alpine3.16-dev
             bfren/alpine-s6:alpine3.16-${{ steps.version_minor.outputs.contents }}-beta
             bfren/alpine-s6:alpine3.16-${{ steps.version.outputs.contents }}-beta
-            ghcr.io/bfren/alpine-s6:dev
             ghcr.io/bfren/alpine-s6:alpine3.16-dev
             ghcr.io/bfren/alpine-s6:alpine3.16-${{ steps.version_minor.outputs.contents }}-beta
             ghcr.io/bfren/alpine-s6:alpine3.16-${{ steps.version.outputs.contents }}-beta
