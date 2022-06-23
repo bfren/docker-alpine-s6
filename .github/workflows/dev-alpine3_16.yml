@@ -87,9 +87,9 @@ jobs:
             ghcr.io/bfren/alpine-s6:alpine3.16-${{ steps.version_minor.outputs.contents }}-beta
             ghcr.io/bfren/alpine-s6:alpine3.16-${{ steps.version.outputs.contents }}-beta
       -
-        name: Test image
-        run: |
-          TEST=./test.sh && chmod +x ${TEST} && ${TEST} "alpine3.16-dev"
-      -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+      -
+        name: Verify image
+        run: |
+          V=./verify.sh && chmod +x ${V} && ${V} alpine3.16-dev
