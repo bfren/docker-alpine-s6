@@ -5,7 +5,7 @@ ARG BUILDPLATFORM
 
 RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
 
-FROM bfren/alpine:alpine3.8.5-1.6.6
+FROM bfren/alpine:alpine3.8.5-1.6.7
 COPY --from=build /log /log
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
