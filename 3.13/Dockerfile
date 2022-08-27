@@ -1,11 +1,11 @@
-FROM --platform=$BUILDPLATFORM golang:alpine AS build
+FROM --platform=${BUILDPLATFORM} golang:alpine AS build
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-RUN echo "Build: $BUILDPLATFORM, target: $TARGETPLATFORM" > /log
+RUN echo "Build: ${BUILDPLATFORM}, target: ${TARGETPLATFORM}" > /log
 
-FROM bfren/alpine:alpine3.13.12-1.6.7
+FROM bfren/alpine:alpine3.13.12-1.6.8
 COPY --from=build /log /log
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
