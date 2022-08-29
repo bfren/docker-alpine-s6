@@ -3,14 +3,31 @@ FROM --platform=${BUILDPLATFORM} golang:alpine AS build
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
-RUN echo "Build: ${BUILDPLATFORM}, target: ${TARGETPLATFORM}" > /log
+WORKDIR /s6
 
-FROM bfren/alpine:alpine3.8.5-1.6.8
+RUN case "${TARGETPLATFORM}" in \
+        linux/amd64) ARCH="x86_64" ;; \
+        linux/arm/v7) ARCH="armhf" ;; \
+        linux/arm64) ARCH="aarch64" ;; \
+        *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1 ;; \
+    esac && \
+    echo "${ARCH}" > arch && \
+    echo "Build: ${BUILDPLATFORM}" > /log && \
+    echo "Target: ${TARGETPLATFORM}" >> /log && \
+    echo "Arch: ${ARCH}" >> /log && \
+    echo "S6 Overlay: 3.1.1.2" >> /log && \
+    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.1.1.2/s6-overlay && \
+    apk add --no-cache curl && \
+    curl -sSL -O ${URL}-${ARCH}.tar.xz && \
+    curl -sSL -O ${URL}-${ARCH}.tar.xz.sha256 && \
+    curl -sSL -O ${URL}-noarch.tar.xz && \
+    curl -sSL -O ${URL}-noarch.tar.xz.sha256
+
+FROM bfren/alpine:alpine3.8.5-1.6.9
 COPY --from=build /log /log
+COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
-
-ARG TARGETPLATFORM
 
 ARG BF_IMAGE
 ARG BF_VERSION
