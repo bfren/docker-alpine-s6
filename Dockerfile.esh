@@ -9,7 +9,7 @@ RUN case "${TARGETPLATFORM}" in \
         linux/amd64) ARCH="x86_64" ;; \
         linux/arm/v7) ARCH="armhf" ;; \
         linux/arm64) ARCH="aarch64" ;; \
-        *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1ls / ;; \
+        *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1 ;; \
     esac && \
     echo "${ARCH}" > arch && \
     echo "Build: ${BUILDPLATFORM}" > /log && \
@@ -17,7 +17,7 @@ RUN case "${TARGETPLATFORM}" in \
     echo "Arch: ${ARCH}" >> /log && \
     echo "S6 Overlay: <%= ${S6_VERSION} %>" >> /log && \
     URL=https://github.com/just-containers/s6-overlay/releases/download/v<%= ${S6_VERSION} %>/s6-overlay && \
-    apk add curl && \
+    apk add --no-cache curl && \
     curl -sSL -O ${URL}-${ARCH}.tar.xz && \
     curl -sSL -O ${URL}-${ARCH}.tar.xz.sha256 && \
     curl -sSL -O ${URL}-noarch.tar.xz && \
