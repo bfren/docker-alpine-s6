@@ -8,7 +8,7 @@ BASE_REVISION="1.6.13"
 S6_VERSION="3.1.2.1"
 echo "Base: ${BASE_REVISION}"
 
-ALPINE_VERSIONS="3.8 3.9 3.10 3.11 3.12 3.13 3.14 3.15 3.16 edge"
+ALPINE_VERSIONS="3.8 3.9 3.10 3.11 3.12 3.13 3.14 3.15 3.16 3.17 edge"
 for V in ${ALPINE_VERSIONS} ; do
 
     echo "Alpine ${V}"
