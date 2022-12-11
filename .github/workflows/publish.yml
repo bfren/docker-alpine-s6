@@ -89,7 +89,7 @@ jobs:
             ghcr.io/bfren/alpine-s6:alpine${{ steps.alpine_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
       -
         name: Build and push default tags
-        id: docker_build
+        id: docker_build_default
         if: matrix.alpine == '3.17'
         uses: docker/build-push-action@v3
         with:
