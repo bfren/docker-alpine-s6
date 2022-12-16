@@ -44,7 +44,7 @@ bf-done
 # Install zabbix agent for Alpine versions >= 3.11.
 #======================================================================================================================
 
-if [ bf-version-at-least "${ALPINE}" "3.11" ] ; then
+if bf-version-at-least "${ALPINE}" "3.11" ; then
 
     bf-echo "Installing Zabbix agent..."
     apk add --no-cache \
