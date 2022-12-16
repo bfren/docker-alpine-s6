@@ -37,7 +37,7 @@ bf-done
 #======================================================================================================================
 
 bf-echo "Installing Zabbix agent..."
-apk --no-cache \
+apk add --no-cache \
     zabbix-agent2
 bf-done
 
