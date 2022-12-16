@@ -38,9 +38,18 @@ bf-done
 
 if [ ${ALPINE_MINOR} -gt 3.11 ] ; then
 
-    bf-echo "Installing Zabbix agent2..."
+    bf-echo "Installing Zabbix agent..."
     apk add --no-cache \
         zabbix-agent2
+    bf-done
+
+else
+
+    bf-echo "Removing Zabbix agent service definition..."
+    bf-rmrf /etc/bf/init.d/04-zabbix
+    bf-rmrf /etc/bf/templates/zabbix_agent2.conf.esh
+    bf-rmrf /etc/s6-overlay/s6-rc.d/zabbix-agent
+    bf-rmrf /etc/s6-overlay/s6-rc.d/user/contents.d/zabbix-agent
     bf-done
 
 fi
