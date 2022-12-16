@@ -23,7 +23,7 @@ RUN case "${TARGETPLATFORM}" in \
     curl -sSL -O ${URL}-noarch.tar.xz && \
     curl -sSL -O ${URL}-noarch.tar.xz.sha256
 
-FROM bfren/alpine:alpine3.13.12-1.7.2
+FROM bfren/alpine:alpine3.13.12-1.7.3
 COPY --from=build /log /log
 COPY --from=build /s6 /s6
 
@@ -31,6 +31,8 @@ LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6
 
 ARG BF_IMAGE
 ARG BF_VERSION
+
+EXPOSE 10050
 
 ENV \
     # add S6 executables to PATH
