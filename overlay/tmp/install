@@ -36,9 +36,12 @@ bf-done
 # Install zabbix agent.
 #======================================================================================================================
 
-bf-echo "Installing Zabbix agent..."
+cd /tmp
+ZABBIX_VERSION=$(cat ZABBIX_BUILD)
+bf-echo "Installing Zabbix agent2 v${ZABBIX_VERSION}..."
 apk add --no-cache \
-    zabbix-agent2@edgecomm
+    libcrypto3@edgemain \
+    zabbix-agent2@edgecomm=${ZABBIX_VERSION}
 bf-done
 
 
