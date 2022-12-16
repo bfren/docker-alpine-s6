@@ -9,5 +9,4 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 #======================================================================================================================
 
 bf-echo "Starting Zabbix agent."
-zabbix_agent2 \
-    --foreground
+zabbix_agent2
