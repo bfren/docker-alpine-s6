@@ -1,0 +1,14 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Generate configuration files.
+#======================================================================================================================
+
+bf-echo "Generating Zabbix configuration file..."
+
+bf-debug " .. ${BF_ZABBIX_CONF_FILE}"
+bf-esh ${BF_TEMPLATES}/zabbix_agent2.conf.esh ${BF_ZABBIX_CONF_FILE}

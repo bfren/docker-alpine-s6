@@ -32,6 +32,8 @@ LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6
 ARG BF_IMAGE
 ARG BF_VERSION
 
+EXPOSE 10050
+
 ENV \
     # add S6 executables to PATH
     PATH=/command:${PATH}
