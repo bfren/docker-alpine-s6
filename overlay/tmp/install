@@ -36,6 +36,7 @@ bf-done
 # Install zabbix agent for Alpine versions >= 3.11.
 #======================================================================================================================
 
+ALPINE_MINOR=$(cat /etc/os-release | grep "VERSION_ID" | sed -n 's/^VERSION_ID=//p')
 if [ "${ALPINE_MINOR}" -ge "3.11" ] ; then
 
     bf-echo "Installing Zabbix agent..."
