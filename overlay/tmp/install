@@ -33,16 +33,17 @@ bf-done
 
 
 #======================================================================================================================
-# Install zabbix agent.
+# Install zabbix agent for Alpine versions >= 3.11.
 #======================================================================================================================
 
-cd /tmp
-ZABBIX_VERSION=$(cat ZABBIX_BUILD)
-bf-echo "Installing Zabbix agent2 v${ZABBIX_VERSION}..."
-apk add --no-cache \
-    libcrypto3@edgemain \
-    zabbix-agent2@edgecomm=${ZABBIX_VERSION}
-bf-done
+if [ ${ALPINE_MINOR} -gt 3.11 ] ; then
+
+    bf-echo "Installing Zabbix agent2..."
+    apk add --no-cache \
+        zabbix-agent2
+    bf-done
+
+fi
 
 
 #======================================================================================================================
