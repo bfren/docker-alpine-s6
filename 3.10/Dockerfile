@@ -23,10 +23,11 @@ RUN case "${TARGETPLATFORM}" in \
     curl -sSL -O ${URL}-noarch.tar.xz && \
     curl -sSL -O ${URL}-noarch.tar.xz.sha256
 
-FROM bfren/alpine:alpine3.10.9-1.7.7
+FROM bfren/alpine:alpine3.10.9-1.7.8
 COPY --from=build /log /log
 COPY --from=build /s6 /s6
 
+LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
 
 ARG BF_IMAGE
