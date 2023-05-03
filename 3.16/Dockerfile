@@ -15,18 +15,19 @@ RUN case "${TARGETPLATFORM}" in \
     echo "Build: ${BUILDPLATFORM}" > /log && \
     echo "Target: ${TARGETPLATFORM}" >> /log && \
     echo "Arch: ${ARCH}" >> /log && \
-    echo "S6 Overlay: 3.1.2.1" >> /log && \
-    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay && \
+    echo "S6 Overlay: 3.1.4.2" >> /log && \
+    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.1.4.2/s6-overlay && \
     apk add --no-cache curl && \
     curl -sSL -O ${URL}-${ARCH}.tar.xz && \
     curl -sSL -O ${URL}-${ARCH}.tar.xz.sha256 && \
     curl -sSL -O ${URL}-noarch.tar.xz && \
     curl -sSL -O ${URL}-noarch.tar.xz.sha256
 
-FROM bfren/alpine:alpine3.16.3-1.7.5
+FROM bfren/alpine:alpine3.16.5-1.7.13
 COPY --from=build /log /log
 COPY --from=build /s6 /s6
 
+LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
 
 ARG BF_IMAGE
