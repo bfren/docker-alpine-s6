@@ -23,7 +23,7 @@ RUN case "${TARGETPLATFORM}" in \
     curl -sSL -O ${URL}-noarch.tar.xz && \
     curl -sSL -O ${URL}-noarch.tar.xz.sha256
 
-FROM bfren/alpine:alpine3.9.6-1.8.1
+FROM bfren/alpine:alpine3.9.6-1.8.2
 COPY --from=build /log /log
 COPY --from=build /s6 /s6
 
