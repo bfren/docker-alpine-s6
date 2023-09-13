@@ -17,6 +17,6 @@ SVC=${1}
 #======================================================================================================================
 
 bf-debug "Stopping ${SVC}." "bf-svc-down"
-s6-rc down "${SVC}" \
-    && bf-echo "Service ${SVC} has been stopped." "bf-svc-down"
+s6-rc -v 3 down "${SVC}" \
+    && bf-echo "Service ${SVC} has been stopped." "bf-svc-down" \
     || bf-error "s6-rc exited $? while disabling service ${SVC}." "bf-svc-down"
