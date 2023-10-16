@@ -19,6 +19,6 @@ def execute [
     try {
         x $filename
     } catch {
-        bf write error $"Error running ($filename)."
+        bf write error $"Error running ($filename)." init/execute
     }
 }
