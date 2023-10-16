@@ -15,7 +15,7 @@ export def terminate [] {
     # terminate all running services (will stop / restart the container depending on restart policy).
     # if cron is up, we need to halt the container
     # if cron is down, the container is already being terminated
-    let stat = s6-svstat -u $"($env.BF_S6_SERVICES)/cron"
+    let stat = s6-svstat -u $"($env.S6_SERVICES)/cron"
     if $stat != null {
         bf write notok "Terminating container, goodbye." cont/terminate
         halt
