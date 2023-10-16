@@ -7,13 +7,15 @@ export def-env main [
 ] {
     # add BF_ prefix
     let use_key = $"BF_($key)"
-    bf write debug $"($use_key)=($value)." env/set
 
     # save to current script's environment
     load-env { $use_key: $value }
 
     # persist to S6 environment (load scripts using /command/with-contenv or s6 x module)
     $value | save --force $"/run/s6/container_environment/($use_key)"
+
+    # output for debugging purposes
+    bf write debug $"($use_key)=($value)." env/set
 }
 
 # Sets the BF_E environment variable to the name of the currently executing script
