@@ -5,7 +5,4 @@ use s6
 s6 env set_executable cron
 
 # Show helpful log message
-def main [...args] {
-    s6 svc finish --terminate
-    bf clean
-}
+def main [...args] { s6 svc finish --terminate }

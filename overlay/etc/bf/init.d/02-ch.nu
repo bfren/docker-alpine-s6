@@ -11,7 +11,7 @@ def main [] {
     }
 
     # apply changes from each file
-    ls -f $env.BF_CH_D | sort -n | each {|x| bf ch apply_file $x.name }
+    ls --full-paths $env.BF_CH_D | sort --natural | each {|x| bf ch apply_file $x.name }
 
     # return nothing
     return
