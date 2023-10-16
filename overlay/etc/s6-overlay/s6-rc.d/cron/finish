@@ -1,12 +1,11 @@
-#!/command/with-contenv sh
+#!/command/with-contenv nu
 
-set -euo pipefail
-export BF_E="${PWD##*/}/$(basename ${0})"
+use bf
+use s6
+s6 env set_executable cron
 
-
-#======================================================================================================================
-# Show helpful log message.
-#======================================================================================================================
-
-bf-svc-finish -t
-bf-clear
+# Show helpful log message
+def main [...args] {
+    s6 svc finish --terminate
+    bf clean
+}

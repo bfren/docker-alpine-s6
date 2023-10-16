@@ -1,41 +1,40 @@
-#!/bin/sh
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E=`basename ${0}`
+use bf
 
+# Extract and install S6 overlay
+def main [] {
+    # extract and install files
+    bf write "Installing S6 Overlay..."
+    cd /s6
+    extract
+    extract (bf fs read ./arch)
 
-#======================================================================================================================
-# Install S6 Overlay.
-#======================================================================================================================
-
-install () {
-
-    # get file
-    FILE=s6-overlay-${1}.tar.xz
-
-    # check integrity
-    sha256sum -cs ${FILE}.sha256 \
-        || bf-error " .. S6 Overlay download does not match checksum."
-
-    # extract
-    bf-echo " .. extracting ${FILE}..."
-    tar -C / -Jxpf ${FILE} \
-        || bf-error " .. unable to extract ${FILE}."
-
+    # cleanup
+    bf write "Removing installation files..."
+    cd /
+    bf del force /s6
 }
 
-bf-echo "Installing S6 Overlay..."
-cd /s6
-ARCH=`cat arch`
-install "noarch"
-install ${ARCH}
-bf-done
+# Shared code to extract arch and noarch files in the same way
+def extract [
+    arch?: string = "noarch"    # Architecture to extract
+] {
+    # build file path
+    let path = $"s6-overlay-($arch).tar.xz" | path expand
 
+    # check integrity
+    try {
+        sha256sum -cs $"($path).sha256"
+    } catch {
+        bf write error " .. S6 Overlay download does not match checksum."
+    }
 
-#======================================================================================================================
-# Cleanup.
-#======================================================================================================================
-
-bf-echo "Removing installation files..."
-rm -rf /s6
-bf-done
+    # extract
+    bf write $" .. extracting ($path)..."
+    try {
+        tar -C / -Jxpf $path
+    } catch {
+        bf write error $" .. unable to extract ($path)."
+    }
+}
