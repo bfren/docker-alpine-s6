@@ -24,7 +24,6 @@ RUN case "${TARGETPLATFORM}" in \
     curl -sSL -O ${URL}-noarch.tar.xz.sha256
 
 FROM bfren/alpine:alpine<%= ${ALPINE_MINOR} %>-<%= ${BASE_REVISION} %>
-COPY --from=build /log /log
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
