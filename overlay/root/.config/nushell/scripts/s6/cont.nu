@@ -16,7 +16,7 @@ export def terminate [] {
     env TERMINATING 1
 
     # if cron is down, the container is already being terminated
-    let stat = s6-svstat -u $"($env.S6_SERVICES)/cron"
+    let stat = s6-svstat -u $"(bf env req S6_SERVICES)/cron"
     if $stat == null {
         do $already_terminating
         return
