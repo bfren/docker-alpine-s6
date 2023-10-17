@@ -3,9 +3,7 @@
 use s6
 
 # Terminate the container
-def main [
-    --executable (-e): string   # Set to override BF_E before calling termination script
-] {
-    if $executable != null { s6 env BF_E $executable }
+def main [...args] {
+    if ($args | length) == 1 { s6 env BF_E $args.0 }
     s6 cont terminate
 }

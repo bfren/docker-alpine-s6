@@ -11,4 +11,4 @@ docker buildx build \
     -t alpine${ALPINE}-s6-dev \
     . \
     && \
-    docker run -it -e BF_DEBUG=1 alpine${ALPINE}-s6-dev nu
+    docker run -it -e BF_DEBUG=1 alpine${ALPINE}-s6-dev nu-env

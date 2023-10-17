@@ -1,7 +1,7 @@
 foreground
 {
-    ifelse -n { /command/with-contenv bf-init }
+    ifelse -n { bf-init }
     {
-        if { bf-cont-terminate --executable "init/up" }
+        if { bf-cont-terminate init/up }
     }
 }
