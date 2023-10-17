@@ -4,6 +4,9 @@ use bf
 
 # Extract and install S6 overlay
 def main [] {
+    # delete default /init - will be replaced by S6
+    bf del force /init
+
     # extract and install files
     bf write "Installing S6 Overlay..."
     cd /s6
