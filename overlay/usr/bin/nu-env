@@ -1,0 +1,5 @@
+#!/command/with-contenv nu
+
+def main [...args] {
+   with-env [ (s6-env | lines | parse "{key}={value}" | transpose -i -r -d | merge $env) ] { nu $args }
+}

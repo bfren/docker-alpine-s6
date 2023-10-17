@@ -1,4 +1,4 @@
-#!/command/with-contenv nu
+#!/usr/bin/nu-env
 
 use bf
 use s6
