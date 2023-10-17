@@ -1,6 +1,7 @@
 #!/usr/bin/nu-env
 
 use s6
+s6 env set_executable
 
 # Terminate the container
 def main [...args] {
