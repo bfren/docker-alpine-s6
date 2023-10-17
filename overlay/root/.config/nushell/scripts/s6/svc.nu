@@ -1,3 +1,4 @@
+use bf
 use cont.nu
 
 # Write a nice finish message when a service is stopped, optionally also terminating the container
