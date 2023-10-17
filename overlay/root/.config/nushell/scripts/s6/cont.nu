@@ -7,13 +7,13 @@ export def terminate [] {
     let already_terminating = {|| bf write debug "Container already being terminated." cont/terminate }
 
     # check if it has already been called (multiple services may try to bring it down).
-    if (bf env check BF_TERMINATING) {
+    if (bf env check TERMINATING) {
         do $already_terminating
         return
     }
 
     # mark the container as terminating
-    env BF_TERMINATING 1
+    env TERMINATING 1
 
     # if cron is down, the container is already being terminated
     let stat = s6-svstat -u $"($env.S6_SERVICES)/cron"
