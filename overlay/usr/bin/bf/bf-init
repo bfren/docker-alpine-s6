@@ -2,7 +2,7 @@
 
 use bf
 use bf-s6
-bf env load -e
+bf env set_executable
 
 # Run S6 initialisation
 def main [] { bf-s6 init }
