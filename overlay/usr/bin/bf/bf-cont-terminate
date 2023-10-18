@@ -5,7 +5,9 @@ use bf-s6
 bf env load -e
 
 # Terminate the container
-def main [...args] {
-    if ($args | length) == 1 { bf env set_executable $args.0 }
+def main [
+    executable?: string # Override BF_E with this
+] {
+    if $executable != null { bf env set_executable $executable }
     bf-s6 cont terminate
 }
