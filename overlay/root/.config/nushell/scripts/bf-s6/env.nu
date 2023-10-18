@@ -8,7 +8,7 @@ export def-env main [
     # add the BF_ prefix
     let prefixed = $"BF_($key)"
 
-    # save to current script's environment
+    # save to environment
     load-env {$prefixed: $value}
 
     # persist to S6 environment (load scripts using /command/with-contenv or s6 x module)
