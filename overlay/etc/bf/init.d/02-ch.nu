@@ -5,7 +5,7 @@ bf env load -e
 def main [] {
     # if init ch is not enabled, return
     if not (bf env check ENABLE_INIT_CH) {
-        write "Applying ch.d during init is disabled."
+        bf write "Applying ch.d during init is disabled."
         return
     }
 
