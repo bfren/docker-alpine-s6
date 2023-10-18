@@ -1,7 +1,7 @@
 #!/usr/bin/nu-env
 
-use s6
-s6 env set_executable
+use bf-s6
+bf-s6 env set_executable
 
 # Run S6 initialisation
-def main [] { s6 init }
+def main [] { bf-s6 init }

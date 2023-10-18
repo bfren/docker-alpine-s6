@@ -1,10 +1,10 @@
 #!/usr/bin/nu-env
 
-use s6
-s6 env set_executable
+use bf-s6
+bf-s6 env set_executable
 
 # Terminate the container
 def main [...args] {
-    if ($args | length) == 1 { s6 env E $args.0 }
-    s6 cont terminate
+    if ($args | length) == 1 { bf-s6 env E $args.0 }
+    bf-s6 cont terminate
 }

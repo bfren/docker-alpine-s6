@@ -1,8 +1,8 @@
 #!/usr/bin/nu-env
 
 use bf
-use s6
-s6 env set_executable cron
+use bf-s6
+bf-s6 env set_executable cron
 
 # Start cron daemon
 def main [...args] {

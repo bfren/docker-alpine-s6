@@ -1,6 +1,6 @@
 use bf
-use s6
-s6 env set_executable
+use bf-s6
+bf-s6 env set_executable
 
 # Apply changes defined in ch.d directory
 def main [] {
