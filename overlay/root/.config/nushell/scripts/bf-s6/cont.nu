@@ -5,7 +5,7 @@ use svc.nu
 const terminating = /tmp/terminating
 
 # Terminate the container
-export def-env terminate [] {
+export def terminate [] {
     # output a message to say the container is already terminating
     let already_terminating = {|| bf write debug "Container already being terminated." cont/terminate }
 
@@ -30,7 +30,7 @@ export def-env terminate [] {
     # kill the init process
     let init_pid = pidof rc.init
     if $init_pid != "" {
-        kill --force ($init_pid | into int)
+        do { kill --force ($init_pid | into int) } | ignore
     }
 
     # bring the container down
