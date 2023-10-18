@@ -18,6 +18,7 @@ def main [] {
     bf env SRC $"($etc)/src"
 
     # set cron info
+    bf env CRON_D "/etc/periodic"
     bf env CRON_LOG_FILE "/var/log/cron.log"
 
     # return nothing

@@ -5,9 +5,12 @@ bf env load -e
 
 # Run cron parts for a specified directory
 def main [
-    path: string        # The cron directory to run
+    directory: string   # The cron directory to run
     --quiet (-q)        # Make 'running cron' message debug only
 ] {
+    # build path to requested cron directory
+    let path = $"(bf env req CRON_D)/($directory)"
+
     # ensure cron directory exists
     if not ($path | path exists) {
         bf write error $"Cron directory does not exist: ($path)."
