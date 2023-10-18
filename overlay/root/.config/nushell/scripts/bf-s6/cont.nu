@@ -1,5 +1,6 @@
 use bf
 use env.nu
+use svc.nu
 
 # The presence of this file indicates that another service is already bringing the dontainer down
 const terminating = /tmp/terminating
@@ -19,8 +20,7 @@ export def-env terminate [] {
     date now | save --force $terminating
 
     # another check - if cron is down, the container is already being terminated
-    let stat = s6-svstat -u $"($env.S6_SERVICE_DIRS)/cron"
-    if $stat == null {
+    if not (svc is_up cron) {
         do $already_terminating
         return
     }
