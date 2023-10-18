@@ -1,6 +1,5 @@
 use bf
-use bf-s6
-bf env set_executable
+bf env load -e
 
 # Set environment variables
 def main [] {

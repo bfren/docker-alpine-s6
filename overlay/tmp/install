@@ -7,9 +7,6 @@ def main [] {
     # delete default /init - will be replaced by S6
     bf del force /init
 
-    # mark nu-env as executable
-    bf ch --mode 0555 /usr/bin/nu-env
-
     # extract and install files
     bf write "Installing S6 Overlay..."
     cd /s6
