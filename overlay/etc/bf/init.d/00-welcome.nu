@@ -1,5 +1,5 @@
 use bf
-bf env load -e
+bf env set_executable
 
 # Output image version
 def main [] { bf image }
