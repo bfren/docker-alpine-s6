@@ -1,5 +1,4 @@
 use bf
-use env.nu
 use svc.nu
 
 # The presence of this file indicates that another service is already bringing the dontainer down
