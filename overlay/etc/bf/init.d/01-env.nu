@@ -3,8 +3,8 @@ bf env set_executable
 
 # Set environment variables
 def main [] {
-    # load system environment
-    bf env load
+    # store system environment
+    bf env store
 
     # set image info
     bf env IMAGE $"(bf fs read /BF_IMAGE)"

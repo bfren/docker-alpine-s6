@@ -1,8 +1,3 @@
-#!/usr/bin/nu
+#!/command/with-contenv sh
 
-use bf
-use bf-s6
-bf env set_executable
-
-# Run S6 initialisation
-def main [] { bf-s6 init }
+nu -c "use bf-s6 init; init"
