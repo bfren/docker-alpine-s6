@@ -2,5 +2,3 @@
 /etc/bf/init.d root:root 0500
 /etc/bf/src root:root 1777 1777
 /etc/bf/templates root:root 0444 0555
-/etc/periodic root:root 0500
-/tmp root:root 1777 1777
