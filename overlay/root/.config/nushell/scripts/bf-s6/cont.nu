@@ -27,12 +27,6 @@ export def terminate [] {
     # if we end up here, we need to halt the container
     bf write notok "Terminating container, goodbye." cont/terminate
 
-    # kill the init process
-    let init_pid = pidof rc.init
-    if $init_pid != "" {
-        do { kill --force ($init_pid | into int) } | ignore
-    }
-
     # bring the container down
     halt
 }
