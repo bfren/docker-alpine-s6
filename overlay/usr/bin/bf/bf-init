@@ -3,4 +3,5 @@
 use s6
 s6 env set_executable
 
+# Run S6 initialisation
 def main [] { s6 init }
