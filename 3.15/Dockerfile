@@ -43,7 +43,9 @@ ENV \
     #   2: stop the container
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     # disable S6 Overlay service timeout - handle by timeout-up instead
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    # location of S6 service directories
+    S6_SERVICE_DIRS=/run/s6-rc/servicedirs
 
 ENV \
     # add S6 executables to PATH

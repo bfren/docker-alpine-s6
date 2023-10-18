@@ -15,8 +15,6 @@ def main [] {
 
     s6 env CRON_LOG_FILE "/var/log/cron.log"
 
-    s6 env S6_SERVICES "/run/s6-rc/servicedirs"
-
     # return nothing
     return
 }
