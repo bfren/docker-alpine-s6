@@ -10,7 +10,7 @@ export def forward [
         let wait = 5sec
         bf write debug $"($path) not found, sleeping for ($wait)s." log/forward
         sleep $wait
-        return
+        exit 0
     }
 
     # tail the specified file
