@@ -1,5 +1,6 @@
 #!/command/with-contenv nu
 
+# Merge container and nu environments and then execute shell
 def main [...args] {
     with-env [ (s6-env | lines | parse "{key}={value}" | transpose -i -r -d | merge $env) ] { nu $args }
 }
