@@ -10,6 +10,14 @@ export def main [] {
     # Execute each initialisation script
     bf write "Initialising container." init
     if ($init_d | path exists) { ls --full-paths $init_d | get name | sort | each {|x| execute $x } }
+    bf env x_clear
+
+    # Show all environment variables that have been configured during initialisation
+    bf write "bfren platform environment variables." init
+    bf env load
+    bf env show
+
+    # Complete
     bf write ok "Initialisation complete." init
 }
 

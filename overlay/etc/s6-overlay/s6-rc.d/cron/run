@@ -1,7 +1,7 @@
 #!/usr/bin/nu
 
 use bf
-bf env load -e cron
+bf env load -x cron
 
 # Start cron daemon
 def main [...args] {

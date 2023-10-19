@@ -2,12 +2,12 @@
 
 use bf
 use bf-s6
-bf env load -e
+bf env load -x
 
 # Terminate the container
 def main [
-    executable?: string # Override BF_E with this
+    executable?: string # Override BF_X with this
 ] {
-    if $executable != null { bf env set_executable $executable }
+    if $executable != null { bf env x_set $executable }
     bf-s6 cont terminate
 }

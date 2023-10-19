@@ -1,5 +1,5 @@
 use bf
-bf env set_executable
+bf env x_set
 
 # Set environment variables
 def main [] {

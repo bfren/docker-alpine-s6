@@ -1,5 +1,5 @@
 use bf
-bf env load -e
+bf env load -x
 
 # Apply changes defined in ch.d directory
 def main [] {
