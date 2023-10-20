@@ -15,5 +15,5 @@ export def forward [
 
     # tail the specified file
     bf write $"Forwarding ($name) - ($path)." log/forward
-    exec tail -F $path
+    ^exec tail -F $path
 }

@@ -28,5 +28,5 @@ export def terminate [] {
     bf write notok "Terminating container, goodbye." cont/terminate
 
     # bring the container down
-    halt
+    ^halt
 }

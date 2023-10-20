@@ -10,8 +10,8 @@ def main [] {
     # extract and install files
     bf write "Installing S6 Overlay..."
     cd /s6
-    extract
-    extract (bf fs read ./arch)
+    extract noarch
+    extract (bf fs read arch)
 
     # cleanup
     bf write "Removing installation files..."
@@ -21,23 +21,17 @@ def main [] {
 
 # Shared code to extract arch and noarch files in the same way
 def extract [
-    arch?: string = "noarch"    # Architecture to extract
+    arch: string    # Architecture to extract
 ] {
     # build file path
     let path = $"s6-overlay-($arch).tar.xz" | path expand
 
     # check integrity
-    try {
-        sha256sum -cs $"($path).sha256"
-    } catch {
-        bf write error " .. S6 Overlay download does not match checksum."
-    }
+    let checksum = do { ^sha256sum -cs $"($path).sha256" } | complete
+    if $checksum.exit_code > 0 { bf write error " .. S6 Overlay download does not match checksum." }
 
     # extract
     bf write $" .. extracting ($path)..."
-    try {
-        tar -C / -Jxpf $path
-    } catch {
-        bf write error $" .. unable to extract ($path)."
-    }
+    let extract = do { ^tar -C / -Jxpf $path } | complete
+    if $extract.exit_code > 0 { bf write error $" .. unable to extract ($path)." }
 }

@@ -9,7 +9,7 @@ export def finish [
 
     # terminate the container if the terminate flag is set -
     # use executable to avoid cyclical module import
-    if $terminate { bf-cont-terminate }
+    if $terminate { ^bf-cont-terminate }
 }
 
 # Bring a service down
@@ -17,7 +17,7 @@ export def down [
     name: string    # The service name
 ] {
     bf write debug $"Stopping ($name)." svc/down
-    let result = do { s6-rc -v 2 -d change $name } | complete
+    let result = do { ^s6-rc -v 2 -d change $name } | complete
     if $result.exit_code == 111 {
         bf write debug $"svc down has probably been called too early for ($name) - try again." svc/down
     } else if $result.exit_code > 0 {
@@ -32,15 +32,11 @@ export def is_up [
 ] {
     # make sure the S6_SERVICES_DIR is set
     let s6_svc_dir = ($env | get --ignore-errors S6_SERVICES_DIR)
-    if $s6_svc_dir == "" {
-        bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up
-    }
+    if $s6_svc_dir == "" { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up }
 
     # make sure S6_SERVICES_DIR exists
-    if not ($s6_svc_dir | path exists) {
-        bf write error "S6_SERVICES_DIR does not exist: ($s6_svc_dir)."
-    }
+    if not ($s6_svc_dir | path exists) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
 
     # use s6-svstat to check service $name is running
-    do { s6-svstat -u $"($s6_svc_dir)/($name)" } | complete | $in.exit_code == 0
+    do { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | complete | $in.exit_code == 0
 }

@@ -1,6 +1,5 @@
 use bf
 use cont.nu
-use x.nu
 
 # Initialise the container by executing all scripts contained in /etc/bf/init.d
 export def main [] {
@@ -27,7 +26,7 @@ def execute [
 ] {
     bf write $"($filename | path basename): Running." init/execute
     try {
-        x $filename
+        bf x $filename
     } catch {
         bf write error $"Error running ($filename)." init/execute
     }
