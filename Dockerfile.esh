@@ -12,7 +12,7 @@ RUN case "${TARGETPLATFORM}" in \
         linux/arm64) ARCH="aarch64" ;; \
         *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1 ;; \
     esac && \
-    echo "${ARCH}" > ARCH && \
+    printf "%s" "${ARCH}" > ARCH && \
     URL=https://github.com/just-containers/s6-overlay/releases/download/v<%= ${S6_VERSION} %>/s6-overlay && \
     wget ${URL}-${ARCH}.tar.xz && \
     wget ${URL}-${ARCH}.tar.xz.sha256 && \
