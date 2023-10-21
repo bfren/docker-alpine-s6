@@ -1,5 +1,5 @@
 use bf
-bf env x_set
+use bf-s6
 
 # Set environment variables
 def main [] {
@@ -7,19 +7,20 @@ def main [] {
     bf env store
 
     # set image info
-    bf env IMAGE $"(bf fs read /BF_IMAGE)"
-    bf env VERSION $"(bf fs read /BF_VERSION)"
+    let etc = bf env ETC
+    cd $etc
+    bf env set IMAGE $"(bf fs read IMAGE)"
+    bf env set VERSION $"(bf fs read VERSION)"
 
     # set bf directories
-    const etc = "/etc/bf"
-    bf env CH_D $"($etc)/ch.d"
-    bf env INIT_D $"($etc)/init.d"
-    bf env TEMPLATES $"($etc)/templates"
-    bf env SRC $"($etc)/src"
+    bf env set CH_D $"($etc)/ch.d"
+    bf env set INIT_D $"($etc)/init.d"
+    bf env set TEMPLATES $"($etc)/templates"
+    bf env set SRC $"($etc)/src"
 
     # set cron info
-    bf env CRON_D "/etc/periodic"
-    bf env CRON_LOG_FILE "/var/log/cron.log"
+    bf env set CRON_D "/etc/periodic"
+    bf env set CRON_LOG_FILE "/var/log/cron.log"
 
     # return nothing
     return

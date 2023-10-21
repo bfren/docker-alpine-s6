@@ -1,5 +1,5 @@
 use bf
-bf env load -x
+bf env load
 
 # Apply changes defined in ch.d directory
 def main [] {
@@ -10,7 +10,7 @@ def main [] {
     }
 
     # apply changes from each file
-    ls --full-paths (bf env req CH_D) | sort --natural | each {|x| bf ch apply_file $x.name }
+    ls --full-paths (bf env CH_D) | sort --natural | each {|x| bf ch apply_file $x.name }
 
     # return nothing
     return
