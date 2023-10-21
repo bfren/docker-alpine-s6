@@ -11,7 +11,7 @@ def main [] {
     bf write "Installing S6 Overlay..."
     cd /s6
     extract noarch
-    extract (bf fs read arch)
+    extract (bf fs read ARCH)
 
     # cleanup
     bf write "Removing installation files..."

@@ -4,26 +4,27 @@ set -euo pipefail
 
 docker pull bfren/alpine
 
-BASE_REVISION="2.0.0-beta"
+BASE_VERSION="2.0.0-dev"
 S6_VERSION="3.1.5.0"
-echo "Base: ${BASE_REVISION}"
+echo "Base: ${BASE_VERSION}"
 
-ALPINE_VERSIONS="3.15 3.16 3.17 3.18"
-for V in ${ALPINE_VERSIONS} ; do
+ALPINE_EDITIONS="3.15 3.16 3.17 3.18"
+for E in ${ALPINE_EDITIONS} ; do
 
-    echo "Alpine ${V}"
+    echo "Alpine ${E}"
+    ALPINE_VERSION=`cat ./${E}/ALPINE_REVISION`
 
     DOCKERFILE=$(docker run \
         -v ${PWD}:/ws \
         -e BF_DEBUG=0 \
         bfren/alpine esh \
         "/ws/Dockerfile.esh" \
-        BASE_REVISION=${BASE_REVISION} \
-        S6_VERSION=${S6_VERSION} \
-        ALPINE_MINOR=${V}
+        ALPINE_VERSION=${ALPINE_VERSION} \
+        BASE_VERSION=${BASE_VERSION} \
+        S6_VERSION=${S6_VERSION}
     )
 
-    echo "${DOCKERFILE}" > ./${V}/Dockerfile
+    echo "${DOCKERFILE}" > ./${E}/Dockerfile
 
 done
 
