@@ -11,8 +11,12 @@ export def main [] {
     if ($init_d | path exists) { ls --full-paths $init_d | get name | sort | each {|x| execute $x } }
     bf env x_clear
 
+    # Show build information
+    bf write "Build information." init
+    bf build show
+
     # Show all environment variables that have been configured during initialisation
-    bf write "bfren platform environment variables." init
+    bf write "bfren platform variables." init
     bf env load
     bf env show
 
