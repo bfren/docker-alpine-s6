@@ -6,7 +6,7 @@ export def main [
     --quiet (-q)        # Make 'running cron' message debug only
 ] {
     # build path to requested cron directory
-    let path = $"(bf env req CRON_D)/($directory)"
+    let path = $"(bf env CRON_D)/($directory)"
 
     # ensure cron directory exists
     if not ($path | path exists) { bf write error $"Cron directory does not exist: ($path)." }

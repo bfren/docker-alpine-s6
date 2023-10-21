@@ -10,5 +10,5 @@ def main [...args] {
     #   -l  log level (from 0 to 8 - 0 is the most verbose)
     #   -L  log to a file (instead of stdout)
     bf write "Starting cron."
-    ^crond -f -l (bf env req CRON_LOG_LEVEL) -L (bf env req CRON_LOG_FILE)
+    ^crond -f -l (bf env CRON_LOG_LEVEL) -L (bf env CRON_LOG_FILE)
 }
