@@ -3,9 +3,6 @@ use bf-s6
 
 # Set environment variables
 def main [] {
-    # store system environment
-    bf env store
-
     # set image info
     let etc = bf env ETC
     cd $etc

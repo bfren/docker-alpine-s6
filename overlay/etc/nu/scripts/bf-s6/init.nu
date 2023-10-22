@@ -3,6 +3,9 @@ use cont.nu
 
 # Initialise the container by executing all scripts contained in init.d
 export def main [] {
+    # store incoming environment variables
+    bf env store
+
     # Environment variables are not available yet so need to hard code the init.d directory
     let $init_d = $"(bf env ETC)/init.d"
 
