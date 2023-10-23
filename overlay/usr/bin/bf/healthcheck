@@ -3,4 +3,4 @@
 use bf
 
 # Override file in images to provide healthcheck functionality
-def main [] { bf write debug "Base healthcheck always returns healthy."; exit 0 }
+def main [] { bf write debug "Base healthcheck always returns healthy." ; exit 0 }
