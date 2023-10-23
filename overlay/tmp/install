@@ -13,6 +13,9 @@ def main [] {
     extract noarch
     extract (bf fs read ARCH)
 
+    # link bf-withenv for easier use in shell scripts
+    ln $"/usr/bin/bf/bf-withenv" /bin/withenv
+
     # cleanup
     bf write "Removing installation files..."
     cd /
