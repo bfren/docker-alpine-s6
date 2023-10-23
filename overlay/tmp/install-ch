@@ -1,4 +1,4 @@
-/etc/bf/ch.d root:root 0500
-/etc/bf/init.d root:root 0500
+/etc/bf/ch.d root:root 0400 0500
+/etc/bf/init.d root:root 0400 0500
 /etc/bf/src root:root 1777 1777
-/etc/bf/templates root:root 0444 0555
+/etc/bf/templates root:root 0400 0500
