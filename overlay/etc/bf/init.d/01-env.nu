@@ -10,10 +10,10 @@ def main [] {
     bf env set VERSION $"(bf fs read VERSION)"
 
     # set bf directories
-    bf env set CH_D $"($etc)/ch.d"
-    bf env set INIT_D $"($etc)/init.d"
-    bf env set TEMPLATES $"($etc)/templates"
-    bf env set SRC $"($etc)/src"
+    bf env set ETC_CH_D $"($etc)/ch.d"
+    bf env set ETC_INIT_D $"($etc)/init.d"
+    bf env set ETC_TEMPLATES $"($etc)/templates"
+    bf env set ETC_SRC $"($etc)/src"
 
     # set cron info
     bf env set CRON_D "/etc/periodic"

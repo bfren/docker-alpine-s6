@@ -10,7 +10,7 @@ def main [] {
     }
 
     # apply changes from each file
-    ls --full-paths (bf env CH_D) | sort --natural | each {|x| bf ch apply_file $x.name }
+    ls --full-paths (bf env ETC_CH_D) | sort --natural | each {|x| bf ch apply_file $x.name }
 
     # return nothing
     return
