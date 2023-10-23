@@ -1,14 +1,21 @@
-#!/usr/bin/nu
+#!/bin/withenv sh
 
-use bf
-bf env load -x cron
+set -euo pipefail
 
-# Start cron daemon
-def main [...args] {
-    # crond flags
-    #   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
-    #   -l  log level (from 0 to 8 - 0 is the most verbose)
-    #   -L  log to a file (instead of stdout)
-    bf write "Starting cron."
-    ^crond -f -l (bf env CRON_LOG_LEVEL) -L (bf env CRON_LOG_FILE)
-}
+
+#======================================================================================================================
+# Run preflight checks.
+#======================================================================================================================
+
+nu -c "use bf-s6 run ; run preflight"
+
+
+#======================================================================================================================
+# Start cron in foreground mode.
+# Flags:
+#   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
+#   -l  log level (from 0 to 8 - 0 is the most verbose)
+#   -L  log to a file (instead of stdout)
+#======================================================================================================================
+
+crond -f -l ${BF_CRON_LOG_LEVEL} -L ${BF_CRON_LOG_FILE}
