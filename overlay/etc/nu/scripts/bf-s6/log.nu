@@ -13,7 +13,7 @@ export def forward [
         exit 0
     }
 
-    # tail the specified file
+    # tail the specified file in a new process
     bf write $"Forwarding ($name) - ($path)." log/forward
-    ^exec tail -F $path
+    exec tail -F $path
 }
