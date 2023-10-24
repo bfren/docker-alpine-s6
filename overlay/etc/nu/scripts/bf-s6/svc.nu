@@ -16,13 +16,19 @@ export def finish [
 export def down [
     name: string    # The service name
 ] {
-    bf write debug $"Stopping ($name)." svc/down
+    bf write debug $"Stopping ($name) service." svc/down
     let result = do { ^s6-rc -v 2 -d change $name } | complete
-    if $result.exit_code == 111 {
-        bf write debug $"svc down has probably been called too early for ($name) - try again." svc/down
-    } else if $result.exit_code > 0 {
-        $result | print
-        bf write error --code $result.exit_code $"s6-rc failed to bring down service ($name)." svc/down
+    match $result.exit_code {
+        111 => {
+            bf write debug $"svc down has probably been called too early for ($name) - try again." svc/down
+        },
+        $code if $code > 0 => {
+            $result | print
+            bf write error --code $code $"s6-rc failed to bring down service ($name)." svc/down
+        }
+        _ => {
+            bf write $"($name) service stopped." svc/down
+        }
     }
 }
 
