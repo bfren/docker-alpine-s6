@@ -35,7 +35,7 @@ export def is_up [
     if $s6_svc_dir == "" { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up }
 
     # make sure S6_SERVICES_DIR exists
-    if not ($s6_svc_dir | path exists) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
+    if ($s6_svc_dir | bf fs is_not_dir) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
 
     # use s6-svstat to check service $name is running
     do { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | complete | $in.exit_code == 0

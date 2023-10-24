@@ -9,7 +9,7 @@ export def main [
     let path = $"(bf env CRON_D)/($directory)"
 
     # ensure cron directory exists
-    if not ($path | path exists) { bf write error $"Cron directory does not exist: ($path)." }
+    if ($path | bf fs is_not_dir) { bf write error $"Cron directory does not exist: ($path)." }
 
     # output running message
     if $quiet {

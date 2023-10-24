@@ -6,7 +6,7 @@ export def forward [
     path: string    # Absolute path to log file to forward to stdout
 ] {
     # if the file does not exist, wait and exit - S6 will bring the service back up to try again
-    if (bf fs is_not_file $path) {
+    if ($path | bf fs is_not_file) {
         let wait = 5sec
         bf write debug $"($path) not found, sleeping for ($wait)s." log/forward
         sleep $wait
