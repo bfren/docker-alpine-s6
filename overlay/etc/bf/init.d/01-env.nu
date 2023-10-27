@@ -1,5 +1,5 @@
 use bf
-use bf-s6
+bf env load
 
 # Set environment variables
 def main [] {
