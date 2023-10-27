@@ -30,11 +30,13 @@ def extract [
     let path = $"s6-overlay-($arch).tar.xz" | path expand
 
     # check integrity
-    let checksum = do { ^sha256sum -cs $"($path).sha256" } | complete
-    if $checksum.exit_code > 0 { bf write error " .. S6 Overlay download does not match checksum." }
+    { ^sha256sum -cs $"($path).sha256" } | bf handle -f {|code, err|
+        bf write error " .. S6 Overlay download does not match checksum."
+    }
 
     # extract
     bf write $" .. extracting ($path)..."
-    let extract = do { ^tar -C / -Jxpf $path } | complete
-    if $extract.exit_code > 0 { bf write error $" .. unable to extract ($path)." }
+    { ^tar -C / -Jxpf $path } | bf handle -f {|code, err|
+        bf write error $" .. unable to extract ($path)."
+    }
 }
