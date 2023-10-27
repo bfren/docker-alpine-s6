@@ -19,6 +19,5 @@ export def main [
     }
 
     # use run-parts to execute cron jobs
-    let result = do { ^run-parts --exit-on-error $path } | complete
-    if $result.exit_code > 0 { bf write error --code $result.exit_code ($result.stderr | str trim) }
+    { ^run-parts --exit-on-error $path } | bf handle
 }
