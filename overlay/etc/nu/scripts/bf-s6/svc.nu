@@ -44,5 +44,5 @@ export def is_up [
     if ($s6_svc_dir | bf fs is_not_dir) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
 
     # use s6-svstat to check service $name is running
-    { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | handle -c | $in == 0
+    { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | bf handle -c | $in == 0
 }
