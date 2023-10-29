@@ -1,12 +1,15 @@
 #======================================================================================================================
-# STAGE 0: install S6 overlay.
+# STAGE 0: download S6 overlay
 #======================================================================================================================
 
 FROM --platform=${BUILDPLATFORM} golang:alpine AS build
 ARG TARGETPLATFORM
 
 WORKDIR /s6
-RUN case "${TARGETPLATFORM}" in \
+RUN \
+    # build a URL to download S6 binaries
+    echo "Downloading S6 Overlay." && \
+    case "${TARGETPLATFORM}" in \
         linux/amd64) ARCH="x86_64" ;; \
         linux/arm/v7) ARCH="armhf" ;; \
         linux/arm64) ARCH="aarch64" ;; \
@@ -21,7 +24,7 @@ RUN case "${TARGETPLATFORM}" in \
 
 
 #======================================================================================================================
-# STAGE 1: get build information.
+# STAGE 1: create final image
 #======================================================================================================================
 
 FROM bfren/alpine:alpine3.16.7-2.0.0-dev
@@ -32,6 +35,8 @@ LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6
 
 ARG BF_IMAGE
 ARG BF_VERSION
+
+COPY ./overlay /
 
 ENV \
     # cron log levels are from 0 (most verbose) to 8 (default)
@@ -50,9 +55,10 @@ ENV \
     # location of S6 service directories
     S6_SERVICES_DIR=/run/s6-rc/servicedirs
 
-COPY ./overlay /
-
-RUN bf-build-add "S6 Overlay" "3.1.5.0" && \
+RUN \
+    # add S6 Overlay to the build log
+    bf-build-add "S6 Overlay" "3.1.5.0" && \
+    # run standard bf installation executable
     bf-install
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 \
