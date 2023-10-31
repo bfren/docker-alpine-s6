@@ -18,6 +18,7 @@ def main [] {
     # set cron info
     bf env set CRON_CRONTABS "/etc/crontabs"
     bf env set CRON_D "/etc/periodic"
+    bf env set CRON_LOG "/var/log/cron"
     bf env set CRON_LOG_FILE "/var/log/cron.log"
 
     # return nothing

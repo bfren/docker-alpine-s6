@@ -1,13 +1,29 @@
-#!/usr/bin/nu
+#!/bin/withenv sh
 
-use bf
-use bf-s6
-bf env load -x
+set -euo pipefail
+export BF_X=`basename ${0}`
 
-# Run cron parts for a specified directory
-def main [
-    directory: string   # The cron directory to run
-    --quiet (-q)        # Make 'running cron' message debug only
-] {
-    if $quiet { bf-s6 cron --quiet $directory } else { bf-s6 cron $directory }
-}
+
+#======================================================================================================================
+# Ensure requested cron directory exists
+#======================================================================================================================
+
+PERIOD=${1-}
+[[ -n "${PERIOD}" ]] || bf-write-error "You must pass the name of the directory to run."
+
+DIR=${BF_CRON_D}/${PERIOD}
+[[ -d "${DIR}" ]] || bf-write-error "Directory ${DIR} does not exist."
+
+
+#======================================================================================================================
+# Store date / time this cron directory was last run
+#======================================================================================================================
+
+echo $(date '+%Y-%m-%d %H:%M:%S') > ${BF_CRON_LOG}/${PERIOD}
+
+
+#======================================================================================================================
+# Execute requested cron directory
+#======================================================================================================================
+
+run-parts --exit-on-error ${DIR}
