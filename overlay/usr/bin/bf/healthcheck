@@ -1,6 +1,10 @@
-#!/usr/bin/nu
+#!/bin/sh
 
-use bf
+set -euo pipefail
 
-# Override file in images to provide healthcheck functionality
-def main [] { bf write debug "Base healthcheck always returns healthy." ; exit 0 }
+
+#======================================================================================================================
+# Override to provide healthcheck functionality.
+#======================================================================================================================
+
+exit 0
