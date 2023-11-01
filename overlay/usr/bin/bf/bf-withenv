@@ -1,8 +1,0 @@
-#!/command/execlineb -S0
-
-# See https://github.com/just-containers/s6-overlay
-
-emptyenv -p
-s6-envdir -Lfn -- /etc/bf/env.d
-exec
-$@
