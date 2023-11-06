@@ -61,5 +61,5 @@ RUN \
     # run standard bf installation executable
     bf-install
 
-HEALTHCHECK --interval=5m --timeout=10s --start-period=15s --retries=5 \
+HEALTHCHECK --interval=1m --timeout=10s --start-period=15s --retries=5 \
     CMD healthcheck
