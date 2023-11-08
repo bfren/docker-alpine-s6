@@ -8,19 +8,24 @@ def main [] {
     bf del force /init
 
     # extract and install files
-    bf write "Installing S6 Overlay..."
+    bf write "Installing S6 Overlay."
     cd /s6
     extract noarch
     extract (bf fs read ARCH)
 
     # set ownership of src directory
+    bf write "Setting ownership of src directory."
     bf ch --mode 1777 /etc/bf/src
 
     # link bf-withenv for easier use in shell scripts
+    bf write "Creating withenv link."
     ln $"/usr/bin/bf/bf-withenv" /bin/withenv
 
+    # add bf-s6 module to config
+    bf config use bf-s6
+
     # cleanup
-    bf write "Removing installation files..."
+    bf write "Removing installation files."
     cd /
     bf del force /s6
 }
