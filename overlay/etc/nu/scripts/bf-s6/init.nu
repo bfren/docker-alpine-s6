@@ -31,7 +31,7 @@ export def main [] {
 def execute [
     filename: string    # Full path to script file
 ] {
-    bf write $"($filename | path basename): Running." init/execute
+    bf write $"($filename | path basename)." init/execute
     try {
         bf x $filename
     } catch {
