@@ -6,14 +6,15 @@ export def main [] {
     # store incoming environment variables
     bf env store
 
-    # Environment variables are not available yet so need to hard code the init.d directory
+    # environment variables are not available yet so need to hard code the init.d directory
     let $init_d = $"(bf env ETC)/init.d"
 
-    # Execute each initialisation script
+    # execute each initialisation script
     bf write "Initialising container." init
     if ($init_d | path exists) { ls --full-paths $init_d | get name | sort | each {|x| execute $x } }
     bf env x_clear
 
+    # output additional info when debug is enabled
     if (bf env debug) {
         # Show build information
         bf write "Build information." init
@@ -24,9 +25,6 @@ export def main [] {
         bf env load
         bf env show
     }
-
-    # Complete
-    bf write ok "Initialisation complete." init
 }
 
 # Execute a script within the init.d directory

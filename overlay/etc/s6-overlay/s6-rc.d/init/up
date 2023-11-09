@@ -1,7 +1,9 @@
 foreground
 {
-    ifelse -n { bf-init }
+    ifelse -X { bf-init }
     {
-        if { bf-cont-terminate init/up }
+        bf-write-ok "Initialisation complete." init/up
     }
+
+    bf-cont-terminate init/up
 }
