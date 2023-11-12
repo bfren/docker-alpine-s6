@@ -17,7 +17,7 @@ export def append [
     if ($crontab | bf fs is_not_file) { generate }
 
     # create padded crontab string
-    let command = [
+    let pattern = [
         ($min | do $pad)
         ($hour | do $pad)
         ($day | do $pad)
@@ -26,7 +26,7 @@ export def append [
     ] | str join
 
     # append to crontab
-    $"(char newline)($command)" | save --append $crontab
+    $"(char newline)($pattern)($command)" | save --append $crontab
 }
 
 # Generate the default crontab
