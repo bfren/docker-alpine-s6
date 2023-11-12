@@ -16,7 +16,9 @@ def main [] {
     bf env set ETC_SRC $"($etc)/src"
 
     # set cron info
-    bf env set CRON_CRONTABS "/etc/crontabs"
+    let crontabs = "/etc/crontabs"
+    bf env set CRONTABS $crontabs
+    bf env set CRONTAB_ROOT $"($crontabs)/root"
     bf env set CRON_D "/etc/periodic"
     bf env set CRON_LOG "/var/log/cron"
     bf env set CRON_LOG_FILE "/var/log/cron.log"
