@@ -21,6 +21,6 @@ nu -c "use bf-s6 run ; run preflight"
 
 crond \
     -f \
-    -c ${BF_CRON_CRONTABS} \
+    -c ${BF_CRONTABS} \
     -l ${BF_CRON_LOG_LEVEL} \
     -L ${BF_CRON_LOG_FILE}
