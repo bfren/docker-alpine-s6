@@ -1,41 +1,50 @@
-#!/bin/sh
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E=`basename ${0}`
+use bf
 
+# Extract and install S6 overlay
+def main [] {
+    # delete default /init - will be replaced by S6
+    bf del force /init
 
-#======================================================================================================================
-# Install S6 Overlay.
-#======================================================================================================================
+    # extract and install files
+    bf write "Installing S6 Overlay."
+    cd /s6
+    extract noarch
+    extract (bf fs read ARCH)
 
-install () {
+    # set ownership of src directory
+    bf write "Setting ownership of src directory."
+    bf ch --mode 1777 /etc/bf/src
 
-    # get file
-    FILE=s6-overlay-${1}.tar.xz
+    # link bf-withenv for easier use in shell scripts
+    bf write "Creating withenv link."
+    ln $"/usr/bin/bf/bf-withenv" /bin/withenv
 
-    # check integrity
-    sha256sum -cs ${FILE}.sha256 \
-        || bf-error " .. S6 Overlay download does not match checksum."
+    # add bf-s6 module to config
+    bf config use bf-s6
 
-    # extract
-    bf-echo " .. extracting ${FILE}..."
-    tar -C / -Jxpf ${FILE} \
-        || bf-error " .. unable to extract ${FILE}."
-
+    # cleanup
+    bf write "Removing installation files."
+    cd /
+    bf del force /s6
 }
 
-bf-echo "Installing S6 Overlay..."
-cd /s6
-ARCH=`cat arch`
-install "noarch"
-install ${ARCH}
-bf-done
+# Shared code to extract arch and noarch files in the same way
+def extract [
+    arch: string    # Architecture to extract
+] {
+    # build file path
+    let path = $"s6-overlay-($arch).tar.xz" | path expand
 
+    # check integrity
+    { ^sha256sum -cs $"($path).sha256" } | bf handle -f {|code, err|
+        bf write error " .. S6 Overlay download does not match checksum." install/extract
+    } install/extract
 
-#======================================================================================================================
-# Cleanup.
-#======================================================================================================================
-
-bf-echo "Removing installation files..."
-rm -rf /s6
-bf-done
+    # extract
+    bf write $" .. extracting ($path)..."
+    { ^tar -C / -Jxpf $path } | bf handle -f {|code, err|
+        bf write error $" .. unable to extract ($path)." install/extract
+    } install/extract
+}

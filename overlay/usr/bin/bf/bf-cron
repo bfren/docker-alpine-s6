@@ -1,47 +1,29 @@
-#!/bin/sh
+#!/bin/withenv sh
 
 set -euo pipefail
+export BF_X=`basename ${0}`
 
 
 #======================================================================================================================
-# Executable usage.
+# Ensure requested cron directory exists
 #======================================================================================================================
 
-usage () {
-    echo "Usage: `basename ${0}` [OPTIONS] DIRECTORY" 2>&1
-    echo "    -q    Make 'running cron' message debug only."
-    echo "    -h    Show this usage message."
-    exit 2
-}
+PERIOD=${1-}
+[[ -n "${PERIOD}" ]] || bf-write-error "You must pass the name of the directory to run."
 
-while getopts ":hq" C ; do
-    case ${C} in
-        h) usage ;;
-        q) QUIET=1 ;;
-        ?) bf-notok "Invalid option: -${OPTARG}" "bf-cron" && usage ;;
-    esac
-done
-
-shift $(($OPTIND -1))
-[[ -z "${1-}" ]] && bf-error "You must provide the name of the cron directory." "bf-cron"
+DIR=${BF_CRON_D}/${PERIOD}
+[[ -d "${DIR}" ]] || bf-write-error "Directory ${DIR} does not exist."
 
 
 #======================================================================================================================
-# Ensure cron directory exists.
+# Store date / time this cron directory was last run
 #======================================================================================================================
 
-DIRECTORY="/etc/periodic/${1}"
-[[ ! -d "${DIRECTORY}" ]] && bf-error "Cron directory does not exist: ${DIRECTORY}." "bf-cron"
+echo $(date '+%Y-%m-%d %H:%M:%S') > ${BF_CRON_LOG}/${PERIOD}
 
 
 #======================================================================================================================
-# Use run-parts to execute cron.
+# Execute requested cron directory
 #======================================================================================================================
 
-if [ "${QUIET-}" == "1" ] ; then
-    bf-debug "${DIRECTORY}" "bf-cron"
-else
-    bf-echo "${DIRECTORY}" "bf-cron"
-fi
-
-run-parts --exit-on-error "${DIRECTORY}"
+run-parts --exit-on-error ${DIR}
