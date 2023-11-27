@@ -17,7 +17,7 @@ export def down [
     name: string    # The service name
 ] {
     bf write debug $"Stopping ($name) service." svc/down
-    let result = { ^s6-rc -v 2 -d change $name } | bf handle -c
+    let result = { ^s6-rc -v 2 -d change $name } | bf handle -c svc/down
     match $result {
         111 => {
             bf write debug $"svc down has probably been called too early for ($name) - try again." svc/down
@@ -44,5 +44,5 @@ export def is_up [
     if ($s6_svc_dir | bf fs is_not_dir) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
 
     # use s6-svstat to check service $name is running
-    { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | bf handle -c | $in == 0
+    { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | bf handle -c svc/is_up | $in == 0
 }

@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM bfren/alpine:alpine3.17.5-2.0.3
+FROM bfren/alpine:alpine3.17.5-2.0.4
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
