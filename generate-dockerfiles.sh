@@ -8,7 +8,7 @@ BASE_VERSION="2.0.5"
 S6_VERSION="3.1.6.2"
 echo "Base: ${BASE_VERSION}"
 
-ALPINE_EDITIONS="3.15 3.16 3.17 3.18"
+ALPINE_EDITIONS="3.15 3.16 3.17 3.18 3.19"
 for E in ${ALPINE_EDITIONS} ; do
 
     echo "Alpine ${E}"
