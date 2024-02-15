@@ -34,6 +34,7 @@ LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-alpine-s6"
 
 ARG BF_IMAGE
+ARG BF_PUBLISHING
 ARG BF_VERSION
 
 COPY ./overlay /
