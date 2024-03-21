@@ -11,7 +11,7 @@ export def main [] {
 
     # execute each initialisation script
     bf write "Initialising container." init
-    if ($init_d | path exists) { ls --full-paths $"($init_d)/*.nu" | get name | sort | each {|x| execute $x } }
+    if ($init_d | path exists) { $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort | each {|x| execute $x } }
     bf env x_clear
 
     # output additional info when debug is enabled
