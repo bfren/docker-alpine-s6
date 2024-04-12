@@ -16,7 +16,7 @@ export def append [
     let pad = { $in | fill -a left -c " " -w 8 }
 
     # if crontab doesn't exist, generate it
-    if ($crontab | bf fs is_not_file) { generate }
+    if ($crontab | bf fs is_not_file) { generate_default }
 
     # create padded crontab pattern string
     let pattern = [
@@ -32,4 +32,29 @@ export def append [
 }
 
 # Generate the default crontab
-export def generate [] { bf esh template (bf env CRONTAB_ROOT) }
+export def generate_default [] { bf esh template (bf env CRONTAB_ROOT) }
+
+# Generate a cron file to execute on the specified frequency
+export def generate_template [
+    frequency: string   # Cron frequency: "1min", "15min", "hourly", "daily", "weekly", "monthly"
+    file: string        # Desired filename of the cron file (a matching .esh file must be placed in the templates directory)
+] {
+    # ensure frequency is a supported value
+    let supported = [
+        "1min"
+        "15min"
+        "hourly"
+        "daily"
+        "weekly"
+        "monthly"
+    ]
+    if $frequency not-in $supported { bf write error $"'($frequency)' is not a supported cron frequency." crontab/generate_template }
+
+    # generate the template
+    let output = $"(bf env CRON_D)/($frequency)/($file)"
+    bf write $"Generating ($output)." crontab/generate_template
+    bf esh template $output
+
+    # apply cron permissions
+    bf ch apply_file "01-cron"
+}
