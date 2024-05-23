@@ -2,7 +2,7 @@
 
 IMAGE=alpine-s6
 VERSION=`cat VERSION`
-ALPINE=${1:-3.19}
+ALPINE=${1:-3.20}
 TAG=${IMAGE}-test
 
 docker buildx build \
