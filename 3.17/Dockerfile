@@ -16,7 +16,7 @@ RUN \
         *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1 ;; \
     esac && \
     printf "%s" "${ARCH}" > ARCH && \
-    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.1.6.2/s6-overlay && \
+    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.2.0.0/s6-overlay && \
     wget ${URL}-${ARCH}.tar.xz && \
     wget ${URL}-${ARCH}.tar.xz.sha256 && \
     wget ${URL}-noarch.tar.xz && \
@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM bfren/alpine:alpine3.17.7-2.3.1
+FROM bfren/alpine:alpine3.17.7-2.4.0
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
@@ -51,14 +51,12 @@ ENV \
     #   1: continue with warning
     #   2: stop the container
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    # disable S6 Overlay service timeout - handle by timeout-up instead
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
     # location of S6 service directories
     S6_SERVICES_DIR=/run/s6-rc/servicedirs
 
 RUN \
     # add S6 Overlay to the build log
-    bf-build-add "S6 Overlay" "3.1.6.2" && \
+    bf-build-add "S6 Overlay" "3.2.0.0" && \
     # run standard bf installation executable
     bf-install
 
