@@ -8,6 +8,6 @@ bf env load -x
 def main [
     override?: string   # The name of the calling script or executable
 ] {
-    if $override != null { bf env x_set --override $override }
+    if ($override | is-not-empty) { bf env x_set --override $override }
     bf-s6 cont terminate
 }
