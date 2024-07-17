@@ -5,7 +5,10 @@ bf env load
 def main [] {
     # if timezone is not defined, return
     let tz = bf env --safe TZ
-    if $tz == "" { return }
+    if ($tz | is-empty)  {
+        bf write debug "Timezone not defined."
+        return
+    }
 
     # set timezone
     bf tz $tz
