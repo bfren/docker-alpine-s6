@@ -1,26 +1,16 @@
 #!/bin/withenv sh
 
-set -euo pipefail
-
 
 #======================================================================================================================
 # Run preflight checks
 #======================================================================================================================
 
-source /usr/lib/bf/preflight.sh s6
+MOD=${1}
+nu -c "use bf-${MOD} run ; run preflight"
 
 
 #======================================================================================================================
-# Start cron in foreground mode.
-# Flags:
-#   -c  run using this directory
-#   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
-#   -l  log level (from 0 to 8 - 0 is the most verbose)
-#   -L  log to a file (instead of stdout)
+# Exit shell gracefully if the preflight has exited early.
 #======================================================================================================================
 
-crond \
-    -f \
-    -c ${BF_CRONTABS} \
-    -l ${BF_CRON_LOG_LEVEL} \
-    -L ${BF_CRON_LOG_FILE}
+if bf-env-check --reload ${MOD}_PREFLIGHT_EARLY_EXIT ; then exit 0; fi

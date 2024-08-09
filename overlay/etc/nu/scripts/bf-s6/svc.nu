@@ -1,5 +1,18 @@
 use bf
 
+# Exit preflight checks early
+export def exit_preflight [
+    module: string  # The module that is exiting early, without the 'bf-' prefix
+]: string -> nothing {
+    # output the reason if set
+    let reason = $in
+    if ($reason | is-not-empty) { bf write notok $"bf-($module) preflight exiting early: ($reason)." }
+
+    # set environment variable and exit nushell
+    bf env set $"($module)_PREFLIGHT_EARLY_EXIT" 1
+    exit 0
+}
+
 # Write a nice finish message when a service is stopped, optionally also terminating the container
 export def finish [
     --terminate (-t)    # Terminate container
