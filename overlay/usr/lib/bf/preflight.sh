@@ -13,4 +13,8 @@ nu -c "use bf-${MOD} run ; run preflight"
 # Exit shell gracefully if the preflight has exited early.
 #======================================================================================================================
 
-if bf-env-check --reload ${MOD}_PREFLIGHT_EARLY_EXIT ; then exit 0; fi
+VAR=${MOD}_PREFLIGHT_EARLY_EXIT
+if bf-env-check --reload ${VAR} ; then
+    bf-env-unset ${VAR}
+    exit 0
+fi
