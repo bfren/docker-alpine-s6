@@ -7,7 +7,7 @@ export def exit_preflight [
 ]: string -> nothing {
     # output the reason if set
     let reason = $in
-    if ($reason | is-not-empty) { bf write warn $"Preflight exiting early: ($reason)." }
+    if ($reason | is-not-empty) { bf write warn $"Preflight exit: ($reason)." }
 
     # set early exit environment variable
     bf env set $"($module)_PREFLIGHT_EARLY_EXIT" 1
