@@ -5,7 +5,7 @@ use bf
 # Extract and install S6 overlay
 def main [] {
     # delete default /init - will be replaced by S6
-    bf del force /init
+    rm --force /init
 
     # extract and install files
     bf write "Installing S6 Overlay."
@@ -27,7 +27,7 @@ def main [] {
     # cleanup
     bf write "Removing installation files."
     cd /
-    bf del force /s6
+    rm --force --recursive /s6
 }
 
 # Shared code to extract arch and noarch files in the same way
