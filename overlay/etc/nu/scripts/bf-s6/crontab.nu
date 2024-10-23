@@ -13,7 +13,7 @@ export def append [
 ] {
     # get variables
     let crontab = bf env CRONTAB_ROOT
-    let pad = { $in | fill -a left -c " " -w 8 }
+    let pad = { $in | fill -a left -c " " -w 7 }
 
     # if crontab doesn't exist, generate it
     if ($crontab | bf fs is_not_file) { generate_default }
@@ -25,10 +25,10 @@ export def append [
         ($day | do $pad)
         ($month | do $pad)
         ($weekday | do $pad)
-    ] | str join
+    ] | str join " "
 
     # append to crontab
-    $"($pattern)($command)(char newline)" | save --append $crontab
+    $"($pattern) ($command)(char newline)" | save --append $crontab
 }
 
 # Generate the default crontab
