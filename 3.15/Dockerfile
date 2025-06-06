@@ -2,7 +2,7 @@
 # STAGE 0: download S6 overlay
 #======================================================================================================================
 
-FROM --platform=${BUILDPLATFORM} golang:alpine AS build
+FROM --platform=${BUILDPLATFORM} ghcr.io/bfren/golang:alpine AS build
 ARG TARGETPLATFORM
 
 WORKDIR /s6
@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM ghcr.io/bfren/alpine:alpine3.15.11-2.9.1
+FROM ghcr.io/bfren/alpine:alpine3.15.11-2.9.2
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
