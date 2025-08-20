@@ -59,7 +59,7 @@ export def is_up [
     name: string    # The service name
 ] {
     # make sure the S6_SERVICES_DIR is set
-    let s6_svc_dir = ($env | get --ignore-errors S6_SERVICES_DIR)
+    let s6_svc_dir = ($env | get --optional S6_SERVICES_DIR)
     if $s6_svc_dir == "" { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up }
 
     # make sure S6_SERVICES_DIR exists
