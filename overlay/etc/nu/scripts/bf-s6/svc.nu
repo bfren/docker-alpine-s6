@@ -46,7 +46,7 @@ export def down [
         },
         $code if $code > 0 => {
             $result | print
-            bf write error --code $code $"s6-rc failed to bring down service ($name)." svc/down
+            bf write error $"s6-rc failed to bring down service ($name)." svc/down
         }
         _ => {
             bf write $"($name) service stopped." svc/down
