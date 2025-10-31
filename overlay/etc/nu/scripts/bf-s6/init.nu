@@ -10,8 +10,13 @@ export def main [] {
     let $init_d = $"(bf env ETC)/init.d"
 
     # execute each initialisation script
+    # we don't use 'each' because of a bug that doesn't redirect stdout of a child process
     bf write "Initialising container." init
-    if ($init_d | path exists) { $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort | each {|x| execute $x } }
+    if ($init_d | path exists) {
+        let init_files = $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort --natural
+        let count = $init_files | length
+        mut x = 0; loop { if $x >= $count { break } ; $init_files | get $x | try { execute $in } catch { exit 1 } ; $x = $x + 1}
+    }
     bf env x_clear
 
     # output additional info when debug is enabled
@@ -32,5 +37,5 @@ def execute [
     filename: string    # Full path to script file
 ] {
     bf write $"($filename | path basename)." init/execute
-    try { bf x $filename } catch { exit 1 }
+    bf x $filename
 }
