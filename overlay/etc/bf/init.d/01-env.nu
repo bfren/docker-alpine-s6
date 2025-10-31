@@ -2,7 +2,7 @@ use bf
 bf env load
 
 # Set environment variables
-def main [] {
+def main []: nothing -> nothing {
     # set image info
     let etc = bf env ETC
     cd $etc

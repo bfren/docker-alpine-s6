@@ -22,19 +22,21 @@ export def exit_preflight [
 # Write a nice finish message when a service is stopped, optionally also terminating the container
 export def finish [
     --terminate (-t)    # Terminate container
-] {
+]: nothing -> nothing {
     # echo service finish debug message.
     bf write debug "Finished." svc/finish
 
     # terminate the container if the terminate flag is set -
     # use executable to avoid cyclical module import
     if $terminate { ^bf-cont-terminate }
+
+    return
 }
 
 # Bring a service down
 export def down [
     name: string    # The service name
-] {
+]: nothing -> nothing {
     bf write debug $"Stopping ($name) service." svc/down
     let result = { ^s6-rc -v 2 -d change $name } | bf handle -c svc/down
     match $result {
@@ -54,7 +56,7 @@ export def down [
 # Returns true if service $name is running
 export def is_up [
     name: string    # The service name
-] {
+]: nothing -> bool {
     # make sure the S6_SERVICES_DIR is set
     let s6_svc_dir = ($env | get --optional S6_SERVICES_DIR)
     if $s6_svc_dir == "" { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up }

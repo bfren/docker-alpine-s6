@@ -7,7 +7,7 @@ bf env load -x
 # Terminate the container
 def main [
     override?: string   # The name of the calling script or executable
-] {
+]: nothing -> nothing {
     if ($override | is-not-empty) { bf env x_set --override $override }
     bf-s6 cont terminate
 }

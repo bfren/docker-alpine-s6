@@ -5,7 +5,7 @@ use svc.nu
 const terminating = "/tmp/terminating"
 
 # Terminate the container
-export def terminate [] {
+export def terminate []: nothing -> nothing {
     # output a message to say the container is already terminating
     let already_terminating = {|| bf write debug "Container already being terminated." cont/terminate ; exit 0 }
 
@@ -23,4 +23,7 @@ export def terminate [] {
 
     # bring the container down
     ^halt
+
+    # return nothing
+    return
 }

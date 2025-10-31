@@ -10,7 +10,7 @@ export def append [
     --day (-d): string = "*"        # Pattern: day of the month, e.g. 20 (every 20th of the month) or */2 (every two days)
     --month (-M): string = "*"      # Pattern: month of the year, e.g. 6 (every June) or */4 (every four months)
     --weekday (-w): string = "*"    # Pattern: weekday, e.g. 0 (every Sunday) or 1-5 (every Monday-Friday)
-] {
+]: nothing -> nothing {
     # get variables
     let crontab = bf env CRONTAB_ROOT
     let pad = { $in | fill -a left -c " " -w 7 }
@@ -32,13 +32,13 @@ export def append [
 }
 
 # Generate the default crontab
-export def generate_default [] { bf esh template (bf env CRONTAB_ROOT) }
+export def generate_default []: nothing -> string { bf esh template (bf env CRONTAB_ROOT) }
 
 # Generate a cron file to execute on the specified frequency
 export def generate_template [
     frequency: string   # Cron frequency: "1min", "15min", "hourly", "daily", "weekly", "monthly"
     file: string        # Desired filename of the cron file (a matching .esh file must be placed in the templates directory)
-] {
+]: nothing -> nothing {
     # ensure frequency is a supported value
     let supported = [
         "1min"

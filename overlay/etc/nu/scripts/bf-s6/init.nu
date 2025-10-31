@@ -15,7 +15,7 @@ export def main [] {
     if ($init_d | path exists) {
         let init_files = $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort --natural
         let count = $init_files | length
-        mut x = 0; loop { if $x >= $count { break } ; $init_files | get $x | try { execute $in } catch { exit 1 } ; $x = $x + 1}
+        mut x = 0; loop { if $x >= $count { break } ; $init_files | get $x | execute $in ; $x = $x + 1}
     }
     bf env x_clear
 
@@ -30,12 +30,14 @@ export def main [] {
         bf env load
         bf env show
     }
+
+    return
 }
 
-# Execute a script within the init.d directory
+# Execute a script within the init.d directory and exit on failure
 def execute [
     filename: string    # Full path to script file
-] {
+]: nothing -> any {
     bf write $"($filename | path basename)." init/execute
-    bf x $filename
+    try { bf x $filename } catch { exit 1 }
 }
