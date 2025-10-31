@@ -28,10 +28,7 @@ export def finish [
 
     # terminate the container if the terminate flag is set -
     # use executable to avoid cyclical module import
-    if $terminate {
-        bf clean
-        ^bf-cont-terminate
-    }
+    if $terminate { ^bf-cont-terminate }
 }
 
 # Bring a service down
