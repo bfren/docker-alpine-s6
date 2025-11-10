@@ -7,7 +7,7 @@ export def main [] {
     bf env store
 
     # environment variables are not available yet so need to hard code the init.d directory
-    let $init_d = $"(bf env ETC)/init.d"
+    let init_d = $"(bf env ETC)/init.d"
 
     # execute each initialisation script
     # we don't use 'each' because of a bug that doesn't redirect stdout of a child process
