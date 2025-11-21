@@ -31,13 +31,19 @@ export def main [] {
         bf env show
     }
 
+    # return nothing
     return
 }
 
 # Execute a script within the init.d directory and exit on failure
 def execute [
     filename: string    # Full path to script file
-]: nothing -> any {
+]: nothing -> nothing {
+    # execute script file, catching errors
+    # exit on error to bring the container down during init process
     bf write $"($filename | path basename)." init/execute
     try { bf x $filename } catch { exit 1 }
+
+    # return nothing
+    return
 }
