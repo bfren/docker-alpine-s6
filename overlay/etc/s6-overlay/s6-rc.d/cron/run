@@ -13,8 +13,8 @@ nu -c "use bf-s6 run ; run preflight"
 #======================================================================================================================
 # Start cron in foreground mode.
 # Flags:
-#   -c  run using this directory
 #   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
+#   -c  run using this directory
 #   -l  log level (from 0 to 8 - 0 is the most verbose)
 #   -L  log to a file (instead of stdout)
 #======================================================================================================================
