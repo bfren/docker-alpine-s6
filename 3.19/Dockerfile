@@ -2,7 +2,7 @@
 # STAGE 0: download S6 overlay
 #======================================================================================================================
 
-FROM --platform=${BUILDPLATFORM} alpine AS build
+FROM --platform=${BUILDPLATFORM} quay.io/bfren/alpine AS build
 ARG TARGETPLATFORM
 
 WORKDIR /s6
