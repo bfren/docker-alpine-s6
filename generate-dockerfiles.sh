@@ -4,7 +4,7 @@ set -euo pipefail
 
 docker pull bfren/alpine
 
-BASE_VERSION="3.0.0-dev"
+BASE_VERSION="3.0.0"
 S6_VERSION="3.2.1.0"
 echo "Base: ${BASE_VERSION}"
 
