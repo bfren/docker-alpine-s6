@@ -13,9 +13,19 @@ export def main [] {
     # we don't use 'each' because of a bug that doesn't redirect stdout of a child process
     bf write "Initialising container." init
     if ($init_d | path exists) {
-        let init_files = $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort --natural
+        let init_files = $"($init_d)/*.nu"
+            | into glob
+            | ls --full-paths $in
+            | get name
+            | sort --natural
         let count = $init_files | length
-        mut x = 0; loop { if $x >= $count { break } ; $init_files | get $x | execute $in ; $x = $x + 1}
+        mut x = 0 ; loop {
+            if $x >= $count { break }
+            $init_files
+                | get $x
+                | execute $in
+            $x = $x + 1
+        }
     }
     bf env x_clear
 
