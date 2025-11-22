@@ -17,10 +17,10 @@ RUN \
     esac && \
     printf "%s" "${ARCH}" > ARCH && \
     URL=https://github.com/just-containers/s6-overlay/releases/download/v3.2.1.0/s6-overlay && \
-    wget ${URL}-${ARCH}.tar.xz && \
-    wget ${URL}-${ARCH}.tar.xz.sha256 && \
-    wget ${URL}-noarch.tar.xz && \
-    wget ${URL}-noarch.tar.xz.sha256
+    wget -v ${URL}-${ARCH}.tar.xz && \
+    wget -v ${URL}-${ARCH}.tar.xz.sha256 && \
+    wget -v ${URL}-noarch.tar.xz && \
+    wget -v ${URL}-noarch.tar.xz.sha256
 
 
 #======================================================================================================================
