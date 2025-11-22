@@ -7,11 +7,26 @@ export def main [] {
     bf env store
 
     # environment variables are not available yet so need to hard code the init.d directory
-    let $init_d = $"(bf env ETC)/init.d"
+    let init_d = $"(bf env ETC)/init.d"
 
     # execute each initialisation script
+    # we don't use 'each' because of a bug that doesn't redirect stdout of a child process
     bf write "Initialising container." init
-    if ($init_d | path exists) { $"($init_d)/*.nu" | into glob | ls --full-paths $in | get name | sort | each {|x| execute $x } }
+    if ($init_d | path exists) {
+        let init_files = $"($init_d)/*.nu"
+            | into glob
+            | ls --full-paths $in
+            | get name
+            | sort --natural
+        let count = $init_files | length
+        mut x = 0 ; loop {
+            if $x >= $count { break }
+            $init_files
+                | get $x
+                | execute $in
+            $x = $x + 1
+        }
+    }
     bf env x_clear
 
     # output additional info when debug is enabled
@@ -25,12 +40,20 @@ export def main [] {
         bf env load
         bf env show
     }
+
+    # return nothing
+    return
 }
 
-# Execute a script within the init.d directory
+# Execute a script within the init.d directory and exit on failure
 def execute [
     filename: string    # Full path to script file
-] {
+]: nothing -> nothing {
+    # execute script file, catching errors
+    # exit on error to bring the container down during init process
     bf write $"($filename | path basename)." init/execute
-    bf x $filename
+    try { bf x $filename } catch { exit 1 }
+
+    # return nothing
+    return
 }

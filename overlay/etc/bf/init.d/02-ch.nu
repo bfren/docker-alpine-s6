@@ -2,7 +2,7 @@ use bf
 bf env load
 
 # Apply changes defined in ch.d directory
-def main [] {
+def main []: nothing -> nothing {
     # if init ch is not enabled, return
     if not (bf env check ENABLE_INIT_CH) {
         bf write "Applying ch.d during init is disabled."

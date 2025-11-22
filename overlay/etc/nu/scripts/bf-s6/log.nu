@@ -4,7 +4,7 @@ use bf
 export def forward [
     name: string    # The name of the log service
     path: string    # Absolute path to log file to forward to stdout
-] {
+]: nothing -> any {
     # if the file does not exist, wait and exit - S6 will bring the service back up to try again
     if ($path | bf fs is_not_file) {
         let wait = 5sec

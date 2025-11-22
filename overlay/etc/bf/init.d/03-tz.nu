@@ -2,7 +2,7 @@ use bf
 bf env load
 
 # Set timezone
-def main [] {
+def main []: nothing -> nothing {
     # if timezone is not defined, return
     let tz = bf env --safe TZ
     if ($tz | is-empty)  {

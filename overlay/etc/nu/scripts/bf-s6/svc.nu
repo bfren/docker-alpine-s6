@@ -22,7 +22,7 @@ export def exit_preflight [
 # Write a nice finish message when a service is stopped, optionally also terminating the container
 export def finish [
     --terminate (-t)    # Terminate container
-] {
+]: nothing -> nothing {
     # echo service finish debug message.
     bf write debug "Finished." svc/finish
 
@@ -32,12 +32,15 @@ export def finish [
         bf clean
         ^bf-cont-terminate
     }
+
+    # return nothing
+    return
 }
 
 # Bring a service down
 export def down [
     name: string    # The service name
-] {
+]: nothing -> nothing {
     bf write debug $"Stopping ($name) service." svc/down
     let result = { ^s6-rc -v 2 -d change $name } | bf handle -c svc/down
     match $result {
@@ -46,18 +49,21 @@ export def down [
         },
         $code if $code > 0 => {
             $result | print
-            bf write error --code $code $"s6-rc failed to bring down service ($name)." svc/down
+            bf write error $"s6-rc failed to bring down service ($name)." svc/down
         }
         _ => {
             bf write $"($name) service stopped." svc/down
         }
     }
+
+    # return nothing
+    return
 }
 
 # Returns true if service $name is running
 export def is_up [
     name: string    # The service name
-] {
+]: nothing -> bool {
     # make sure the S6_SERVICES_DIR is set
     let s6_svc_dir = ($env | get --optional S6_SERVICES_DIR)
     if $s6_svc_dir == "" { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/is_up }
@@ -66,5 +72,7 @@ export def is_up [
     if ($s6_svc_dir | bf fs is_not_dir) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." }
 
     # use s6-svstat to check service $name is running
-    { ^s6-svstat -u $"($s6_svc_dir)/($name)" } | bf handle -c svc/is_up | $in == 0
+    { ^s6-svstat -u $"($s6_svc_dir)/($name)" }
+        | bf handle -c svc/is_up
+        | $in == 0
 }
