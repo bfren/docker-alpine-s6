@@ -17,17 +17,17 @@ RUN \
     esac && \
     printf "%s" "${ARCH}" > ARCH && \
     URL=https://github.com/just-containers/s6-overlay/releases/download/v3.2.1.0/s6-overlay && \
-    wget ${URL}-${ARCH}.tar.xz && \
-    wget ${URL}-${ARCH}.tar.xz.sha256 && \
-    wget ${URL}-noarch.tar.xz && \
-    wget ${URL}-noarch.tar.xz.sha256
+    bf-wget ${URL}-${ARCH}.tar.xz && \
+    bf-wget ${URL}-${ARCH}.tar.xz.sha256 && \
+    bf-wget ${URL}-noarch.tar.xz && \
+    bf-wget ${URL}-noarch.tar.xz.sha256
 
 
 #======================================================================================================================
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM quay.io/bfren/alpine:alpine3.21.5-3.0.0
+FROM quay.io/bfren/alpine:alpine3.21.5-3.0.1
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
