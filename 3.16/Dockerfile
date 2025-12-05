@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM quay.io/bfren/alpine:alpine3.16.9-3.0.2
+FROM quay.io/bfren/alpine:alpine3.16.9-3.1.0
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
