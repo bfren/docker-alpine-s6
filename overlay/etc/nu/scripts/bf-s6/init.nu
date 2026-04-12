@@ -23,11 +23,11 @@ export def main [] {
             if $x >= $count { break }
             $init_files
                 | get $x
-                | execute $in
+                | execute
             $x = $x + 1
         }
     }
-    bf env x_clear
+    bf env unset X
 
     # output additional info when debug is enabled
     if (bf env debug) {
@@ -46,13 +46,12 @@ export def main [] {
 }
 
 # Execute a script within the init.d directory and exit on failure
-def execute [
-    filename: string    # Full path to script file
-]: nothing -> nothing {
+def execute []: string -> nothing {
     # execute script file, catching errors
     # exit on error to bring the container down during init process
-    bf write $"($filename | path basename)." init/execute
-    try { bf x $filename } catch { exit 1 }
+    let script = $in
+    bf write $"($script | path basename)." init/execute
+    try { bf x $script } catch { exit 1 }
 
     # return nothing
     return
