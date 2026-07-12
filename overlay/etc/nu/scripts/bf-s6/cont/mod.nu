@@ -1,5 +1,5 @@
 use bf
-use ../svc
+use bf-s6/svc
 
 # The presence of this file indicates that another service is already bringing the dontainer down
 const terminating = "/tmp/terminating"
