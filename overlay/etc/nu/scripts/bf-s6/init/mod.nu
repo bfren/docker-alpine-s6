@@ -1,5 +1,5 @@
 use bf
-use cont.nu
+use ../cont
 
 # Initialise the container by executing all scripts contained in init.d
 export def main [] {

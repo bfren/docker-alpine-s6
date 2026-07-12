@@ -1,1 +1,1 @@
-export module clean.nu
+export use clean.nu
