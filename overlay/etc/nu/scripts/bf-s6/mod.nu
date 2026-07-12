@@ -1,7 +1,7 @@
-export module clean.nu
-export module cont.nu
-export module crontab.nu
-export module init.nu
-export module log.nu
-export module run.nu
-export module svc.nu
+export use clean.nu
+export use cont.nu
+export use crontab.nu
+export use init.nu
+export use log.nu
+export use run.nu
+export use svc.nu
