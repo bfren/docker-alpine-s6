@@ -1,7 +1,7 @@
-export use bf-s6/clean
-export use bf-s6/cont
-export use bf-s6/crontab
-export use bf-s6/init
-export use bf-s6/log
-export use bf-s6/run
-export use bf-s6/svc
+export module clean.nu
+export module cont.nu
+export module crontab.nu
+export module init.nu
+export module log.nu
+export module run.nu
+export module svc.nu

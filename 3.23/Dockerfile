@@ -16,7 +16,7 @@ RUN \
         *) echo "Unsupported target platform: ${TARGETPLATFORM}." && exit 1 ;; \
     esac && \
     printf "%s" "${ARCH}" > ARCH && \
-    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.2.3.0/s6-overlay && \
+    URL=https://github.com/just-containers/s6-overlay/releases/download/v3.2.3.2/s6-overlay && \
     bf-wget ${URL}-${ARCH}.tar.xz && \
     bf-wget ${URL}-${ARCH}.tar.xz.sha256 && \
     bf-wget ${URL}-noarch.tar.xz && \
@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM quay.io/bfren/alpine:alpine3.23.5-3.2.4
+FROM quay.io/bfren/alpine:alpine3.23.5-3.3.0
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
@@ -56,7 +56,7 @@ ENV \
 
 RUN \
     # add S6 Overlay to the build log
-    bf-build-add "S6 Overlay" "3.2.3.0" && \
+    bf-build-add "S6 Overlay" "3.2.3.2" && \
     # run standard bf installation executable
     bf-install
 
