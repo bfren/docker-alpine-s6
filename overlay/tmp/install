@@ -22,7 +22,7 @@ def main [] {
     ln $"/usr/bin/bf/bf-withenv" /bin/withenv
 
     # add bf-s6 module to config
-    bf config use bf-s6
+    bf config use_mod bf-s6
 
     # cleanup
     bf write "Removing installation files."
