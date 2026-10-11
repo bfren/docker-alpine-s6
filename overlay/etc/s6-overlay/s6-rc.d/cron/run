@@ -19,7 +19,7 @@ nu -c "use bf-s6 run ; run preflight"
 #   -L  log to a file (instead of stdout)
 #======================================================================================================================
 
-crond \
+exec crond \
     -f \
     -c ${BF_CRONTABS} \
     -l ${BF_CRON_LOG_LEVEL} \
