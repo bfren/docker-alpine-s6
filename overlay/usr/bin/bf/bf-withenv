@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec env -i envdir /etc/bf/env.d "$@"
