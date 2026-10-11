@@ -84,6 +84,11 @@ jobs:
         run: |
           docker run --entrypoint /test ${{ env.TEST_TAG }}
       -
+        name: Run smoke test
+        id: docker_smoke
+        run: |
+          sh ./smoke.sh ${{ env.TEST_TAG }}
+      -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v7
