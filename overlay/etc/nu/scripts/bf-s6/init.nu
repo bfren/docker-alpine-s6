@@ -3,6 +3,9 @@ use cont.nu
 
 # Initialise the container by executing all scripts contained in init.d
 export def main [] {
+    # remove marker left behind if the container was terminated before being restarted
+    cont reset
+
     # store incoming environment variables
     bf env store
 

@@ -2,7 +2,7 @@ use bf
 use svc.nu
 
 # The presence of this file indicates that another service is already bringing the dontainer down
-const terminating = "/tmp/terminating"
+const terminating = "/run/bf-terminating"
 
 # Terminate the container
 export def terminate []: nothing -> nothing {
@@ -15,14 +15,19 @@ export def terminate []: nothing -> nothing {
     # create file to indicate that the container is terminating
     date now | save --force $terminating
 
-    # another check - if cron is down, the container is already being terminated
-    if not (svc is_up cron) { do $already_terminating }
-
     # if we end up here, we need to halt the container
     bf write notok "Terminating container, goodbye." cont/terminate
 
     # bring the container down
     ^halt
+
+    # return nothing
+    return
+}
+
+# Remove the terminating marker - called during initialisation in case it survived a container restart
+export def reset []: nothing -> nothing {
+    rm --force $terminating
 
     # return nothing
     return
