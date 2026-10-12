@@ -1,4 +1,6 @@
 use bf
+use ch.nu
+use esh.nu
 
 # Append an instruction to the default crontab
 #
@@ -32,7 +34,7 @@ export def add [
 }
 
 # Generate the default crontab
-export def generate_default []: nothing -> string { bf esh template (bf env CRONTAB_ROOT) }
+export def generate_default []: nothing -> string { esh template (bf env CRONTAB_ROOT) }
 
 # Generate a cron file to execute on the specified frequency
 export def generate_template [
@@ -53,8 +55,8 @@ export def generate_template [
     # generate the template
     let output = $"(bf env CRON_D)/($frequency)/($file)"
     bf write $"Generating ($output)." crontab/generate_template
-    bf esh template $output
+    esh template $output
 
     # apply cron permissions
-    bf ch apply_file "01-cron"
+    ch apply_file "01-cron"
 }
