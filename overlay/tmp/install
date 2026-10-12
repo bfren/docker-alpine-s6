@@ -17,10 +17,6 @@ def main [] {
     bf write "Setting ownership of src directory."
     bf ch --mode 1777 /etc/bf/src
 
-    # link bf-withenv for easier use in shell scripts
-    bf write "Creating withenv link."
-    ln $"/usr/bin/bf/bf-withenv" /bin/withenv
-
     # add bf-s6 module to config
     bf config use_mod bf-s6
 
