@@ -105,3 +105,71 @@ export def finish__failure_without_terminate_does_not_terminate [] {
 
     assert equal false $result
 }
+
+
+#======================================================================================================================
+# launch
+#======================================================================================================================
+
+# launch replaces the current process, so run it in a child Nushell process and return the completed result -
+# the commands are run from a script file (like an s6 run file) so Nushell sets CURRENT_FILE, FILE_PWD, etc.
+def launch_e [
+    commands: string    # Commands to run after importing bf-s6
+]: nothing -> record {
+    let script = $"(mktemp --directory)/run.nu"
+    $"use bf-s6\n($commands)\n" | save $script
+    ^$nu.current-exe --no-config-file $script | complete
+}
+
+export def launch__passes_arguments_to_executable [] {
+    let result = launch_e r#'bf-s6 svc launch printf "%s|" "-c" "/etc/app.conf" "-d"'#
+
+    assert equal "-c|/etc/app.conf|-d|" $result.stdout
+}
+
+export def launch__passes_spread_arguments_to_executable [] {
+    let result = launch_e r#'let args = [ "-c" "/etc/app.conf" "-d" ] ; bf-s6 svc launch printf "%s|" ...$args'#
+
+    assert equal "-c|/etc/app.conf|-d|" $result.stdout
+}
+
+export def launch__converts_non_string_arguments [] {
+    let result = launch_e r#'let args = [ "-p" 6379 1.5 true ] ; bf-s6 svc launch printf "%s|" ...$args'#
+
+    assert equal "-p|6379|1.5|true|" $result.stdout
+}
+
+export def launch__does_not_parse_flags_for_executable [] {
+    let result = launch_e r#'bf-s6 svc launch printf "%s|" --foreground -f --config=/etc/app.conf'#
+
+    assert equal "--foreground|-f|--config=/etc/app.conf|" $result.stdout
+}
+
+export def launch__replaces_current_process [] {
+    let result = launch_e r#'print $nu.pid ; bf-s6 svc launch sh "-c" "echo $$"'#
+    let pids = $result.stdout | lines
+
+    assert equal 2 ($pids | length)
+    assert equal ($pids | first) ($pids | last)
+}
+
+export def launch__returns_exit_code_of_executable [] {
+    let result = launch_e r#'bf-s6 svc launch sh "-c" "exit 3"'#
+
+    assert equal 3 $result.exit_code
+}
+
+export def launch__hides_nushell_and_bf_environment_variables [] {
+    let result = launch_e r#'$env.BF_X = "test/launch" ; ^true ; bf-s6 svc launch env'#
+    let hidden = [ "BF_X" "CURRENT_FILE" "FILE_PWD" "LAST_EXIT_CODE" "NU_VERSION" "PROCESS_PATH" ]
+    let names = $result.stdout | lines | parse "{key}={val}" | get key
+
+    assert equal [] ($names | where $it in $hidden)
+}
+
+export def launch__keeps_other_environment_variables [] {
+    let result = launch_e r#'$env.BF_LAUNCH_TEST = "kept" ; bf-s6 svc launch env'#
+    let names = $result.stdout | lines
+
+    assert ("BF_LAUNCH_TEST=kept" in $names)
+}
