@@ -1,4 +1,5 @@
 use bf
+use bf-s6
 bf env load
 
 # Apply changes defined in ch.d directory
@@ -10,7 +11,7 @@ def main []: nothing -> nothing {
     }
 
     # apply changes from each file
-    ls (bf env ETC_CH_D) | sort --natural | each {|x| bf ch apply_file $x.name }
+    ls (bf env ETC_CH_D) | sort --natural | each {|x| bf-s6 ch apply_file $x.name }
 
     # return nothing
     return
