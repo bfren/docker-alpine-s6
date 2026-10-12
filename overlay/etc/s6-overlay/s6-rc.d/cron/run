@@ -1,26 +1,30 @@
-#!/bin/withenv sh
+#!/usr/bin/nu
 
-set -euo pipefail
+use bf
+use bf-s6
+bf env load
 
+# Start crond in foreground mode so it can be supervised by S6
+def main [
+    name: string    # The service name, passed by s6-supervise
+] {
+    # set executable name - used to make log output more useful
+    bf env x_set --override run $name
 
-#======================================================================================================================
-# Run preflight checks
-#======================================================================================================================
+    # run checks before executing service
+    bf write debug "No pre-run checks required."
 
-nu -c "use bf-s6 run ; run preflight"
-
-
-#======================================================================================================================
-# Start cron in foreground mode.
-# Flags:
-#   -f  run in foreground mode (allows S6 to supervise the service - which keeps the container running)
-#   -c  run using this directory
-#   -l  log level (from 0 to 8 - 0 is the most verbose)
-#   -L  log to a file (instead of stdout)
-#======================================================================================================================
-
-exec crond \
-    -f \
-    -c ${BF_CRONTABS} \
-    -l ${BF_CRON_LOG_LEVEL} \
-    -L ${BF_CRON_LOG_FILE}
+    # flags:
+    #   -f  run in foreground mode (allows S6 to supervise the service)
+    #   -c  run using this directory
+    #   -l  log level (from 0 to 8 where 0 is the most verbose)
+    #   -L  log to a file (instead of stdout)
+    bf write "Starting cron in foreground mode."
+    let args = [
+        "-f"
+        "-c" (bf env CRONTABS)
+        "-l" (bf env CRON_LOG_LEVEL)
+        "-L" (bf env CRON_LOG_FILE)
+    ]
+    bf-s6 svc launch crond ...$args
+}

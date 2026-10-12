@@ -95,6 +95,26 @@ export def is_up [
         | $in == "true"
 }
 
+# Use exec to start a new process with specified arguments, replacing the current shell
+export def --wrapped launch [
+    x: string               # The name or path of the executable to run
+    ...args                 # List of arguments to pass to the executable file
+]: nothing -> nothing {
+    # hide important environment variables from the executable
+    let hide = [
+        "BF_X"
+        "CURRENT_FILE"
+        "FILE_PWD"
+        "LAST_EXIT_CODE"
+        "NU_VERSION"
+        "PROCESS_PATH"
+    ]
+    hide-env --ignore-errors ...$hide
+
+    # call the executable, replacing the current shell process
+    exec $x ...$args
+}
+
 # Restart a service: s6-supervise sends it the down signal (SIGTERM unless the service has a down-signal file),
 # waits for it to stop and starts it again - this does not terminate the container because the service is still
 # wanted up and is stopped by SIGTERM (see is_failure)
