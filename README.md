@@ -113,15 +113,15 @@ docker exec test ps -o pid,ppid,args
 
 Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfren/alpine-s6`).
 
-| Tag                           | Example                | Use when                                              |
-| ----------------------------- | ---------------------- | ----------------------------------------------------- |
-| `alpineX.Y`                   | `alpine3.24`           | You want the latest image for an Alpine version       |
-| `alpineX.Y-MAJOR`             | `alpine3.24-6`         | You want updates, but not breaking changes            |
-| `alpineX.Y-MINOR`             | `alpine3.24-6.6`       | You want fixes only - **recommended for building on** |
-| `alpineX.Y-VERSION`           | `alpine3.24-6.6.0`     | You want to pin this image exactly                    |
-| `alpineX.Y.Z`                 | `alpine3.24.2`         | You want an exact Alpine release                      |
-| `alpineX.Y.Z-VERSION`         | `alpine3.24.2-6.6.0`   | You want to pin both                                  |
-| `latest`, `6`, `6.6`, `6.6.0` |                        | As above, on the newest Alpine version                |
+| Tag                           | Example              | Use when                                              |
+| ----------------------------- | -------------------- | ----------------------------------------------------- |
+| `alpineX.Y`                   | `alpine3.24`         | You want the latest image for an Alpine version       |
+| `alpineX.Y-MAJOR`             | `alpine3.24-6`       | You want updates, but not breaking changes            |
+| `alpineX.Y-MINOR`             | `alpine3.24-6.6`     | You want fixes only - **recommended for building on** |
+| `alpineX.Y-VERSION`           | `alpine3.24-6.6.0`   | You want to pin this image exactly                    |
+| `alpineX.Y.Z`                 | `alpine3.24.2`       | You want an exact Alpine release                      |
+| `alpineX.Y.Z-VERSION`         | `alpine3.24.2-6.6.0` | You want to pin both                                  |
+| `latest`, `6`, `6.6`, `6.6.0` |                      | As above, on the newest Alpine version                |
 
 | Alpine | Security support ends |
 | ------ | --------------------- |
@@ -142,12 +142,12 @@ Images for unsupported Alpine versions are still built, but no longer receive Al
 
 ### Environment Variables
 
-| Variable            | Values       | Description                                                       | Default         |
-| ------------------- | ------------ | ----------------------------------------------------------------- | --------------- |
-| `BF_DEBUG`          | `0`, `1`     | Show detailed output from `bf` scripts.                           | `0`             |
-| `BF_TZ`             | timezone     | Container timezone, e.g. `Europe/London`.                         | `Europe/London` |
-| `BF_CRON_LOG_LEVEL` | `0` to `8`   | Cron log detail - `0` is the most verbose.                        | `8`             |
-| `BF_ENABLE_INIT_CH` | `0`, `1`     | Set to `0` to skip applying `ch.d` permissions at start-up.       | `1`             |
+| Variable            | Values     | Description                                                 | Default         |
+| ------------------- | ---------- | ----------------------------------------------------------- | --------------- |
+| `BF_DEBUG`          | `0`, `1`   | Show detailed output from `bf` scripts.                     | `0`             |
+| `BF_TZ`             | timezone   | Container timezone, e.g. `Europe/London`.                   | `Europe/London` |
+| `BF_CRON_LOG_LEVEL` | `0` to `8` | Cron log detail - `0` is the most verbose.                  | `8`             |
+| `BF_ENABLE_INIT_CH` | `0`, `1`   | Set to `0` to skip applying `ch.d` permissions at start-up. | `1`             |
 
 ### Build Arguments
 
@@ -171,13 +171,13 @@ S6 is the entrypoint. When the container starts:
 
 The image includes these, so start yours at `10` or above:
 
-| Script           | Does                                                                      |
-| ---------------- | ------------------------------------------------------------------------- |
-| `00-welcome.nu`  | Shows the image name and version                                          |
-| `01-env.nu`      | Sets the standard `BF_` variables (image, directories, cron paths)        |
-| `02-ch.nu`       | Applies the permissions files in `/etc/bf/ch.d`                           |
-| `03-tz.nu`       | Sets the timezone from `BF_TZ`                                            |
-| `04-cron.nu`     | Generates the default crontab                                             |
+| Script          | Does                                                               |
+| --------------- | ------------------------------------------------------------------ |
+| `00-welcome.nu` | Shows the image name and version                                   |
+| `01-env.nu`     | Sets the standard `BF_` variables (image, directories, cron paths) |
+| `02-ch.nu`      | Applies the permissions files in `/etc/bf/ch.d`                    |
+| `03-tz.nu`      | Sets the timezone from `BF_TZ`                                     |
+| `04-cron.nu`    | Generates the default crontab                                      |
 
 Add your own, for example:
 
@@ -234,14 +234,14 @@ The template is found by the output file's name, and the output folder must alre
 
 Put an executable script in one of these folders and it will run on that schedule:
 
-| Folder                  | Runs                   |
-| ----------------------- | ---------------------- |
-| `/etc/periodic/1min`    | every minute           |
-| `/etc/periodic/15min`   | every 15 minutes       |
-| `/etc/periodic/hourly`  | on the hour            |
-| `/etc/periodic/daily`   | 02:00                  |
-| `/etc/periodic/weekly`  | 03:00 on Saturdays     |
-| `/etc/periodic/monthly` | 05:00 on the 1st       |
+| Folder                  | Runs               |
+| ----------------------- | ------------------ |
+| `/etc/periodic/1min`    | every minute       |
+| `/etc/periodic/15min`   | every 15 minutes   |
+| `/etc/periodic/hourly`  | on the hour        |
+| `/etc/periodic/daily`   | 02:00              |
+| `/etc/periodic/weekly`  | 03:00 on Saturdays |
+| `/etc/periodic/monthly` | 05:00 on the 1st   |
 
 To generate a script in one of those folders from a template, use `bf-s6 crontab generate_template hourly myjob`. For anything else, add a line to the crontab from an initialisation script:
 
@@ -276,15 +276,15 @@ The image runs `healthcheck` every minute. It is a link to `/usr/bin/bf/bf-healt
 
 This module is added to the `bf` module from [Alpine](https://github.com/bfren/docker-alpine#the-bf-module). Load it with `use bf-s6`.
 
-| Submodule         | Use                                                                           |
-| ----------------- | ----------------------------------------------------------------------------- |
-| `bf-s6 ch`        | Apply the ownership and permissions in a `ch.d` file                          |
-| `bf-s6 cont`      | Terminate the container                                                       |
-| `bf-s6 crontab`   | Add lines to the crontab, and generate cron scripts from templates            |
-| `bf-s6 esh`       | Generate a file from an esh template, found by the output file's name         |
-| `bf-s6 init`      | Run the scripts in `/etc/bf/init.d` (used by `bf-init`)                       |
-| `bf-s6 log`       | Tail a log file and forward it to the container's output                      |
-| `bf-s6 svc`       | Launch, restart, stop and check services, and handle their `finish` scripts   |
+| Submodule       | Use                                                                         |
+| --------------- | --------------------------------------------------------------------------- |
+| `bf-s6 ch`      | Apply the ownership and permissions in a `ch.d` file                        |
+| `bf-s6 cont`    | Terminate the container                                                     |
+| `bf-s6 crontab` | Add lines to the crontab, and generate cron scripts from templates          |
+| `bf-s6 esh`     | Generate a file from an esh template, found by the output file's name       |
+| `bf-s6 init`    | Run the scripts in `/etc/bf/init.d` (used by `bf-init`)                     |
+| `bf-s6 log`     | Tail a log file and forward it to the container's output                    |
+| `bf-s6 svc`     | Launch, restart, stop and check services, and handle their `finish` scripts |
 
 Run `help bf-s6 <submodule>` in a `nu` shell for details.
 
