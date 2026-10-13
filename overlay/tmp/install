@@ -13,6 +13,10 @@ def main [] {
     extract noarch
     extract (bf fs read ARCH)
 
+    # link bf-healthcheck for easier overriding in child images
+    bf write "Creating healthcheck link."
+    ^ln -s $"/usr/bin/bf/bf-healthcheck" /bin/healthcheck
+
     # set ownership of src directory
     bf write "Setting ownership of src directory."
     bf ch --mode 1777 /etc/bf/src

@@ -106,7 +106,7 @@ docker exec test ps -o pid,ppid,args
 * ⏰ Cron, with folders for jobs every minute, 15 minutes, hour, day, week and month
 * 🕐 Timezone set from `BF_TZ` during start-up
 * 🛑 The container stops if a service fails - but not when you restart a service on purpose, or on `docker stop`
-* 🩺 A `HEALTHCHECK` you can override with your own script
+* 🩺 A `HEALTHCHECK` that checks cron is running, which you can override with your own script
 * 🧪 Built-in test runner and smoke test
 
 ## Tags
@@ -270,7 +270,7 @@ If your service shuts down gracefully with a signal other than `SIGTERM` (Postgr
 
 ### Health checks
 
-The image runs `healthcheck` every minute. By default it does nothing and always passes. To add a real check, replace `/usr/bin/bf/healthcheck` in your image with a script that exits non-zero when the service is unhealthy.
+The image runs `healthcheck` every minute. It is a link to `/usr/bin/bf/bf-healthcheck`, which checks that the cron service is running. Images that run a service should check it instead: replace `/usr/bin/bf/bf-healthcheck` in your image with a script that exits non-zero when the service is unhealthy. Your script replaces the cron check, so add one if you still need it (`s6-svstat -u /run/service/cron` prints `true` when cron is up).
 
 ### The `bf-s6` module
 
@@ -288,7 +288,7 @@ This module is added to the `bf` module from [Alpine](https://github.com/bfren/d
 
 Run `help bf-s6 <submodule>` in a `nu` shell for details.
 
-A few have executable helpers on the `PATH`: `bf-init`, `bf-cron`, `bf-cont-terminate` and `healthcheck`. Check out `overlay/usr/bin/bf` for the complete list.
+A few have executable helpers on the `PATH`: `bf-init`, `bf-cron`, `bf-cont-terminate` and `bf-healthcheck` (also available as `healthcheck`). Check out `overlay/usr/bin/bf` for the complete list.
 
 ## Testing
 
