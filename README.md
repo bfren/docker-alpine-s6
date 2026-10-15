@@ -270,7 +270,7 @@ If your service shuts down gracefully with a signal other than `SIGTERM` (Postgr
 
 ### Health checks
 
-The image runs `healthcheck` every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). It is a link to `/usr/bin/bf/bf-healthcheck`, which checks that the cron service is running. Images that run a service should check it instead: replace `/usr/bin/bf/bf-healthcheck` in your image with a script that exits non-zero when the service is unhealthy. Your script replaces the cron check, so add one if you still need it (`s6-svstat -u /run/service/cron` prints `true` when cron is up).
+The image runs `healthcheck` every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). It is a link (`/usr/local/bin/healthcheck`) to `/usr/bin/bf/bf-healthcheck`, which checks that the cron service is running. Images that run a service should check it instead: replace `/usr/bin/bf/bf-healthcheck` in your image with a script that exits non-zero when the service is unhealthy. Your script replaces the cron check, so add one if you still need it (`s6-svstat -u /run/service/cron` prints `true` when cron is up).
 
 ### The `bf-s6` module
 
