@@ -4,7 +4,8 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Override to provide healthcheck functionality
+# Check cron is running - images that need to check more than this override this file
 #======================================================================================================================
 
-exit 0
+SERVICE=/run/service/cron
+[ "$(s6-svstat -u ${SERVICE})" = "true" ] || bf-write-error "The cron service is not running." bf-healthcheck
