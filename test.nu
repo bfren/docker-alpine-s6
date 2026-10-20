@@ -21,5 +21,5 @@ def main [
     --all (-a)               # test all registered versions of Alpine (overrides $alpine)
 ] {
     let branches = if $all { $alpine_branches } else { [$alpine] }
-    test "alpine-s6" $branches
+    test "alpine-s6" $branches --smoke
 }

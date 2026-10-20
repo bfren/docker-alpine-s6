@@ -296,7 +296,8 @@ A few have executable helpers on the `PATH`: `bf-init`, `bf-cron`, `bf-cont-term
 * `./smoke.sh <image>` starts the image normally and checks that services start, are supervised directly by S6, survive a restart, and stop the container when killed.
 
 ```sh
-./test.sh        # builds the image, then runs /test and the smoke test
+./test.nu        # builds the image, then runs /test and the smoke test
+./test.nu --all  # every version, in parallel
 ```
 
 ## Troubleshooting
