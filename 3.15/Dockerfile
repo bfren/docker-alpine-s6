@@ -27,7 +27,7 @@ RUN \
 # STAGE 1: create final image
 #======================================================================================================================
 
-FROM quay.io/bfren/alpine:alpine3.15.11-3.4.0
+FROM quay.io/bfren/alpine:alpine3.15.11-3.5.0
 COPY --from=build /s6 /s6
 
 LABEL org.opencontainers.image.description="Alpine base image with S6 Overlay."
@@ -60,5 +60,5 @@ RUN \
     # run standard bf installation executable
     bf-install
 
-HEALTHCHECK --interval=1m --timeout=10s --start-period=15s --retries=5 \
-    CMD healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --start-interval=2s --retries=3 \
+    CMD ["healthcheck"]
