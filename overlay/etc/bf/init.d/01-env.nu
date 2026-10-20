@@ -11,6 +11,7 @@ def main []: nothing -> nothing {
 
     # set bf directories
     bf env set ETC_CH_D $"($etc)/ch.d"
+    bf env set ETC_HEALTH_D $"($etc)/health.d"
     bf env set ETC_INIT_D $"($etc)/init.d"
     bf env set ETC_TEMPLATES $"($etc)/templates"
     bf env set ETC_SRC $"($etc)/src"

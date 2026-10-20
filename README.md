@@ -36,7 +36,7 @@ my-image/
 `Dockerfile`:
 
 ```dockerfile
-FROM quay.io/bfren/alpine-s6:alpine3.24-6.6
+FROM quay.io/bfren/alpine-s6:alpine3.24-6.7
 
 ARG BF_IMAGE=my-image
 ARG BF_VERSION=1.0.0
@@ -102,6 +102,7 @@ docker exec test ps -o pid,ppid,args
 * 🧭 S6 Overlay process supervision, with clean shutdown on `docker stop`
 * 🚀 Nushell start-up scripts in `/etc/bf/init.d`, run in order before any service starts
 * 🔐 Permissions applied from simple text files in `/etc/bf/ch.d`
+* 🩺 Health checks from every image in the chain, added as scripts in `/etc/bf/health.d`
 * 📝 Configuration files generated from [esh](https://github.com/jirutka/esh) templates in `/etc/bf/templates`
 * ⏰ Cron, with folders for jobs every minute, 15 minutes, hour, day, week and month
 * 🕐 Timezone set from `BF_TZ` during start-up
@@ -117,11 +118,11 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | ----------------------------- | -------------------- | ----------------------------------------------------- |
 | `alpineX.Y`                   | `alpine3.24`         | You want the latest image for an Alpine version       |
 | `alpineX.Y-MAJOR`             | `alpine3.24-6`       | You want updates, but not breaking changes            |
-| `alpineX.Y-MINOR`             | `alpine3.24-6.6`     | You want fixes only - **recommended for building on** |
-| `alpineX.Y-VERSION`           | `alpine3.24-6.6.0`   | You want to pin this image exactly                    |
+| `alpineX.Y-MINOR`             | `alpine3.24-6.7`     | You want fixes only - **recommended for building on** |
+| `alpineX.Y-VERSION`           | `alpine3.24-6.7.0`   | You want to pin this image exactly                    |
 | `alpineX.Y.Z`                 | `alpine3.24.2`       | You want an exact Alpine release                      |
-| `alpineX.Y.Z-VERSION`         | `alpine3.24.2-6.6.0` | You want to pin both                                  |
-| `latest`, `6`, `6.6`, `6.6.0` |                      | As above, on the newest Alpine version                |
+| `alpineX.Y.Z-VERSION`         | `alpine3.24.2-6.7.0` | You want to pin both                                  |
+| `latest`, `6`, `6.7`, `6.7.0` |                      | As above, on the newest Alpine version                |
 
 | Alpine | Security support ends |
 | ------ | --------------------- |
@@ -270,7 +271,17 @@ If your service shuts down gracefully with a signal other than `SIGTERM` (Postgr
 
 ### Health checks
 
-The image runs `healthcheck` every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). It is a link (`/usr/local/bin/healthcheck`) to `/usr/bin/bf/bf-healthcheck`, which checks that the cron service is running. Images that run a service should check it instead: replace `/usr/bin/bf/bf-healthcheck` in your image with a script that exits non-zero when the service is unhealthy. Your script replaces the cron check, so add one if you still need it (`s6-svstat -u /run/service/cron` prints `true` when cron is up).
+The image runs `bf-healthcheck` every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). It runs every `*.nu` file in `/etc/bf/health.d`, and the container is healthy only if they all pass. This image adds `00-cron.nu`, which checks that the cron service is running.
+
+To check your own service, add a script to `/etc/bf/health.d` - numbered like your `init.d` scripts, e.g. `10-myapp.nu` - that fails (with `exit 1` or `bf write error`) when the service is unhealthy - don't replace `bf-healthcheck`. Checks from every image in the chain run together, so an image built on Nginx keeps Nginx's check as well as adding its own. Failed checks and their output appear in `docker inspect --format '{{json .State.Health}}' <container>`.
+
+```nu
+# /etc/bf/health.d/10-myapp.nu
+use bf
+bf env load -x
+
+def main [] { "http://localhost:8080" | bf http test | if not $in { exit 1 } }
+```
 
 ### The `bf-s6` module
 
@@ -282,13 +293,14 @@ This module is added to the `bf` module from [Alpine](https://github.com/bfren/d
 | `bf-s6 cont`    | Terminate the container                                                     |
 | `bf-s6 crontab` | Add lines to the crontab, and generate cron scripts from templates          |
 | `bf-s6 esh`     | Generate a file from an esh template, found by the output file's name       |
+| `bf-s6 health`  | Run the checks in `/etc/bf/health.d` (used by `bf-healthcheck`)        |
 | `bf-s6 init`    | Run the scripts in `/etc/bf/init.d` (used by `bf-init`)                     |
 | `bf-s6 log`     | Tail a log file and forward it to the container's output                    |
 | `bf-s6 svc`     | Launch, restart, stop and check services, and handle their `finish` scripts |
 
 Run `help bf-s6 <submodule>` in a `nu` shell for details.
 
-A few have executable helpers on the `PATH`: `bf-init`, `bf-cron`, `bf-cont-terminate` and `bf-healthcheck` (also available as `healthcheck`). Check out `overlay/usr/bin/bf` for the complete list.
+A few have executable helpers on the `PATH`: `bf-init`, `bf-cron`, `bf-cont-terminate` and `bf-healthcheck`. Check out `overlay/usr/bin/bf` for the complete list.
 
 ## Testing
 

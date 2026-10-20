@@ -13,12 +13,6 @@ def main [] {
     extract noarch
     extract (bf fs read ARCH)
 
-    # link bf-healthcheck for easier overriding in child images
-    #   the link must not be in /usr/bin (or /bin, which is a link to /usr/bin on some systems e.g. Debian): Nushell looks
-    #   for modules next to the path a script is run from, so 'use bf' would find the /usr/bin/bf directory and fail
-    bf write "Creating healthcheck link."
-    ^ln -sf $"/usr/bin/bf/bf-healthcheck" /usr/local/bin/healthcheck
-
     # set ownership of src directory
     bf write "Setting ownership of src directory."
     bf ch --mode 1777 /etc/bf/src

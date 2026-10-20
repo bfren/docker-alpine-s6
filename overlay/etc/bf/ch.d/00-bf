@@ -1,3 +1,4 @@
 /etc/bf/ch.d root:root 0400 0500
+/etc/bf/health.d root:root 0400 0500
 /etc/bf/init.d root:root 0400 0500
 /etc/bf/templates root:root 0400 0500

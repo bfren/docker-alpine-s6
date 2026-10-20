@@ -1,11 +1,9 @@
-#!/bin/sh
+#!/usr/bin/nu
 
-set -euo pipefail
+use bf
+use bf-s6
+bf env load -x
 
-
-#======================================================================================================================
-# Check cron is running - images that need to check more than this override this file
-#======================================================================================================================
-
-SERVICE=/run/service/cron
-[ "$(s6-svstat -u ${SERVICE})" = "true" ] || bf-write-error "The cron service is not running." bf-healthcheck
+# Run every check in /etc/bf/health.d - the container is healthy only if they all pass
+#   images add their own checks to health.d - do not replace this file
+def main [] { bf-s6 health }
