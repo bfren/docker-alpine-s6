@@ -24,7 +24,6 @@ jobs:
         linux/arm/v7
         linux/arm64
       smoke-test: ./smoke.sh
-      publish: ${{ github.event_name == 'release' }}
       tags: |
         alpine${FOLDER}
         alpine${FOLDER}-${VERSION_MAJOR}
