@@ -152,10 +152,14 @@ def service_dir [
 ]: nothing -> string {
     # make sure the S6_SERVICES_DIR is set
     let s6_svc_dir = ($env | get --optional S6_SERVICES_DIR)
-    if ($s6_svc_dir | is-empty) { bf write error "Environment variable S6_SERVICES_DIR is not set." svc/service_dir }
+    if ($s6_svc_dir | is-empty) {
+        bf write error "Environment variable S6_SERVICES_DIR is not set." svc/service_dir
+    }
 
     # make sure S6_SERVICES_DIR exists
-    if ($s6_svc_dir | bf fs is_not_dir) { bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." svc/service_dir }
+    if ($s6_svc_dir | bf fs is_not_dir) {
+        bf write error $"S6_SERVICES_DIR does not exist: ($s6_svc_dir)." svc/service_dir
+    }
 
     $"($s6_svc_dir)/($name)"
 }
