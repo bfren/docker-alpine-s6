@@ -129,7 +129,7 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | 3.24   | 2028-06-01            |
 | 3.23   | 2027-11-01            |
 | 3.22   | 2027-05-01            |
-| 3.21   | 2026-11-01            |
+| 3.21   | ended 2026-11-01      |
 | 3.20   | ended 2026-04-01      |
 
 Images for unsupported Alpine versions are still built, but no longer receive Alpine security fixes - avoid them for anything new.
