@@ -50,7 +50,9 @@ export def generate_template [
         "weekly"
         "monthly"
     ]
-    if $frequency not-in $supported { bf write error $"'($frequency)' is not a supported cron frequency." crontab/generate_template }
+    if $frequency not-in $supported {
+        bf write error $"'($frequency)' is not a supported cron frequency." crontab/generate_template
+    }
 
     # generate the template
     let output = $"(bf env CRON_D)/($frequency)/($file)"

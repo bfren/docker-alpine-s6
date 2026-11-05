@@ -1,6 +1,6 @@
 # Alpine + S6
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fpulls%2Falpine-s6) ![Docker Image Size](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fsize%2Falpine-s6) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bfren/docker-alpine-s6/dev.yml?branch=main)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-alpine-s6) ![Docker Pulls](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fpulls%2Falpine-s6) ![Docker Image Size](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fsize%2Falpine-s6) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bfren/docker-alpine-s6/build.yml?branch=main)
 
 [Docker Hub](https://hub.docker.com/r/bfren/alpine-s6) - [Quay.io](https://quay.io/repository/bfren/alpine-s6) - [bfren ecosystem](https://github.com/bfren/docker)
 
@@ -36,7 +36,7 @@ my-image/
 `Dockerfile`:
 
 ```dockerfile
-FROM quay.io/bfren/alpine-s6:alpine3.24-6.7
+FROM quay.io/bfren/alpine-s6:alpine3.24-7.0
 
 ARG BF_IMAGE=my-image
 ARG BF_VERSION=1.0.0
@@ -98,7 +98,7 @@ docker exec test ps -o pid,ppid,args
 
 ## Features
 
-* 🐧 Alpine 3.15 to 3.24 - choose with the image tag
+* 🐧 Alpine 3.20 to 3.24 - choose with the image tag
 * 🧭 S6 Overlay process supervision, with clean shutdown on `docker stop`
 * 🚀 Nushell start-up scripts in `/etc/bf/init.d`, run in order before any service starts
 * 🔐 Permissions applied from simple text files in `/etc/bf/ch.d`
@@ -117,12 +117,12 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | Tag                           | Example              | Use when                                              |
 | ----------------------------- | -------------------- | ----------------------------------------------------- |
 | `alpineX.Y`                   | `alpine3.24`         | You want the latest image for an Alpine version       |
-| `alpineX.Y-MAJOR`             | `alpine3.24-6`       | You want updates, but not breaking changes            |
-| `alpineX.Y-MINOR`             | `alpine3.24-6.7`     | You want fixes only - **recommended for building on** |
-| `alpineX.Y-VERSION`           | `alpine3.24-6.7.0`   | You want to pin this image exactly                    |
-| `alpineX.Y.Z`                 | `alpine3.24.2`       | You want an exact Alpine release                      |
-| `alpineX.Y.Z-VERSION`         | `alpine3.24.2-6.7.0` | You want to pin both                                  |
-| `latest`, `6`, `6.7`, `6.7.0` |                      | As above, on the newest Alpine version                |
+| `alpineX.Y-MAJOR`             | `alpine3.24-7`       | You want updates, but not breaking changes            |
+| `alpineX.Y-MINOR`             | `alpine3.24-7.0`     | You want fixes only - **recommended for building on** |
+| `alpineX.Y-VERSION`           | `alpine3.24-7.0.0`   | You want to pin this image exactly                    |
+| `alpineX.Y.Z`                 | `alpine3.24.3`       | You want an exact Alpine release                      |
+| `alpineX.Y.Z-VERSION`         | `alpine3.24.3-7.0.0` | You want to pin both                                  |
+| `latest`, `7`, `7.0`, `7.0.0` |                      | As above, on the newest Alpine version                |
 
 | Alpine | Security support ends |
 | ------ | --------------------- |
@@ -131,11 +131,6 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | 3.22   | 2027-05-01            |
 | 3.21   | 2026-11-01            |
 | 3.20   | ended 2026-04-01      |
-| 3.19   | ended 2025-11-01      |
-| 3.18   | ended 2025-05-09      |
-| 3.17   | ended 2024-11-22      |
-| 3.16   | ended 2024-05-23      |
-| 3.15   | ended 2023-11-01      |
 
 Images for unsupported Alpine versions are still built, but no longer receive Alpine security fixes - avoid them for anything new.
 
@@ -293,7 +288,7 @@ This module is added to the `bf` module from [Alpine](https://github.com/bfren/d
 | `bf-s6 cont`    | Terminate the container                                                     |
 | `bf-s6 crontab` | Add lines to the crontab, and generate cron scripts from templates          |
 | `bf-s6 esh`     | Generate a file from an esh template, found by the output file's name       |
-| `bf-s6 health`  | Run the checks in `/etc/bf/health.d` (used by `bf-healthcheck`)        |
+| `bf-s6 health`  | Run the checks in `/etc/bf/health.d` (used by `bf-healthcheck`)             |
 | `bf-s6 init`    | Run the scripts in `/etc/bf/init.d` (used by `bf-init`)                     |
 | `bf-s6 log`     | Tail a log file and forward it to the container's output                    |
 | `bf-s6 svc`     | Launch, restart, stop and check services, and handle their `finish` scripts |

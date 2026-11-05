@@ -7,7 +7,10 @@ const terminating = "/run/bf-terminating"
 # Terminate the container
 export def terminate []: nothing -> nothing {
     # output a message to say the container is already terminating
-    let already_terminating = {|| bf write debug "Container already being terminated." cont/terminate ; exit 0 }
+    let already_terminating = {||
+        bf write debug "Container already being terminated." cont/terminate
+        exit 0
+    }
 
     # check if terminate has already been called (multiple services may try to bring it down)
     if ($terminating | path exists) { do $already_terminating }

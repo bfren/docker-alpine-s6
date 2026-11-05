@@ -12,7 +12,9 @@ export def main [] {
 # Run every check in health.d (BF_ETC_HEALTH_D), returning the name and output of those that fail
 export def failed []: nothing -> list<record<name: string, output: string>> {
     let health_d = bf env --safe ETC_HEALTH_D
-    if $health_d == "" { bf write error "BF_ETC_HEALTH_D is not set - the container may not have finished initialising." health/failed }
+    if $health_d == "" {
+        bf write error "BF_ETC_HEALTH_D is not set - the container may not have finished initialising." health/failed
+    }
 
     glob $"($health_d)/*.nu"
         | sort --natural
@@ -26,5 +28,9 @@ def run_check [
     path: string    # Absolute path to the check
 ]: nothing -> record<name: string, exit_code: int, output: string> {
     let result = bf x $path | complete
-    {name: ($path | path basename), exit_code: $result.exit_code, output: ($result.stdout + $result.stderr | str trim)}
+    {
+        name: ($path | path basename)
+        exit_code: $result.exit_code
+        output: ($result.stdout + $result.stderr | str trim)
+    }
 }

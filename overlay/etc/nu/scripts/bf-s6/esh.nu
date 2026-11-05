@@ -12,8 +12,12 @@ export def template [
     let input = $"(bf env ETC_TEMPLATES)/($filename).esh"
 
     # ensure input file and output directory exist
-    if ($input | bf fs is_not_file) { bf write error $"Template file ($input) does not exist." esh/template }
-    if ($output_dir | bf fs is_not_dir) { bf write error $"Output directory ($output_dir) does not exist." esh/template }
+    if ($input | bf fs is_not_file) {
+        bf write error $"Template file ($input) does not exist." esh/template
+    }
+    if ($output_dir | bf fs is_not_dir) {
+        bf write error $"Output directory ($output_dir) does not exist." esh/template
+    }
 
     # output debug message and generate file
     bf write debug $" .. ($filename).esh" esh/template
