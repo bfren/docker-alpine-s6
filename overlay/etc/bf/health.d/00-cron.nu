@@ -1,7 +1,7 @@
 use bf
+use bf-s6
 
 # Check the cron service is running
 def main [] {
-    let up = { ^s6-svstat -u /run/service/cron } | bf handle -i
-    if $up != "true" { bf write error "The cron service is not running." healthcheck/cron }
+    if not (bf-s6 svc is_up cron) { bf write error "The cron service is not running." healthcheck/cron }
 }
