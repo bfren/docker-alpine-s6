@@ -10,8 +10,9 @@ def main []: nothing -> nothing {
         return
     }
 
-    # set timezone
-    bf tz $tz
+    # set timezone - this installs tzdata, so it fails without network access (or with an unknown timezone); keep the
+    # current timezone rather than stopping the container
+    try { bf tz $tz } catch { bf write notok $"Unable to set timezone to ($tz) - keeping (bf tz current)." }
 
     # return nothing
     return
