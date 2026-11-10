@@ -100,11 +100,10 @@ export def --wrapped launch [
     x: string               # The name or path of the executable to run
     ...args                 # List of arguments to pass to the executable file
 ]: nothing -> nothing {
-    # hide important environment variables from the executable
+    # hide important environment variables from the executable - not CURRENT_FILE or FILE_PWD: from Nushell 0.117
+    # hide-env refuses to hide them, even with --ignore-errors
     let hide = [
         "BF_X"
-        "CURRENT_FILE"
-        "FILE_PWD"
         "LAST_EXIT_CODE"
         "NU_VERSION"
         "PROCESS_PATH"

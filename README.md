@@ -119,10 +119,10 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | `alpineX.Y`                   | `alpine3.24`         | You want the latest image for an Alpine version       |
 | `alpineX.Y-MAJOR`             | `alpine3.24-7`       | You want updates, but not breaking changes            |
 | `alpineX.Y-MINOR`             | `alpine3.24-7.0`     | You want fixes only - **recommended for building on** |
-| `alpineX.Y-VERSION`           | `alpine3.24-7.0.1`   | You want to pin this image exactly                    |
+| `alpineX.Y-VERSION`           | `alpine3.24-7.0.2`   | You want to pin this image exactly                    |
 | `alpineX.Y.Z`                 | `alpine3.24.4`       | You want an exact Alpine release                      |
-| `alpineX.Y.Z-VERSION`         | `alpine3.24.4-7.0.1` | You want to pin both                                  |
-| `latest`, `7`, `7.0`, `7.0.1` |                      | As above, on the newest Alpine version                |
+| `alpineX.Y.Z-VERSION`         | `alpine3.24.4-7.0.2` | You want to pin both                                  |
+| `latest`, `7`, `7.0`, `7.0.2` |                      | As above, on the newest Alpine version                |
 
 | Alpine | Security support ends |
 | ------ | --------------------- |
@@ -201,7 +201,7 @@ S6 runs each service's `run` script with one argument - the service name - so `m
 
 * replaces the `run` script with your service, so S6 supervises it directly and signals (including `docker stop`) reach it
 * passes every argument through unchanged - build them as a list, one flag per line, and spread it with `...$args`
-* hides Nushell's own variables (`NU_VERSION`, `CURRENT_FILE`, etc.) from your service
+* hides Nushell's own variables (`NU_VERSION`, `PROCESS_PATH`, etc.) from your service - except `CURRENT_FILE` and `FILE_PWD`, which Nushell won't hide
 
 Do any checks before the launch. To stop a service starting - for example if an optional feature is turned off - call `bf-s6 svc down $name` and `return`, rather than exiting, otherwise S6 will just run the script again.
 
