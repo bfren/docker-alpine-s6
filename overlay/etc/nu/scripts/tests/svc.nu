@@ -161,7 +161,7 @@ export def launch__returns_exit_code_of_executable [] {
 
 export def launch__hides_nushell_and_bf_environment_variables [] {
     let result = launch_e r#'$env.BF_X = "test/launch" ; ^true ; bf-s6 svc launch env'#
-    let hidden = [ "BF_X" "CURRENT_FILE" "FILE_PWD" "LAST_EXIT_CODE" "NU_VERSION" "PROCESS_PATH" ]
+    let hidden = [ "BF_X" "LAST_EXIT_CODE" "NU_VERSION" "PROCESS_PATH" ]
     let names = $result.stdout | lines | parse "{key}={val}" | get key
 
     assert equal [] ($names | where $it in $hidden)

@@ -201,7 +201,7 @@ S6 runs each service's `run` script with one argument - the service name - so `m
 
 * replaces the `run` script with your service, so S6 supervises it directly and signals (including `docker stop`) reach it
 * passes every argument through unchanged - build them as a list, one flag per line, and spread it with `...$args`
-* hides Nushell's own variables (`NU_VERSION`, `CURRENT_FILE`, etc.) from your service
+* hides Nushell's own variables (`NU_VERSION`, `PROCESS_PATH`, etc.) from your service - except `CURRENT_FILE` and `FILE_PWD`, which Nushell won't hide
 
 Do any checks before the launch. To stop a service starting - for example if an optional feature is turned off - call `bf-s6 svc down $name` and `return`, rather than exiting, otherwise S6 will just run the script again.
 
