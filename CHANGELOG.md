@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.0.3] - Unreleased
+
+### Fixed
+
+- README: the Quickstart is now numbered steps, with what each of S6's empty files does.
+- README: the Features list no longer suggests replacing the health check - add your own checks to `/etc/bf/health.d`
+  instead.
+
 ## [7.0.2] - 2026-11-10
 
 ### Changed
@@ -46,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking:** images for Alpine 3.15, 3.16, 3.17, 3.18 and 3.19 are no longer built. Supported versions are now
   Alpine 3.20 to 3.24.
 
+[7.0.3]: https://github.com/bfren/docker-alpine-s6/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/bfren/docker-alpine-s6/compare/v7.0.1...v7.0.2
 [7.0.1]: https://github.com/bfren/docker-alpine-s6/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/bfren/docker-alpine-s6/compare/v6.7.3...v7.0.0

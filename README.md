@@ -18,7 +18,9 @@ You probably don't want to run this image on its own. Use it as the `FROM` line 
 
 ## Quickstart
 
-A minimal image that runs one supervised service:
+A minimal image that runs one supervised service, `myapp`.
+
+1. Create a folder for your image with this layout - everything in `overlay` is copied into the image:
 
 ```plain
 my-image/
@@ -33,7 +35,13 @@ my-image/
         └── user-bundles.d/user/contents.d/myapp   (empty file)
 ```
 
-`Dockerfile`:
+   The empty files tell S6 what to do - their names are what matter:
+
+   * `dependencies.d/init` - start `myapp` only after the image's initialisation scripts have finished.
+   * `type` - `longrun` means a service that keeps running, and S6 restarts it if it exits.
+   * `user-bundles.d/user/contents.d/myapp` - start `myapp` when the container starts.
+
+2. Write the `Dockerfile`:
 
 ```dockerfile
 FROM quay.io/bfren/alpine-s6:alpine3.24-7.0
@@ -45,7 +53,7 @@ COPY ./overlay /
 RUN apk add --no-cache myapp && bf-install
 ```
 
-`run` - start your service in the foreground, **ending with `bf-s6 svc launch`**:
+3. Write `run`, which starts your service in the foreground. It must **end with `bf-s6 svc launch`**, so that S6 supervises your service directly:
 
 ```nu
 #!/usr/bin/nu
@@ -74,7 +82,7 @@ def main [
 }
 ```
 
-`finish` - pass S6's arguments through so the container only stops if `myapp` fails:
+4. Write `finish`, which S6 runs whenever `myapp` stops. It passes S6's arguments through, so the container only stops if `myapp` fails:
 
 ```nu
 #!/usr/bin/nu
@@ -87,10 +95,11 @@ bf env load -x myapp
 def main [...args] { bf-s6 svc finish --terminate ...$args }
 ```
 
-Build it, run it, and check `myapp` is supervised directly by S6:
+5. Build and start the image, then check `myapp` is supervised directly by S6:
 
 ```sh
-docker build -t my-image . && docker run -d --name test my-image
+docker build -t my-image .
+docker run -d --name test my-image
 docker exec test ps -o pid,ppid,args
 ```
 
@@ -102,12 +111,11 @@ docker exec test ps -o pid,ppid,args
 * 🧭 S6 Overlay process supervision, with clean shutdown on `docker stop`
 * 🚀 Nushell start-up scripts in `/etc/bf/init.d`, run in order before any service starts
 * 🔐 Permissions applied from simple text files in `/etc/bf/ch.d`
-* 🩺 Health checks from every image in the chain, added as scripts in `/etc/bf/health.d`
+* 🩺 Health checks from every image in the chain, added as scripts in `/etc/bf/health.d` - this image checks cron is running
 * 📝 Configuration files generated from [esh](https://github.com/jirutka/esh) templates in `/etc/bf/templates`
 * ⏰ Cron, with folders for jobs every minute, 15 minutes, hour, day, week and month
 * 🕐 Timezone set from `BF_TZ` during start-up
 * 🛑 The container stops if a service fails - but not when you restart a service on purpose, or on `docker stop`
-* 🩺 A `HEALTHCHECK` that checks cron is running, which you can override with your own script
 * 🧪 Built-in test runner and smoke test
 
 ## Tags
@@ -119,10 +127,10 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | `alpineX.Y`                   | `alpine3.24`         | You want the latest image for an Alpine version       |
 | `alpineX.Y-MAJOR`             | `alpine3.24-7`       | You want updates, but not breaking changes            |
 | `alpineX.Y-MINOR`             | `alpine3.24-7.0`     | You want fixes only - **recommended for building on** |
-| `alpineX.Y-VERSION`           | `alpine3.24-7.0.2`   | You want to pin this image exactly                    |
+| `alpineX.Y-VERSION`           | `alpine3.24-7.0.3`   | You want to pin this image exactly                    |
 | `alpineX.Y.Z`                 | `alpine3.24.4`       | You want an exact Alpine release                      |
-| `alpineX.Y.Z-VERSION`         | `alpine3.24.4-7.0.2` | You want to pin both                                  |
-| `latest`, `7`, `7.0`, `7.0.2` |                      | As above, on the newest Alpine version                |
+| `alpineX.Y.Z-VERSION`         | `alpine3.24.4-7.0.3` | You want to pin both                                  |
+| `latest`, `7`, `7.0`, `7.0.3` |                      | As above, on the newest Alpine version                |
 
 | Alpine | Security support ends |
 | ------ | --------------------- |
