@@ -132,6 +132,8 @@ Images are published to Docker Hub (`bfren/alpine-s6`) and Quay.io (`quay.io/bfr
 | `alpineX.Y.Z-VERSION`         | `alpine3.24.4-7.0.3` | You want to pin both                                  |
 | `latest`, `7`, `7.0`, `7.0.3` |                      | As above, on the newest Alpine version                |
 
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
+
 | Alpine | Security support ends |
 | ------ | --------------------- |
 | 3.24   | 2028-06-01            |
